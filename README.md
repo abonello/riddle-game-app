@@ -69,6 +69,8 @@ very handy when developing an app as the server will be restarted automatically
 after saving a file.
 
 #### Manual Testing
-Run run.py to check that setup and flask are OK.
-
+Run run.py to check that setup and flask are OK.  
 Everything working.
+
+#### Added more routes -- About Contact Hall-of-Fame
+All manually tested and working.

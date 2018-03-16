@@ -72,5 +72,8 @@ after saving a file.
 Run run.py to check that setup and flask are OK.  
 Everything working.
 
-#### Added more routes -- About Contact Hall-of-Fame
+#### Added more routes -- About, Contact, Hall-of-Fame
+All manually tested and working.
+
+#### Added simple templates for About, Contact, Hall-of-Fame
 All manually tested and working.

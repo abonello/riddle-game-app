@@ -135,3 +135,29 @@ I will think about what fonts to use before proceeding to the next step.
 
 Next I will draft **about.html**, **contact.html** and **halloffame.html** based on the 
 same code.
+
+#### Selecting Google Fonts
+
+##### Main Title:  short list
+|||
+|--|--|
+|**Gloria Hallelujah**|Schoolbell|
+|Courgette|Kalam|
+|Merienda|
+
+##### Sub Titles:
+Bubblegum Sans
+
+##### Text: short list
+|||
+|-|-|
+|***Forum***|Comfortaa|
+|***Kelly Slab***|**Averia Serif Libre**|
+
+#### Selected fonts
+
+Main Title : Gloria Hallelujah  
+Sub Titles : Bubblegum Sans  
+Other Text : Averia Serif Libre
+
+Changed h2 in main section to h3. Better semantics.

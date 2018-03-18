@@ -1,10 +1,18 @@
+@import url('https://fonts.googleapis.com/css?family=Averia+Serif+Libre:400,700|Bubblegum+Sans|Gloria+Hallelujah');
+
 body {
+    font-family: 'Averia Serif Libre', cursive;
     margin: 0;
     padding: 0;
 }
 
-h1 {
+header h1 {
+    font-family: 'Gloria Hallelujah', cursive;
     font-size: 46px;
+}
+
+header h2 {
+    /*font-family: 'Bubblegum Sans', cursive;*/
 }
 
 
@@ -61,7 +69,8 @@ h1 {
 }
 
 /* Added subtle text shadows. Softens the text and makes it easier to read. */
-.main h2 {
+.main h3 {
+    font-family: 'Bubblegum Sans', cursive;
     text-shadow: 0 0 1px #c1c193;
 }
 .main p {

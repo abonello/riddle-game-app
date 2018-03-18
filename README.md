@@ -131,5 +131,7 @@ NB:
 1. The current colour scheme is only tentative at this stage.
 2. The logo image is a place holder. It might be changed later on.
 
+I will think about what fonts to use before proceeding to the next step.
+
 Next I will draft **about.html**, **contact.html** and **halloffame.html** based on the 
 same code.

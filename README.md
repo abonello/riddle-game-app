@@ -131,10 +131,18 @@ NB:
 1. The current colour scheme is only tentative at this stage.
 2. The logo image is a place holder. It might be changed later on.
 
+I used Chrome extensively to develope the CSS using the automatic features that
+this browser offers to display changes in real time. I also found it handy when
+setting colors.
+
 I will think about what fonts to use before proceeding to the next step.
 
 Next I will draft **about.html**, **contact.html** and **halloffame.html** based on the 
 same code.
+
+#### Manual testing of draft for index.html
+The draft up to this point was manually tested to make sure that the layout
+is fully responsive. I used Chrome for this.
 
 #### Selecting Google Fonts
 

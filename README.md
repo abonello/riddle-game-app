@@ -102,3 +102,24 @@ def contact():
 ~~~~
 
 Note to self: Will be cleaning code later.
+
+* * *
+## Catch up note
+
+18/3/18
+
+
+Over the past few days I experimented with various html and css code to find
+how I am going to lay things down while keeping to the wireframe I prepared.
+I explored how the menu will respond to different screen sizes. I want the menu
+to be a button at the top for mobiles. It becomes a menu across the top for 
+tablets and then a menu below the main title for larger screens.
+
+I managed to achieve this.
+
+I also explored various colors and visual details such as borders. Now I think 
+that I am in a position to start laying down the foundation for the index page.
+I will start by writing the whole html and css code which I will later refactor
+in a way as to use a base template which will be extended in the other templates.
+
+* * *

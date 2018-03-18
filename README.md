@@ -162,10 +162,21 @@ Bubblegum Sans
 |***Forum***|Comfortaa|
 |***Kelly Slab***|**Averia Serif Libre**|
 
-#### Selected fonts
+##### Selected fonts
 
 Main Title : Gloria Hallelujah  
 Sub Titles : Bubblegum Sans  
 Other Text : Averia Serif Libre
 
 Changed h2 in main section to h3. Better semantics.
+
+
+##### Apply draft code to other pages
+
+Now I have index.html, about.html, halloffame.html and contact.html base on the
+same layout and responsive design.
+
+What I need to add is the menu for the registration and login at the top of the 
+page.
+
+I also need to try and test the deployment on heroku.

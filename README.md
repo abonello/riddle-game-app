@@ -104,7 +104,7 @@ def contact():
 Note to self: Will be cleaning code later.
 
 * * *
-## Catch up note
+#### Catch up note
 
 18/3/18
 
@@ -123,3 +123,13 @@ I will start by writing the whole html and css code which I will later refactor
 in a way as to use a base template which will be extended in the other templates.
 
 * * *
+#### Draft Index.html Template
+
+I finished the responsive draft for the **index.html** template together with 
+the accompanying styles.css  
+NB:
+1. The current colour scheme is only tentative at this stage.
+2. The logo image is a place holder. It might be changed later on.
+
+Next I will draft **about.html**, **contact.html** and **halloffame.html** based on the 
+same code.

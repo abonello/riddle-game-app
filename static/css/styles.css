@@ -1,0 +1,211 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    font-size: 46px;
+}
+
+
+.min-height-main {
+    min-height: 460px;
+}
+
+.min-height-footer {
+    min-height: 30px;
+}
+
+
+/*Transition only comes into play if someone resizes the browser window.*/
+.logo {
+     transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+    -webkit-transition: all 0.5s ease-in-out;
+    -o-transition: all 0.5s ease-in-out;
+    padding: 50px; 
+    position: relative;
+    margin: -50px;
+}
+
+.logo img {
+    margin: 0px auto;
+    display: block;
+    width: 100%;
+}
+
+.nav {
+    margin-right: 50px;
+}
+
+.navbar {
+    position: fixed;
+    right: 0;
+    top: 0px;
+    width: 100%;
+    z-index: 10;
+}
+
+.title {
+    text-align: center;
+    margin-top: 70px;
+}
+
+.main {
+    background: #eaeaea;
+    padding: 20px;
+    border: 1px solid #d0d0d0;
+    border-radius: 20px;
+    margin:20px 5px;
+    box-shadow:  0 0 5px #e4f2d1, 0 0 15px #e8e8de;
+}
+
+/* Added subtle text shadows. Softens the text and makes it easier to read. */
+.main h2 {
+    text-shadow: 0 0 1px #c1c193;
+}
+.main p {
+    text-shadow: 0 0 1px #d0d0b6;
+}
+
+.main a {
+    decoration: none;
+    color: #333;
+}
+
+.main a:hover {
+    decoration: none;
+    color: #c16565;
+}
+
+
+footer {
+    background-color: #eaeaea;
+    box-shadow:  0 0 5px #e4f2d1, 0 0 15px #e8e8de;
+    min-height: 75px;
+    margin: 0;
+    border-top: 1px solid #d0d0d0;
+    padding-top: 20px;
+    text-align: center;
+}
+
+.copyright {
+    text-align: center;
+}
+
+.links {
+    text-align: center;
+}
+
+.social-links {
+    padding-bottom: 15px;
+}
+
+.social-links a {
+    color: #333;
+    -moz-transition: all 0.35s ease-in-out;
+    -webkit-transition: all 0.35s ease-in-out;
+    -o-transition: all 0.35s ease-in-out;
+}
+
+.social-links a:hover {
+    color: #c1c1c1;
+    text-decoration: none;
+    text-shadow: 0 0 1px #bdbd9b;
+    -moz-transition: all 0.35s ease-in-out;
+    -webkit-transition: all 0.35s ease-in-out;
+    -o-transition: all 0.35s ease-in-out;
+}
+
+.social-links li a i {
+    width: 32px;
+    height: 35px;
+    padding: 12px 0;
+    border-radius: 50%;
+    font-size: 20px;
+    line-height: 7px;
+    text-align: center;
+    color: #fafafa;
+    -moz-transition: all 0.35s ease-in-out;
+    -webkit-transition: all 0.35s ease-in-out;
+    -o-transition: all 0.35s ease-in-out;
+    background-color: #8f8f8f;
+    border-bottom: 3px solid #e84610;
+}
+
+.social-links li a i:hover {
+    background-color: #e84610;
+    border-color: #fafafa;
+    color: #333;
+}
+
+
+
+
+
+@media only screen and (min-width: 520px){
+    h1 {
+        font-size: 68px;
+    }
+
+    .links {
+        /*border-top: 1px solid #d0d0d0;*/
+        /* padding-top: 20px;
+        text-align: center; */
+    }
+}
+
+@media only screen and (min-width: 770px){
+    .main {
+        margin:20px auto;
+    }
+
+    .navbar {
+        position: fixed;
+        left: 0px;
+        top: 0px;
+        z-index:10;
+    }
+    .social-links {
+        padding-bottom: 0px;
+    }
+}
+
+@media only screen and (min-width: 992px){
+    h1 {
+        font-size: 50px;
+    }
+    
+    .navbar {
+        position: relative;
+        left: 100%;
+        top: 220px;
+        width: 300%;
+        /* z-index: 0; */
+    }
+    
+    .min-height-header {
+        min-height: 250px;
+    }
+
+    .logo {
+        min-height: 200px;
+         transition: all 0.5s ease-in-out;
+        -moz-transition: all 0.5s ease-in-out;
+        -webkit-transition: all 0.5s ease-in-out;
+        -o-transition: all 0.5s ease-in-out;
+         padding: 0px; 
+    }
+    
+    .logo img {
+        margin: 20px auto;
+        max-height: 200px;
+        width: 80%;
+    }
+
+    .title {
+        margin-top: 0px;
+        padding-left: 50px;
+        text-align: left;
+    }
+}

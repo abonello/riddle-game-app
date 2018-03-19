@@ -180,3 +180,8 @@ What I need to add is the menu for the registration and login at the top of the
 page.
 
 I also need to try and test the deployment on heroku.
+
+##### Bug
+I noticed a bug when I tries to load the page on my mobile. There is some 
+horizontal scroll of the whole page and I cannot understand what is causing it.
+Also the Menu button is partly out of sight.

@@ -194,3 +194,4 @@ placement is slightly different due to the Menu button for mobiles. And, it will
 appear above the menu (below the titles) for the desktop layout. I think this 
 gives a better user experience. I am still finding that there is some horizontal 
 scrolling when testing in Chrome emulating mobiles.
+

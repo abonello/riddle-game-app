@@ -185,3 +185,12 @@ I also need to try and test the deployment on heroku.
 I noticed a bug when I tries to load the page on my mobile. There is some 
 horizontal scroll of the whole page and I cannot understand what is causing it.
 Also the Menu button is partly out of sight.
+
+I rethought the layout for mobile design. I saw that the logo image was taking
+too much space so I decided to remove this for mobiles and tablets. It will 
+appear only in the desktop layout. Also the form for registering / login has
+been moved. It will appear at the top for mobiles and tablets. Note that the 
+placement is slightly different due to the Menu button for mobiles. And, it will
+appear above the menu (below the titles) for the desktop layout. I think this 
+gives a better user experience. I am still finding that there is some horizontal 
+scrolling when testing in Chrome emulating mobiles.

@@ -25,6 +25,27 @@ header h2 {
 }
 
 
+/*Registration Login*/
+/*.img-container{*/
+/*    position:relative;*/
+/*    width:*/
+/*}*/
+
+.align-right {
+    position: fixed;
+    right: 100px;
+     /*top: 54px; */
+    top: 10px;
+    z-index: 20;
+}
+.form-username {
+    width: 200px;
+}
+.form-align {
+    display: inline;
+}
+
+
 /*Transition only comes into play if someone resizes the browser window.*/
 .logo {
      transition: all 0.5s ease-in-out;
@@ -40,6 +61,7 @@ header h2 {
     margin: 0px auto;
     display: block;
     width: 100%;
+    display: none;
 }
 
 .nav {
@@ -162,6 +184,7 @@ footer {
         /* padding-top: 20px;
         text-align: center; */
     }
+    
 }
 
 @media only screen and (min-width: 770px){
@@ -175,6 +198,13 @@ footer {
         top: 0px;
         z-index:10;
     }
+    .align-right {
+        right: 10px;
+    }
+    /*.restrict-size {*/
+    /*    width: 80vw;*/
+    /*    overflow: hidden;*/
+    /*}*/
     .social-links {
         padding-bottom: 0px;
     }
@@ -191,10 +221,21 @@ footer {
         top: 220px;
         width: 300%;
         /* z-index: 0; */
+        
     }
+    
+    /*.restrict-size {*/
+        /*width: 600px;*/
+    /*    overflow: hidden;*/
+    /*}*/
     
     .min-height-header {
         min-height: 250px;
+    }
+    
+    .align-right {
+        right: 10px;
+        top: 130px;
     }
 
     .logo {
@@ -210,6 +251,7 @@ footer {
         margin: 20px auto;
         max-height: 200px;
         width: 80%;
+        display: block;
     }
 
     .title {

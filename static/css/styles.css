@@ -54,7 +54,7 @@ header h2 {
     -o-transition: all 0.5s ease-in-out;
     padding: 50px; 
     position: relative;
-    margin: -50px;
+    margin: 0px;
 }
 
 .logo img {

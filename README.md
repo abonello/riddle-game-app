@@ -195,3 +195,4 @@ appear above the menu (below the titles) for the desktop layout. I think this
 gives a better user experience. I am still finding that there is some horizontal 
 scrolling when testing in Chrome emulating mobiles.
 
+Fixed: missprint in .logo margin. Was set to -50px. Now chagned to 0px.

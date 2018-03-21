@@ -23,4 +23,5 @@ def contact():
     # return "<h1>Riddle-Me-This Application</h1><h2>Contact</h2>"
     return render_template("contact.html")
     
-app.run(host=os.getenv('IP'), port=int(os.getenv('PORT')), debug=True)
+if __name__ == '__main__':
+    app.run(host=os.getenv('IP'), port=int(os.getenv('PORT')), debug=True)

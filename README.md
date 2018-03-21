@@ -196,3 +196,59 @@ gives a better user experience. I am still finding that there is some horizontal
 scrolling when testing in Chrome emulating mobiles.
 
 Fixed: missprint in .logo margin. Was set to -50px. Now chagned to 0px.
+
+#### Heroku Deployment
+Logged in to heroku. (Need email and password) I then listed the apps I already
+have. Following this I created an app with the title "riddle-guessing-game". All
+this was done in the command line.
+~~~~
+heroku login
+heroku apps
+heroku apps:create riddle-guessing-game
+~~~~
+Once I list the heroku apps again, the new app is in the list.
+Logging into heroku and creating an app will also add a git remote. This can be 
+viewed by listing the git remotes.
+~~~~
+git remote -v
+~~~~
+
+The result of the last command is:
+~~~~
+    heroku  https://git.heroku.com/riddle-guessing-game.git (fetch)
+    heroku  https://git.heroku.com/riddle-guessing-game.git (push)
+    origin  https://github.com/abonello/riddle-game-app.git (fetch)
+    origin  https://github.com/abonello/riddle-game-app.git (push)
+~~~~
+
+Next I will push the project to heroku.
+~~~~
+git push -u heroku master
+~~~~
+
+Successfully installed Flask-0.12.2 Jinja2-2.10 MarkupSafe-1.0 Werkzeug-0.14.1 click-6.7 itsdangerous-0.24
+https://riddle-guessing-game.herokuapp.com/ deployed to Heroku
+remote: Verifying deploy... done.
+To [Riddle-Guessing-Game](https://git.heroku.com/riddle-guessing-game.git)
+
+Create a watcher in heroku.
+~~~~
+heroku ps:scale web=1
+~~~~
+
+Next we need to go to the Heroku site. Select the app. From settings, click on 
+*Reveal Config Vars*. Here you need to create some configuration variables.
+Set the following key : value pairs
+IP 0.0.0.0
+PORT 5000
+
+These will be the IP and PORT used in the following line of code in run.py
+~~~~python
+app.run(host=os.getenv('IP'), port=int(os.getenv('PORT')), debug=True)
+~~~~
+
+Restart all Dynos:  
+Go to More in Heroku and restart all dynos.
+
+I am getting the following error:  
+at=error code=H14 desc="No web processes running" method=GET path="/favicon.ico" host=riddle-guessing-game.herokuapp.com request_id=86105bba-9b47-44f2-a211-f83b2cc3a3fa fwd="92.21.201.110" dyno= connect= service= status=503 bytes= protocol=https

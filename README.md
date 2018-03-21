@@ -252,3 +252,4 @@ Go to More in Heroku and restart all dynos.
 
 I am getting the following error:  
 at=error code=H14 desc="No web processes running" method=GET path="/favicon.ico" host=riddle-guessing-game.herokuapp.com request_id=86105bba-9b47-44f2-a211-f83b2cc3a3fa fwd="92.21.201.110" dyno= connect= service= status=503 bytes= protocol=https
+

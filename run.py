@@ -3,25 +3,36 @@ from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
-username_set = {'AB', 'BC', 'CD'}
+# username_set = {'AB', 'BC', 'CD'}
 
 @app.route('/', methods=['GET','POST'])
 def index():
+    allusers = ""
     username = ""
     if request.method == 'POST':
         if 'register' in request.form:
-            username = request.form['username']
-            if username in username_set:
-                username = ""
-                return render_template("index.html", username="username already exist try another one")
-            else:
-                username_set.add(username)
+            with open("data/users.txt", "r") as readusernames:
+                allusers = readusernames.read()
+                username = request.form['username']
+                if username in allusers:
+                    return render_template("index.html", username="username already exist try another one")
+                else:
+                    with open("data/users.txt", "a") as addusernames:
+                        addusernames.write(username + "\n")
+                        allusers += (username)
+                    # username_set.add(username)
+                    return render_template("index.html", username=username, allusers=allusers)
                 
         elif 'login' in request.form:
-            username = "Please register first"
+            with open("data/users.txt", "r") as readusernames:
+                username = "Please register first"
+                userlist = readusernames.read()
+            return render_template("index.html", username=username, allusers= userlist)
         
     # return "<h1>Hello World -- This is Riddle-Me-This Application</h1><h2>It is a guessing game.</h2>"
-    return render_template("index.html", username=username, allusers=username_set)
+    # return render_template("index.html", username=username, allusers=username_set)
+    return render_template("index.html", username=username, allusers="")
+    
     
 @app.route('/halloffame')
 def halloffame():

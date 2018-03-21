@@ -326,3 +326,40 @@ part.
 </form>
 ~~~~html
 
+* * *
+Next I need to check if a username already exist when someone tries to register.  
+
+~~~~python
+@app.route('/', methods=['GET','POST'])
+def index():
+    username_set = {'AB', 'BC', 'CD'}
+    username = ""
+    if request.method == 'POST':
+        if 'register' in request.form:
+            username = request.form['username']
+            if username in username_set:
+                username = ""
+                return render_template("index.html", username="username already exist try another one")
+            else:
+                username_set.add(username)
+                
+        elif 'login' in request.form:
+            username = "Please register first"
+        
+    return render_template("index.html", username=username, allusers=username_set)
+~~~~
+
+For now a username_set holds all the users. When someone new tries to register
+the username is checked to see if it already exist in which case a text appears,
+currently an h2 below the subtitle asking the user to select another name. If 
+the username does not exist it is added to the set.  
+I am currently displaying the contents of the set in the main section for testing 
+purposes. This will be removed.
+
+The set is reinitialised everytime the / route is selected so I cannot add two users.
+Moving
+~~~~python
+username_set = {'AB', 'BC', 'CD'}
+~~~~
+outside of def index() solved this temporary problem. Now the set will hold any
+added users for as long as I do not restart the server.

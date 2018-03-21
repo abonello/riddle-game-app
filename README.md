@@ -276,3 +276,53 @@ git push -u heroku master
 heroku ps:scale web=1
 ~~~~
 
+#### Passing a variable to index.html
+~~~~html
+<h2>{{ username }}</h2>
+~~~~
+and run.py, the @app.route('/')
+~~~~python
+username = "AB"
+return render_template("index.html", username=username)
+~~~~
+
+This displays the hardcoded text. Now I want to capture a text written as 
+username and posted using the login button.
+
+Get two buttons to function from the same form.  
+
+Changes to code:  
+run.py  
+import request is added  
+modify the routing for / 
+Currently I have a default username but this will be changed. It will be a list
+of usernames stored in a text file. The file will be read in a set to which new
+usernames can be added to make sure they are unique.
+~~~~python
+from flask import Flask, render_template, request
+
+@app.route('/', methods=['GET','POST'])
+def index():
+    username = "AB"
+    if request.method == 'POST':
+        if 'register' in request.form:
+            username = request.form['username']
+        elif 'login' in request.form:
+            username = "Please register first"
+        
+    return render_template("index.html", username=username)
+~~~~
+
+index.html 
+POST method was added to the form and an action. names were added to each form 
+part.  
+~~~~html
+<form class="align-right" method="POST" action="/">
+    <div class="form-group">
+        <input type="text" class="form-control form-username form-align" name="username" id="username" placeholder="username">
+        <button type="submit" class="btn btn-default form-align" name="login" type="submit" value="login">Login</button>
+        <button type="submit" class="btn btn-default form-align" name="register" type="submit" value="register">Register</button>
+    </div>
+</form>
+~~~~html
+

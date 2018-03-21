@@ -1,12 +1,19 @@
 import os
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
-@app.route('/')
+@app.route('/', methods=['GET','POST'])
 def index():
+    username = "AB"
+    if request.method == 'POST':
+        if 'register' in request.form:
+            username = request.form['username']
+        elif 'login' in request.form:
+            username = "Please register first"
+        
     # return "<h1>Hello World -- This is Riddle-Me-This Application</h1><h2>It is a guessing game.</h2>"
-    return render_template("index.html")
+    return render_template("index.html", username=username)
     
 @app.route('/halloffame')
 def halloffame():

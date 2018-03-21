@@ -31,10 +31,12 @@
                                 </div>
                             </div> 
                             <!-- Registration Login Form-->
-                            <form class="align-right">
-                                <input type="text" class="form-control form-username form-align" id="username" placeholder="username">
-                                <button type="submit" class="btn btn-default form-align">Login</button>
-                                <button type="submit" class="btn btn-default form-align">Register</button>
+                            <form class="align-right" method="POST" action="/">
+                                <div class="form-group">
+                                    <input type="text" class="form-control form-username form-align" name="username" id="username" placeholder="username">
+                                    <button type="submit" class="btn btn-default form-align" name="login" type="submit" value="login">Login</button>
+                                    <button type="submit" class="btn btn-default form-align" name="register" type="submit" value="register">Register</button>
+                                </div>
                             </form>
                             <img class="img-responsive" src="static/img/guess.png" alt="logo image"></img>
                         </div>
@@ -44,6 +46,7 @@
                 <div class="col-md-8 col-lg-9 title min-height-header">
                     <h1>Riddle Me This</h1>
                     <h2>A Guessing Game</h2>
+                    <h2>{{ username }}</h2>
                 </div>
             </div>
         </header>

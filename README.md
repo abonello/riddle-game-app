@@ -22,7 +22,7 @@ Note that while install Flask, it will install its own requirements as well.
 #### Prepare the Procfile
 This will be needed for the Heroku deployment.
 ~~~~
-echo web:python run.py > Procfile
+echo web: python run.py > Procfile
 ~~~~
 
 #### Create the run.py
@@ -252,4 +252,27 @@ Go to More in Heroku and restart all dynos.
 
 I am getting the following error:  
 at=error code=H14 desc="No web processes running" method=GET path="/favicon.ico" host=riddle-guessing-game.herokuapp.com request_id=86105bba-9b47-44f2-a211-f83b2cc3a3fa fwd="92.21.201.110" dyno= connect= service= status=503 bytes= protocol=https
+
+I tracked this down to the following:  
+When I run
+~~~~
+heroku ps:scale web=1
+~~~~
+I get the following:
+*       Scaling dynos... !  
+         ▸    Couldn't find that process type.  
+ 
+
+I changed this code in run.py
+~~~~python
+if __name__ == '__main__':
+    app.run(host=os.getenv('IP'), port=int(os.getenv('PORT')), debug=True)
+~~~~
+
+Then I pushed again to heroku. run the scaling and restarted the dynos.  
+No errors and the app is successfully deployed.
+~~~~
+git push -u heroku master
+heroku ps:scale web=1
+~~~~
 

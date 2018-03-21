@@ -363,3 +363,39 @@ username_set = {'AB', 'BC', 'CD'}
 ~~~~
 outside of def index() solved this temporary problem. Now the set will hold any
 added users for as long as I do not restart the server.
+
+Login and Registration sorted.
+
+~~~~python
+@app.route('/', methods=['GET','POST'])
+def index():
+    allusers = ""
+    username = ""
+    if request.method == 'POST':
+        username = request.form['username']
+        with open("data/users.txt", "r") as readusernames:
+            allusers = readusernames.read()
+        if 'register' in request.form:
+                if username in allusers:
+                    return render_template("index.html", username="username already exist try another one")
+                else:
+                    with open("data/users.txt", "a") as addusernames:
+                        addusernames.write(username + "\n")
+                        allusers += (username)
+                    return render_template("index.html", username=username, allusers=allusers)
+                
+        elif 'login' in request.form:
+            if username == "":
+                return render_template("index.html", username="Enter a username to log in", allusers=allusers)
+            elif username in allusers:
+                username += " LOGGED IN"
+                return render_template("index.html", username=username, allusers=allusers)
+            else:
+                username = "That username does not exist."
+            return render_template("index.html", username=username, allusers=allusers)
+        
+    return render_template("index.html", username=username, allusers="")
+~~~~
+
+I will now need to make the registration button redirect to another page and 
+move the relevant code there.

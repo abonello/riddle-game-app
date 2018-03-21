@@ -10,10 +10,10 @@ def index():
     allusers = ""
     username = ""
     if request.method == 'POST':
+        username = request.form['username']
+        with open("data/users.txt", "r") as readusernames:
+            allusers = readusernames.read()
         if 'register' in request.form:
-            with open("data/users.txt", "r") as readusernames:
-                allusers = readusernames.read()
-                username = request.form['username']
                 if username in allusers:
                     return render_template("index.html", username="username already exist try another one")
                 else:
@@ -24,10 +24,14 @@ def index():
                     return render_template("index.html", username=username, allusers=allusers)
                 
         elif 'login' in request.form:
-            with open("data/users.txt", "r") as readusernames:
-                username = "Please register first"
-                userlist = readusernames.read()
-            return render_template("index.html", username=username, allusers= userlist)
+            if username == "":
+                return render_template("index.html", username="Enter a username to log in", allusers=allusers)
+            elif username in allusers:
+                username += " LOGGED IN"
+                return render_template("index.html", username=username, allusers=allusers)
+            else:
+                username = "That username does not exist."
+            return render_template("index.html", username=username, allusers=allusers)
         
     # return "<h1>Hello World -- This is Riddle-Me-This Application</h1><h2>It is a guessing game.</h2>"
     # return render_template("index.html", username=username, allusers=username_set)

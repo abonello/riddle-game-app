@@ -4,31 +4,43 @@ from flask import Flask, render_template, request
 app = Flask(__name__)
 
 # username_set = {'AB', 'BC', 'CD'}
+logged = False
+
+@app.route('/logout', methods=['GET', 'POST'])
+def logout():
+    if request.method == 'POST':
+        # return "<h1>Logout</h1>"
+        return render_template("index.html", username="", allusers="", logged=False)
 
 @app.route('/', methods=['GET','POST'])
 def index():
     allusers = ""
     username = ""
-    if request.method == 'POST':
-        username = request.form['username']
-        with open("data/users.txt", "r") as readusernames:
-            allusers = readusernames.read()
-        if 'register' in request.form:
-            return render_template("register.html",register="",check_active="", register_active="btn-deactivated", username="", allusers="")
+    # console.log(request.from[])
+    try:
+        if request.method == 'POST':
+            username = request.form['username']
+            with open("data/users.txt", "r") as readusernames:
+                allusers = readusernames.read()
+            if 'register' in request.form:
+                return render_template("register.html",register="",check_active="", register_active="btn-deactivated", username="", allusers="")
+                    
+            elif 'login' in request.form:
+                if username == "":
+                    return render_template("index.html", username="Enter a username to log in", allusers=allusers, logged=False)
+                elif username in allusers:
+                    username += " LOGGED IN"
+                    return render_template("index.html", username=username, allusers=allusers, logged=True)
+                else:
+                    username = "That username does not exist. Please register first."
+                return render_template("index.html", username=username, allusers=allusers, logged=False)
                 
-        elif 'login' in request.form:
-            if username == "":
-                return render_template("index.html", username="Enter a username to log in", allusers=allusers)
-            elif username in allusers:
-                username += " LOGGED IN"
-                return render_template("index.html", username=username, allusers=allusers)
-            else:
-                username = "That username does not exist. Please register first."
-            return render_template("index.html", username=username, allusers=allusers)
+    except Exception as e:
+        return "<h1> Error: " + str(e) + "</h1>"
         
     # return "<h1>Hello World -- This is Riddle-Me-This Application</h1><h2>It is a guessing game.</h2>"
     # return render_template("index.html", username=username, allusers=username_set)
-    return render_template("index.html", username=username, allusers="")
+    return render_template("index.html", username=username, allusers="", logged=False)
     
 @app.route('/register', methods=['GET','POST'])
 def register():
@@ -53,17 +65,17 @@ def register():
             # return render_template("register.html", register="register", username_feedback="Username added. You can now log in.", allusers=allusers)
             # return render_template("register.html", register="register", username_feedback="Username added. You can now log in.",username=username, allusers=allusers)
             # Go back to index as registered for now. Later I will redirect to user page.
-            return render_template("index.html", register="register", username_feedback="Username added. You can now log in.",username=username, allusers=allusers)
+            return render_template("index.html", register="register", username_feedback="Username added. You can now log in.",username=username, allusers=allusers, logged="True")
 
-        elif 'login' in request.form:
-            if username == "":
-                return render_template("index.html", username="Enter a username to log in", allusers=allusers)
-            elif username in allusers:
-                username += " LOGGED IN"
-                return render_template("index.html", username=username, allusers=allusers)
-            else:
-                username = "That username does not exist."
-            return render_template("index.html", username=username, allusers=allusers)
+        # elif 'login' in request.form:
+        #     if username == "":
+        #         return render_template("index.html", username="Enter a username to log in", allusers=allusers)
+        #     elif username in allusers:
+        #         username += " LOGGED IN"
+        #         return render_template("index.html", username=username, allusers=allusers)
+        #     else:
+        #         username = "That username does not exist."
+        #     return render_template("index.html", username=username, allusers=allusers)
         
     # return "<h1>Hello World -- This is Riddle-Me-This Application</h1><h2>It is a guessing game.</h2>"
     # return render_template("index.html", username=username, allusers=username_set)

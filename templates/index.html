@@ -31,13 +31,22 @@
                                 </div>
                             </div> 
                             <!-- Registration Login Form-->
-                            <form class="align-right" method="POST" action="/">
-                                <div class="form-group">
-                                    <input type="text" class="form-control form-username form-align" name="username" id="username" placeholder="username">
-                                    <button type="submit" class="btn btn-default form-align" name="login" type="submit" value="login">Login</button>
-                                    <button type="submit" class="btn btn-default form-align" name="register" type="submit" value="register">Register</button>
-                                </div>
-                            </form>
+                            {%if logged %}
+                                <form class="align-right" method="POST" action="/logout">
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-default form-align" name="logout" type="submit" value="logout">Logout</button>
+                                    </div>
+                                </form>
+                            {% elif not logged %}
+                                <form class="align-right" method="POST" action="/">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control form-username form-align" name="username" id="username" placeholder="username">
+                                        <button type="submit" class="btn btn-default form-align" name="login" type="submit" value="login" alt="login">Login</button>
+                                        <button type="submit" class="btn btn-default form-align" name="register" type="submit" value="register">Register</button>
+                                    </div>
+                                </form>
+                            {% endif %}
+                            
                             <img class="img-responsive" src="static/img/guess.png" alt="logo image"></img>
                         </div>
                     </div>

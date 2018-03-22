@@ -425,3 +425,37 @@ Alternatively I could have given a different variable name for the text box but
 then I would add another variable to an already long list that I have to pass.
 
 
+~~~~html
+<form class="align-right" method="POST" action="/">
+    <div class="form-group">
+        {%if logged == "True" %}
+            <button type="submit" class="btn btn-default form-align" name="logout" type="submit" value="logout">Logout</button>
+        {% else %}
+            <input type="text" class="form-control form-username form-align" name="username" id="username" placeholder="username">
+            <button type="submit" class="btn btn-default form-align" name="login" type="submit" value="login">Login</button>
+            <button type="submit" class="btn btn-default form-align" name="register" type="submit" value="register">Register</button>
+        {% endif %}
+    </div>
+</form>
+~~~~
+The above code those not work as I cannot make it call the same route from the logout as for the login or register buttons.
+The following code allows me to have different action for logout and works well.
+~~~~html
+{%if logged %}
+    <form class="align-right" method="POST" action="/logout">
+        <div class="form-group">
+            <button type="submit" class="btn btn-default form-align" name="logout" type="submit" value="logout">Logout</button>
+        </div>
+    </form>
+{% elif not logged %}
+    <form class="align-right" method="POST" action="/">
+        <div class="form-group">
+            <input type="text" class="form-control form-username form-align" name="username" id="username" placeholder="username">
+            <button type="submit" class="btn btn-default form-align" name="login" type="submit" value="login" alt="login">Login</button>
+            <button type="submit" class="btn btn-default form-align" name="register" type="submit" value="register">Register</button>
+        </div>
+    </form>
+{% endif %}
+~~~~
+
+I also applied a try except code that will display the exception raised.

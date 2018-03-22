@@ -40,10 +40,11 @@ def register():
             allusers = readusernames.read()
         if 'check' in request.form:
             if username in allusers:
-                return render_template("register.html", register="", register_active="btn-deactivated", check_active="", username_feedback="username already exist try another one")
+                return render_template("register.html", register="", register_active="btn-deactivated", check_active="", username_feedback="username already exist try another one", username=username)
             else:
                 return render_template("register.html", register="register", register_active="", check_active="btn-deactivated", username_feedback="Username available. Please click the register button.", username=username)
-                    
+                # return render_template("register.html", register="register", register_active="", check_active="btn-deactivated", username_feedback="Username available. Please click the register button.", username="")
+  
         if 'register' in request.form:
             with open("data/users.txt", "a") as addusernames:
                 addusernames.write(username + "\n")

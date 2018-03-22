@@ -409,5 +409,19 @@ Checking if username already exist.
 Then register and for now redirect to index.html. Later this will take the user
 to the user page in logged in status.
 
+#### There is a bug.
+
+When I check if a username is available, if it is available it is immediately 
+showing in the header. This should only appear after the user finishes the
+registration process. (or if the user logs in using the login button).
+
+Fix:  
+At first I tried to remove the username=username from the return, but this means
+that I cannot keep the username displayed in the text box. I wanted to keep this
+then I decided to remove the variable displaying the username in the header in
+the register page as I do not intend to use this anyway.
+
+Alternatively I could have given a different variable name for the text box but
+then I would add another variable to an already long list that I have to pass.
 
 

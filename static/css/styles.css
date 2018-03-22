@@ -109,6 +109,24 @@ header h2 {
     color: #c16565;
 }
 
+.registration {
+    /*position: relative;*/
+    /*right: 100px;*/
+     /*top: 54px; */
+    /*top: 10px;*/
+    /*z-index: 20;*/
+}
+.red {
+    color: red;
+}
+
+.btn-width {
+    width: 400px;
+}
+.btn-deactivated {
+    color: grey;
+}
+
 
 footer {
     background-color: #eaeaea;

@@ -399,3 +399,13 @@ def index():
 
 I will now need to make the registration button redirect to another page and 
 move the relevant code there.
+
+I changed the register code in route for index.html to load the register.html  
+In here I will have another form which will do the checking of a username to 
+see if it already exist and the actual registration of a new username.
+
+
+
+
+
+Added some more code in register.html and related python.

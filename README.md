@@ -404,8 +404,10 @@ I changed the register code in route for index.html to load the register.html
 In here I will have another form which will do the checking of a username to 
 see if it already exist and the actual registration of a new username.
 
+Completed code for register page.  
+Checking if username already exist.  
+Then register and for now redirect to index.html. Later this will take the user
+to the user page in logged in status.
 
 
 
-
-Added some more code in register.html and related python.

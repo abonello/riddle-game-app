@@ -459,3 +459,11 @@ The following code allows me to have different action for logout and works well.
 ~~~~
 
 I also applied a try except code that will display the exception raised.
+Small thing to fix. After logging out I was ending up in a url ending .../logout
+
+I fixed this by redirecting to the url of index  
+I also made sure that the logged variable holds the value False
+~~~~python
+logged = False
+return redirect(url_for('index'))
+~~~~

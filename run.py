@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for
 
 app = Flask(__name__)
 
@@ -10,7 +10,9 @@ logged = False
 def logout():
     if request.method == 'POST':
         # return "<h1>Logout</h1>"
-        return render_template("index.html", username="", allusers="", logged=False)
+        # return render_template("index.html", username="", allusers="", logged=False)
+        logged = False
+        return redirect(url_for('index'))
 
 @app.route('/', methods=['GET','POST'])
 def index():
@@ -79,7 +81,7 @@ def register():
         
     # return "<h1>Hello World -- This is Riddle-Me-This Application</h1><h2>It is a guessing game.</h2>"
     # return render_template("index.html", username=username, allusers=username_set)
-    return render_template("register.html", username=username, allusers="", username_feedback=" Enter a username")
+    return render_template("register.html", username=username, allusers="", username_feedback=" Enter a valid username.")
     
     
 @app.route('/halloffame')

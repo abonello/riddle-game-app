@@ -22,19 +22,19 @@
                                     </button>
                                     <div class="collapse navbar-collapse navHeaderCollapse">
                                         <ul class="nav navbar-nav navbar-left navbar-main">
-                                            {% if not(app_info["route"] == "index") %}
+                                            {% if not(route == "index") %}
                                                 <li class="nav-item active"><a class="nav-link scroll" href="/" id="home">Home</a></li>
                                             {% endif %}
-                                            {% if app_info["logged"] and not(app_info["route"] == "user") %}
+                                            {% if logged %}
                                                 <li class="nav-item"><a class="nav-link scroll" href="/user" id="userNav">USER</a></li>
                                             {% endif %}
-                                            {% if not(app_info["route"] == "halloffame") %}
+                                            {% if not(route == "halloffame") %}
                                                 <li class="nav-item"><a class="nav-link scroll" href="/halloffame" id="hofNav">Hall of Fame</a></li>
                                             {% endif %}
-                                            {% if not(app_info["route"] == "about") %}
+                                            {% if not(route == "about") %}
                                                 <li class="nav-item"><a class="nav-link scroll" href="/about" id="aboutNav">About</a></li>
                                             {% endif %}
-                                            {% if not(app_info["route"] == "contact") %}
+                                            {% if not(route == "contact") %}
                                                 <li class="nav-item"><a class="nav-link scroll" href="/contact" id="contactNav">Contact</a></li>
                                             {% endif %}
                                         </ul>
@@ -42,13 +42,13 @@
                                 </div>
                             </div> 
                             <!-- Registration Login Form-->
-                            {%if app_info["logged"] %}
+                            {%if logged %}
                                 <form class="align-right" method="POST" action="/logout">
                                     <div class="form-group">
                                         <button type="submit" class="btn btn-default form-align" name="logout" type="submit" value="logout">Logout</button>
                                     </div>
                                 </form>
-                            {% elif not app_info["logged"] %}
+                            {% elif not logged %}
                                 <form class="align-right" method="POST" action="/">
                                     <div class="form-group">
                                         <input type="text" class="form-control form-username form-align" name="username" id="username" placeholder="username">
@@ -57,6 +57,7 @@
                                     </div>
                                 </form>
                             {% endif %}
+                            
                             <img class="img-responsive" src="static/img/guess.png" alt="logo image"></img>
                         </div>
                     </div>
@@ -72,13 +73,32 @@
     
         <section class="container">
             <div class="row">
-                <p>User: {{ app_info["username"] }}</p>
-                <p>All users: {{ app_info["allusers"] }}</p>
-                <p>Logged: {{ app_info["logged"] }}</p>
+                <p>User: {{username}}</p>
+                <p>All users: {{ allusers }}</p>
+                <p>Logged: {{ logged }}</p>
                 <div class="col-md-12 main min-height-main">
-                    <h3>About</h3>
-                    <p>This is a guessing game, which will be part of my protfolio.</p>
-                    <p>This will be the about page.</p>
+                    <h3>Description</h3>
+        
+                    <p>This is the milestone project that I am building for the “Practical Python” stream, 
+                    part of the New LMS in the “Full Stack Web Development Course” offered by Code Institute.</p>
+                    
+                    <p>The purpose of the game is to guess a word or phrase from a given picture. Three attempts 
+                    are allowed. With each subsequent attempt further clues will be shown at the expense of reduced
+                    points.</p>
+        
+                    <p>More information can be found in the <a href="/about"><strong>About</strong></a> section of this
+                    game.</p>
+        
+                    <h3>Instructions</h3>
+                    <p>First you need to register if you have not already done so.</p>
+                    <p>If you have already registered, use your username to login. Your username is unique and its 
+                    sole purpose is to keep track of the games you played and the points you gained. The user name 
+                    can be any set of letters.<br>
+                    Once you log in you will be taken to your user page. There you can see a list of games played
+                    and the points gained. You can start a new game from this page.</p>
+                    <p>More information can be found in the <a href="/about"><strong>About</strong></a> section of this
+                    game.</p>
+        
                 </div>
                 <!-- Will be needed in the pages which split in two columns -->
                 <!-- <div class="col-md-6 blue min-height-main"></div> -->

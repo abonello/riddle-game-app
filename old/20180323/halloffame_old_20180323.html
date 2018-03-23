@@ -15,48 +15,38 @@
                 <div class="col-md-4 col-lg-3 min-height-header">
                     <div class="row">
                         <div class="logo">
-                            <div class="navbar navbar-default restrict-size">
+                            <div class="navbar navbar-default">
                                 <div class="container-fluid">
                                     <button class="navbar-toggle" data-toggle="collapse" data-target=".navHeaderCollapse">
                                         Menu
                                     </button>
                                     <div class="collapse navbar-collapse navHeaderCollapse">
                                         <ul class="nav navbar-nav navbar-left navbar-main">
-                                            {% if not(app_info["route"] == "index") %}
+                                            {% if not(route == "index") %}
                                                 <li class="nav-item active"><a class="nav-link scroll" href="/" id="home">Home</a></li>
                                             {% endif %}
-                                            {% if app_info["logged"] and not(app_info["route"] == "user") %}
+                                            {% if logged %}
                                                 <li class="nav-item"><a class="nav-link scroll" href="/user" id="userNav">USER</a></li>
                                             {% endif %}
-                                            {% if not(app_info["route"] == "halloffame") %}
+                                            {% if not(route == "halloffame") %}
                                                 <li class="nav-item"><a class="nav-link scroll" href="/halloffame" id="hofNav">Hall of Fame</a></li>
                                             {% endif %}
-                                            {% if not(app_info["route"] == "about") %}
+                                            {% if not(route == "about") %}
                                                 <li class="nav-item"><a class="nav-link scroll" href="/about" id="aboutNav">About</a></li>
                                             {% endif %}
-                                            {% if not(app_info["route"] == "contact") %}
+                                            {% if not(route == "contact") %}
                                                 <li class="nav-item"><a class="nav-link scroll" href="/contact" id="contactNav">Contact</a></li>
                                             {% endif %}
+                                            <!--<li class="nav-item active"><a class="nav-link scroll" href="/" id="home">Home</a></li>-->
+                                            <!--{% if logged %}-->
+                                            <!--    <li class="nav-item"><a class="nav-link scroll" href="/user" id="userNav">USER</a></li>-->
+                                            <!--{% endif %}-->
+                                            <!--<li class="nav-item"><a class="nav-link scroll" href="/about" id="aboutNav">About</a></li>-->
+                                            <!--<li class="nav-item"><a class="nav-link scroll" href="/contact" id="contactNav">Contact</a></li>-->
                                         </ul>
                                     </div>
                                 </div>
                             </div> 
-                            <!-- Registration Login Form-->
-                            {%if app_info["logged"] %}
-                                <form class="align-right" method="POST" action="/logout">
-                                    <div class="form-group">
-                                        <button type="submit" class="btn btn-default form-align" name="logout" type="submit" value="logout">Logout</button>
-                                    </div>
-                                </form>
-                            {% elif not app_info["logged"] %}
-                                <form class="align-right" method="POST" action="/">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control form-username form-align" name="username" id="username" placeholder="username">
-                                        <button type="submit" class="btn btn-default form-align" name="login" type="submit" value="login" alt="login">Login</button>
-                                        <button type="submit" class="btn btn-default form-align" name="register" type="submit" value="register">Register</button>
-                                    </div>
-                                </form>
-                            {% endif %}
                             <img class="img-responsive" src="static/img/guess.png" alt="logo image"></img>
                         </div>
                     </div>
@@ -72,9 +62,9 @@
     
         <section class="container">
             <div class="row main">
-                <p>User: {{ app_info["username"] }}</p>
-                <p>All users: {{ app_info["allusers"] }}</p>
-                <p>Logged: {{ app_info["logged"] }}</p>
+                <p>User: {{username}}</p>
+                <p>All users: {{ allusers }}</p>
+                <p>Logged: {{ logged }}</p>
                 <div class="row">
                     <div class="col-md-6">
                         <h3>Hall of Fame</h3>
@@ -83,12 +73,12 @@
                         halls of fame.</p>
                     </div>
                     
-                    {% if app_info["logged"] %}
+                    {% if logged %}
                         <div class="col-md-6">
-                            <h3>Welcome {{ app_info["username"] }}</h3>
+                            <h3>Welcome {{ username }}</h3>
                         </div>
                     {% endif %}
-                    {% if not app_info["logged"] %}
+                    {% if not logged %}
                         <div class="col-md-6">
                             <p><br></p>
                             <p>Log in if you would like to play</p>

@@ -22,25 +22,21 @@
                                     </button>
                                     <div class="collapse navbar-collapse navHeaderCollapse">
                                         <ul class="nav navbar-nav navbar-left navbar-main">
-                                            {% if not(route == "index") %}
+                                            {% if not(app_info["route"] == "index") %}
                                                 <li class="nav-item active"><a class="nav-link scroll" href="/" id="home">Home</a></li>
                                             {% endif %}
-                                            {% if logged %}
+                                            {% if app_info["logged"] and not(app_info["route"] == "user") %}
                                                 <li class="nav-item"><a class="nav-link scroll" href="/user" id="userNav">USER</a></li>
                                             {% endif %}
-                                            {% if not(route == "halloffame") %}
+                                            {% if not(app_info["route"] == "halloffame") %}
                                                 <li class="nav-item"><a class="nav-link scroll" href="/halloffame" id="hofNav">Hall of Fame</a></li>
                                             {% endif %}
-                                            {% if not(route == "about") %}
+                                            {% if not(app_info["route"] == "about") %}
                                                 <li class="nav-item"><a class="nav-link scroll" href="/about" id="aboutNav">About</a></li>
                                             {% endif %}
-                                            {% if not(route == "contact") %}
+                                            {% if not(app_info["route"] == "contact") %}
                                                 <li class="nav-item"><a class="nav-link scroll" href="/contact" id="contactNav">Contact</a></li>
                                             {% endif %}
-                                            <!--<li class="nav-item active"><a class="nav-link scroll" href="/" id="home2">Home</a></li>-->
-                                            <!--<li class="nav-item"><a class="nav-link scroll" href="/halloffame" id="activitiesNav">Hall of Fame</a></li>-->
-                                            <!--<li class="nav-item"><a class="nav-link scroll" href="/about" id="portfolioNav">About</a></li>-->
-                                            <!--<li class="nav-item"><a class="nav-link scroll" href="/contact" id="contactNav">Contact</a></li>-->
                                         </ul>
                                     </div>
                                 </div>
@@ -68,9 +64,9 @@
     
         <section class="container">
             <div class="row">
-                <p>User: {{username}}</p>
-                <p>All users: {{ allusers }}</p>
-                <p>Logged: {{ logged }}</p>
+                <p>User: {{ app_info["username"] }}</p>
+                <p>All users: {{ app_info["allusers"] }}</p>
+                <p>Logged: {{ app_info["logged"] }}</p>
                 <div class="col-md-12 main min-height-main">
                     <h3>Register</h3>
         
@@ -80,11 +76,11 @@
                     <!-- Registration Login Form-->
                     <form class="registration" method="POST" action="/register">
                         <div class="form-group">
-                            <input type="text" class="form-control form-username form-align" name="username" id="username" placeholder="username" value={{ username }}>
-                            <button type="submit" class="btn btn-default form-align {{ check_active }}" name="check" type="submit" value="login">Check Username Available</button>
+                            <input type="text" class="form-control form-username form-align" name="username" id="username" placeholder="username" value={{ app_info["username"] }}>
+                            <button type="submit" class="btn btn-default form-align {{ app_info["check_active"] }}" name="check" type="submit" value="login">Check Username Available</button>
                         </div>
                         <div class="red">{{ username_feedback }}</div>
-                        <button type="submit" class="btn btn-default form-align btn-width {{ register_active }}" name="{{  register  }}" type="submit" value="register">Register</button>
+                        <button type="submit" class="btn btn-default form-align btn-width {{ app_info["register_active"] }}" name="{{  app_info["register"]  }}" type="submit" value="register">Register</button>
                     </form>
         
                     

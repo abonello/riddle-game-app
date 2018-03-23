@@ -22,19 +22,19 @@
                                     </button>
                                     <div class="collapse navbar-collapse navHeaderCollapse">
                                         <ul class="nav navbar-nav navbar-left navbar-main">
-                                            {% if not(route == "index") %}
+                                            {% if not(app_info["route"] == "index") %}
                                                 <li class="nav-item active"><a class="nav-link scroll" href="/" id="home">Home</a></li>
                                             {% endif %}
-                                            {% if logged %}
+                                            {% if app_info["logged"] and not(app_info["route"] == "user") %}
                                                 <li class="nav-item"><a class="nav-link scroll" href="/user" id="userNav">USER</a></li>
                                             {% endif %}
-                                            {% if not(route == "halloffame") %}
+                                            {% if not(app_info["route"] == "halloffame") %}
                                                 <li class="nav-item"><a class="nav-link scroll" href="/halloffame" id="hofNav">Hall of Fame</a></li>
                                             {% endif %}
-                                            {% if not(route == "about") %}
+                                            {% if not(app_info["route"] == "about") %}
                                                 <li class="nav-item"><a class="nav-link scroll" href="/about" id="aboutNav">About</a></li>
                                             {% endif %}
-                                            {% if not(route == "contact") %}
+                                            {% if not(app_info["route"] == "contact") %}
                                                 <li class="nav-item"><a class="nav-link scroll" href="/contact" id="contactNav">Contact</a></li>
                                             {% endif %}
                                         </ul>
@@ -42,13 +42,13 @@
                                 </div>
                             </div> 
                             <!-- Registration Login Form-->
-                            {%if logged %}
+                            {%if app_info["logged"] %}
                                 <form class="align-right" method="POST" action="/logout">
                                     <div class="form-group">
                                         <button type="submit" class="btn btn-default form-align" name="logout" type="submit" value="logout">Logout</button>
                                     </div>
                                 </form>
-                            {% elif not logged %}
+                            {% elif not app_info["logged"] %}
                                 <form class="align-right" method="POST" action="/">
                                     <div class="form-group">
                                         <input type="text" class="form-control form-username form-align" name="username" id="username" placeholder="username">
@@ -66,16 +66,16 @@
                 <div class="col-md-8 col-lg-9 title min-height-header">
                     <h1>Riddle Me This</h1>
                     <h2>A Guessing Game</h2>
-                    <h2>{{ username }}</h2>
+                    <h2>{{ app_info["username"] }}</h2>
                 </div>
             </div>
         </header>
     
         <section class="container">
             <div class="row">
-                <p>User: {{username}}</p>
-                <p>All users: {{ allusers }}</p>
-                <p>Logged: {{ logged }}</p>
+                <p>User: {{ app_info["username"] }}</p>
+                <p>All users: {{ app_info["allusers"] }}</p>
+                <p>Logged: {{ app_info["logged"] }}</p>
                 <div class="col-md-12 main min-height-main">
                     <h3>Description</h3>
         

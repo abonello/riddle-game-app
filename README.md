@@ -612,6 +612,12 @@ For now the data is hard coded in a list. This will be replaced and stored in a
 text file so that it can be retained from session to another.
 
 
+## Refactoring data structure for app information
+I am going to change the various global variables to a dictionary. In this way 
+I will only have to pass one item to a web page.
+Done.
+
+
 
 * * *
 * * *

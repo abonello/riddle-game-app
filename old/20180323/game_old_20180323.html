@@ -15,48 +15,36 @@
                 <div class="col-md-4 col-lg-3 min-height-header">
                     <div class="row">
                         <div class="logo">
-                            <div class="navbar navbar-default restrict-size">
+                            <div class="navbar navbar-default">
                                 <div class="container-fluid">
                                     <button class="navbar-toggle" data-toggle="collapse" data-target=".navHeaderCollapse">
                                         Menu
                                     </button>
                                     <div class="collapse navbar-collapse navHeaderCollapse">
                                         <ul class="nav navbar-nav navbar-left navbar-main">
-                                            {% if not(app_info["route"] == "index") %}
+                                            {% if not(route == "index") %}
                                                 <li class="nav-item active"><a class="nav-link scroll" href="/" id="home">Home</a></li>
                                             {% endif %}
-                                            {% if app_info["logged"] and not(app_info["route"] == "user") %}
+                                            {% if logged and not(route == "user")%}
                                                 <li class="nav-item"><a class="nav-link scroll" href="/user" id="userNav">USER</a></li>
                                             {% endif %}
-                                            {% if not(app_info["route"] == "halloffame") %}
+                                            {% if not(route == "halloffame") %}
                                                 <li class="nav-item"><a class="nav-link scroll" href="/halloffame" id="hofNav">Hall of Fame</a></li>
                                             {% endif %}
-                                            {% if not(app_info["route"] == "about") %}
+                                            {% if not(route == "about") %}
                                                 <li class="nav-item"><a class="nav-link scroll" href="/about" id="aboutNav">About</a></li>
                                             {% endif %}
-                                            {% if not(app_info["route"] == "contact") %}
+                                            {% if not(route == "contact") %}
                                                 <li class="nav-item"><a class="nav-link scroll" href="/contact" id="contactNav">Contact</a></li>
                                             {% endif %}
+                                            <!--<li class="nav-item active"><a class="nav-link scroll" href="/" id="home">Home</a></li>-->
+                                            <!--<li class="nav-item"><a class="nav-link scroll" href="/halloffame" id="hofNav">Hall of Fame</a></li>-->
+                                            <!--<li class="nav-item"><a class="nav-link scroll" href="/about" id="aboutNav">About</a></li>-->
+                                            <!--<li class="nav-item"><a class="nav-link scroll" href="/contact" id="contactNav">Contact</a></li>-->
                                         </ul>
                                     </div>
                                 </div>
                             </div> 
-                            <!-- Registration Login Form-->
-                            {%if app_info["logged"] %}
-                                <form class="align-right" method="POST" action="/logout">
-                                    <div class="form-group">
-                                        <button type="submit" class="btn btn-default form-align" name="logout" type="submit" value="logout">Logout</button>
-                                    </div>
-                                </form>
-                            {% elif not app_info["logged"] %}
-                                <form class="align-right" method="POST" action="/">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control form-username form-align" name="username" id="username" placeholder="username">
-                                        <button type="submit" class="btn btn-default form-align" name="login" type="submit" value="login" alt="login">Login</button>
-                                        <button type="submit" class="btn btn-default form-align" name="register" type="submit" value="register">Register</button>
-                                    </div>
-                                </form>
-                            {% endif %}
                             <img class="img-responsive" src="static/img/guess.png" alt="logo image"></img>
                         </div>
                     </div>
@@ -65,23 +53,44 @@
                 <div class="col-md-8 col-lg-9 title min-height-header">
                     <h1>Riddle Me This</h1>
                     <h2>A Guessing Game</h2>
-                    <h2>{{ username }}</h2>
                 </div>
             </div>
         </header>
     
         <section class="container">
-            <div class="row">
-                <p>User: {{ app_info["username"] }}</p>
-                <p>All users: {{ app_info["allusers"] }}</p>
-                <p>Logged: {{ app_info["logged"] }}</p>
-                <div class="col-md-12 main min-height-main">
-                    <h3>About</h3>
+            <div class="row main">
+                <p>User: {{username}}</p>
+                <p>All users: {{ allusers }}</p>
+                <p>Logged: {{ logged }}</p>
+                <div class="col md-12">
+                    <h2>PLAY A GAME</h2>
+                </div>
+                <div class="col-md-6  min-height-main">
+                    <h3>Welcome {{ username }}</h3>
                     <p>This is a guessing game, which will be part of my protfolio.</p>
-                    <p>This will be the about page.</p>
+                    <p>This will be the hall of fame page. It will contain two tables with two 
+                    halls of fame.</p>
+                    <hr>
+                    
+                    <div class="list_games table-responsive">
+                        <table class="table table-condensed table-striped table-bordered">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col">Date</td>
+                                    <th scope="col">Points</td>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
                 </div>
                 <!-- Will be needed in the pages which split in two columns -->
-                <!-- <div class="col-md-6 blue min-height-main"></div> -->
+                <div class="col-md-6  min-height-main">
+                    <form class="play_game" method="POST" action="/game">
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-default form-align" name="play" type="submit" value="play">Play a game</button>
+                        </div>
+                    </form>
+                </div> 
         
             </div>
         </section>

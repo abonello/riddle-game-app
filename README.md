@@ -486,3 +486,10 @@ from the pages.
 <p>All users: {{ allusers }}</p>
 <p>Logged: {{ logged }}</p>
 ~~~~
+
+I need to clean the code, removing any commented out code. I will keep a copy 
+of the code as it is now and store it in a folder called old. The reason for 
+this is so that I can quickly refer to it and study it. This will be beyond what
+I can do with the git versioning.
+
+Cleaned code run.py

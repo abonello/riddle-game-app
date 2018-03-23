@@ -39,7 +39,7 @@ def index():
                     username += " LOGGED IN"
                     logged = True
                     # return render_template("user.html", username=username, allusers=allusers, logged=logged, route="user")
-                    redirect(url_for('user'))
+                    return redirect(url_for('user'))
                 else:
                     username = "That username does not exist. Please register first."
                     logged = False
@@ -77,7 +77,7 @@ def register():
                 allusers += (username)
                 logged = True
             # return render_template("user.html", username=username, allusers=allusers, logged=logged, route="user")
-            redirect(url_for('user'))
+            return redirect(url_for('user'))
 
     return render_template("register.html", username=username, allusers="", username_feedback=" Enter a valid username.", route="register")
 

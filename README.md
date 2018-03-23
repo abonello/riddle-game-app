@@ -584,3 +584,11 @@ I will be using identical shadows in other pages to unify the style of the appli
 Now I need to uncomment the second div within the main section. Here I will have
 the button which the user will use to start the game.
 
+
+
+# Bug
+The login and register redirection is not working.  
+This fixes the problem:  
+~~~~python
+return redirect(url_for('user'))
+~~~~

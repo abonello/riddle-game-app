@@ -133,6 +133,24 @@ header h2 {
     box-shadow: 0 0 5px #000000, 0 0 10px #f17474, 2px 2px #eababa, -2px -2px #d4a144;
 }
 
+.start_game {
+    margin-top: 20px;
+}
+.play_btn {
+    width: 100%;
+    background: #ff0ed6;
+    border-radius: 20px;
+}
+.play_btn:hover {
+    box-shadow: 0 0 20px yellow;
+    background: #d4ffae;
+}
+.play_btn:active, .play_btn:focus {
+    box-shadow: 0 0 40px blue;
+    background: #b093f7;
+    color: #d4ffae;
+}
+
 
 footer {
     background-color: #eaeaea;
@@ -282,5 +300,8 @@ footer {
         margin-top: 0px;
         padding-left: 50px;
         text-align: left;
+    }
+    .start_game {
+        margin-top: 50%;
     }
 }

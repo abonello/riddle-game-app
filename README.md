@@ -598,3 +598,16 @@ row div. This will give a unified background for both sides of the page with equ
 height if the two sides have different amount of content.
 
 Added a simple button that will POST to a new page called game.html
+
+
+
+
+
+
+
+* * *
+* * *
+# To DO
+I will need to add a game menu item that will appear only when a user is logged in and
+only while a game is running. This should allow the user to navigate away from the
+game and return to the game by using this menu item.

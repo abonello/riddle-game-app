@@ -98,11 +98,15 @@
                 </div>
                 <!-- Will be needed in the pages which split in two columns -->
                 <div class="col-md-6  min-height-main">
-                    <form class="play_game" method="POST" action="/game">
-                        <div class="form-group">
-                            <button type="submit" class="btn btn-default form-align" name="play" type="submit" value="play">Play a game</button>
+                    <div class="row start_game">
+                        <div class="col-md-8 col-md-offset-2">
+                            <form class="play_game" method="POST" action="/game">
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-default play_btn" name="play" type="submit" value="play">Play a game</button>
+                                </div>
+                            </form>
                         </div>
-                    </form>
+                    </div>
                 </div> 
         
             </div>

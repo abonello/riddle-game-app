@@ -2,7 +2,7 @@
 ## A Flask milestone project for Practical Python
 ### Part of the Fullstack Web Developer Course - Code Institute
 
-This project is deployed at []().  
+This project is deployed at [riddle-guessing-game](http://riddle-guessing-game.herokuapp.com/).  
 Github Repository is at [riddle-game-app](https://github.com/abonello/riddle-game-app).
 
 #### Install Flask

@@ -62,8 +62,7 @@
                 <p>User: {{username}}</p>
                 <p>All users: {{ allusers }}</p>
                 <p>Logged: {{ logged }}</p>
-                <div class="col-md-6  min-height-main">
-                    <h3>Welcome {{ username }}</h3>
+                <h3>Welcome {{ username }}</h3>
                     <p>This is a guessing game, which will be part of my protfolio.</p>
                     <p>This will be the hall of fame page. It will contain two tables with two 
                     halls of fame.</p>
@@ -77,6 +76,7 @@
                     {% endif %}
                     <br>Your total number of points over all the games played is 
                     {{ user_data["total_user_points"] }} Points.</p>
+                <div class="col-md-6  min-height-main">
                     <div class="list_games table-responsive">
                         <table class="table table-condensed table-striped table-bordered">
                             <thead class="thead-dark">

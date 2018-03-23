@@ -127,6 +127,12 @@ header h2 {
     color: grey;
 }
 
+.list_games {
+    border: 2px solid black;
+    border-radius: 10px;
+    box-shadow: 0 0 5px #000000, 0 0 10px #f17474, 2px 2px #eababa, -2px -2px #d4a144;
+}
+
 
 footer {
     background-color: #eaeaea;

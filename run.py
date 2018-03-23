@@ -38,7 +38,8 @@ def index():
                 elif username in allusers:
                     username += " LOGGED IN"
                     logged = True
-                    return render_template("user.html", username=username, allusers=allusers, logged=logged, route="user")
+                    # return render_template("user.html", username=username, allusers=allusers, logged=logged, route="user")
+                    redirect(url_for('user'))
                 else:
                     username = "That username does not exist. Please register first."
                     logged = False
@@ -75,7 +76,8 @@ def register():
                 addusernames.write(username + "\n")
                 allusers += (username)
                 logged = True
-            return render_template("user.html", username=username, allusers=allusers, logged=logged, route="user")
+            # return render_template("user.html", username=username, allusers=allusers, logged=logged, route="user")
+            redirect(url_for('user'))
 
     return render_template("register.html", username=username, allusers="", username_feedback=" Enter a valid username.", route="register")
 
@@ -84,7 +86,19 @@ def user():
     global logged
     global username
     global allusers
-    return render_template("user.html", username=username, allusers=allusers, logged=logged, route="user")
+    user_data = {
+        "number_of_games" : 5,
+        "date_best_game" : "15/3/2018",
+        "points_best_game" : 56,
+        "total_user_points" : 340,
+        "games_played": [
+            ("17/3/2018", 48),
+            ("16/3/2018", 50),
+            ("16/3/2018", 54),
+            ("15/3/2018", 56),
+            ("14/3/2018", 34)]
+    }
+    return render_template("user.html", username=username, allusers=allusers, logged=logged, route="user", user_data=user_data)
 
 @app.route('/halloffame')
 def halloffame():

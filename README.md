@@ -526,3 +526,61 @@ for all pages.
 
 I added jinja templating code to automatically hide the current page's menu.
 In this way I have a code which is ready to be used in a base.html page.
+
+I want to prepare the layout of the user.html page.
+I created this set of data (hardcoded for now)
+~~~~python
+user_data = {
+    "number_of_games" : 5,
+    "date_best_game" : "15/3/2018",
+    "points_best_game" : 56,
+    "total_user_points" : 340
+}
+~~~~
+Later on this data will be stored in a text file in json format. This makes passing
+a lot of variables to an html page easier. The same system will replace the other
+current varaibles controlling user login.
+Now I want to add a list of games played. The data to be stored are date and points gained.
+Order by date -- most recent first.
+
+~~~~python
+user_data = {
+    "number_of_games" : 5,
+    "date_best_game" : "15/3/2018",
+    "points_best_game" : 56,
+    "total_user_points" : 340,
+    "games_played": [
+        ("17/3/2018", 48),
+        ("16/3/2018", 50),
+        ("16/3/2018", 54),
+        ("15/3/2018", 56),
+        ("14/3/2018", 34)]
+}
+~~~~
+
+I modified other routes which call the user route to use 
+~~~~python
+redirect(url_for('user'))
+~~~~
+instead of
+~~~~python
+return render_template( . . . )
+~~~~
+
+In user.html
+I created a bootstrap styled table within a div that will display the data 
+for the games played by the logged in user.
+
+#### Shadow around divs which contain tables of data
+Given that this is a game I feel I have more artistic freedom to explore ways 
+to display tables than I would have if this project was a corporate website or
+the like. For this reason I am applying multiple shadows in order to get a mix of 
+colours around the divs that contain tables of data. The colors chosen are on the 
+red and yellow scales to keep close to the colours which are dominant in the 
+images I will be using in the riddles. The exact color choice is quite subjective.
+
+I will be using identical shadows in other pages to unify the style of the application.
+
+Now I need to uncomment the second div within the main section. Here I will have
+the button which the user will use to start the game.
+

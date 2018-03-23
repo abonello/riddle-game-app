@@ -105,7 +105,27 @@ def halloffame():
     global logged
     global username
     global allusers
-    return render_template("halloffame.html", username=username, allusers=allusers, logged=logged, route="halloffame")
+    best_individual_games = [
+            (1, "20/3/2018", "AB", 72),
+            (2, "21/3/2018", "BC", 63),
+            (3, "17/3/2018", "DE", 60),
+            (4, "15/3/2018", "AB", 56),
+            (5, "16/3/2018", "CD", 54),
+            (6, "16/3/2018", "BC", 50),
+            (7, "17/3/2018", "AB", 48),
+            (8, "14/3/2018", "FDG", 34)]
+    best_all_games = [
+            (1, "AB", 890),
+            (2, "BC", 825),
+            (3, "DE", 710),
+            (4, "CD", 700),
+            (5, "CDDF", 540),
+            (6, "BCOE", 500),
+            (7, "ABDF", 480),
+            (8, "FDG", 450),
+            (9, "OFDG", 420),
+            (10, "AFFDG", 410)]
+    return render_template("halloffame.html", username=username, allusers=allusers, logged=logged, route="halloffame", best_individual_games=best_individual_games, best_all_games=best_all_games)
     
 @app.route('/about')
 def about():

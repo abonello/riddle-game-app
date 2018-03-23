@@ -61,18 +61,81 @@
         </header>
     
         <section class="container">
-            <div class="row">
+            <div class="row main">
                 <p>User: {{username}}</p>
                 <p>All users: {{ allusers }}</p>
                 <p>Logged: {{ logged }}</p>
-                <div class="col-md-12 main min-height-main">
-                    <h3>Hall of Fame</h3>
-                    <p>This is a guessing game, which will be part of my protfolio.</p>
-                    <p>This will be the hall of fame page. It will contain two tables with two 
-                    halls of fame.</p>
+                <div class="row">
+                    <div class="col-md-6">
+                        <h3>Hall of Fame</h3>
+                        <p>This is a guessing game, which will be part of my protfolio.</p>
+                        <p>This will be the hall of fame page. It will contain two tables with two 
+                        halls of fame.</p>
+                    </div>
+                    
+                    {% if logged %}
+                        <div class="col-md-6">
+                            <h3>Welcome {{ username }}</h3>
+                        </div>
+                    {% endif %}
+                    {% if not logged %}
+                        <div class="col-md-6">
+                            <p><br></p>
+                            <p>Log in if you would like to play</p>
+                            <p>Registration is free.</p>
+                        </div>
+                    {% endif %}
+                    
+                </div>
+                <div class="col-md-6  min-height-main">
+                    <h3>Individual Games</h3>
+                    <div class="list_games table-responsive">
+                        <table class="table table-condensed table-striped table-bordered">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col">Rank</td>
+                                    <th scope="col">Date</td>
+                                    <th scope="col">User</td>
+                                    <th scope="col">Points</td>
+                                </tr>
+                                <tbody>
+                                    {% for item in best_individual_games %}
+                                        <tr>
+                                            <th scope="row">{{ item[0] }}</td>
+                                            <td>{{ item[1] }}</td>
+                                            <td>{{ item[2] }}</td>
+                                            <td>{{ item[3] }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </thead>
+                        </table>
+                    </div>
                 </div>
                 <!-- Will be needed in the pages which split in two columns -->
-                <!-- <div class="col-md-6 blue min-height-main"></div> -->
+                 <div class="col-md-6 min-height-main">
+                    <h3>All Games Played</h3>
+                    <div class="list_games table-responsive">
+                        <table class="table table-condensed table-striped table-bordered">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col">Rank</td>
+                                    <th scope="col">User</td>
+                                    <th scope="col">Points</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                    {% for item in best_all_games %}
+                                        <tr>
+                                            <th scope="row">{{ item[0] }}</td>
+                                            <td>{{ item[1] }}</td>
+                                            <td>{{ item[2] }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                        </table>
+                    </div>
+                 </div> 
         
             </div>
         </section>

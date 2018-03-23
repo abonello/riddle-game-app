@@ -601,7 +601,15 @@ Added a simple button that will POST to a new page called game.html
 
 
 
+## Hall of fame
+Updated code of halloffame.html to display two tables, one for Individual Games 
+and the other for All Games Played.
 
+There is also an instruction for a guest user to login / register. This will be 
+hidden once a user logs in and will be replaced with the username.
+
+For now the data is hard coded in a list. This will be replaced and stored in a 
+text file so that it can be retained from session to another.
 
 
 

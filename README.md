@@ -592,3 +592,9 @@ This fixes the problem:
 ~~~~python
 return redirect(url_for('user'))
 ~~~~
+
+In main section of user.html I moved the main class from the column divs to the 
+row div. This will give a unified background for both sides of the page with equal
+height if the two sides have different amount of content.
+
+Added a simple button that will POST to a new page called game.html

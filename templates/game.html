@@ -62,21 +62,16 @@
                 <p>User: {{username}}</p>
                 <p>All users: {{ allusers }}</p>
                 <p>Logged: {{ logged }}</p>
+                <div class="col md-12">
+                    <h2>PLAY A GAME</h2>
+                </div>
                 <div class="col-md-6  min-height-main">
                     <h3>Welcome {{ username }}</h3>
                     <p>This is a guessing game, which will be part of my protfolio.</p>
                     <p>This will be the hall of fame page. It will contain two tables with two 
                     halls of fame.</p>
                     <hr>
-                    <p>This is the page for a {{ username }}. It will hold information about
-                    the latest games and a button to start a new game.</p>
-                    <p>You have played {{ user_data["number_of_games"] }} games up to now.
-                    {% if user_data["number_of_games"] > 0 %}
-                    <br>Your best game was on {{ user_data["date_best_game"] }} and you gained
-                    {{ user_data["points_best_game"] }} Points.
-                    {% endif %}
-                    <br>Your total number of points over all the games played is 
-                    {{ user_data["total_user_points"] }} Points.</p>
+                    
                     <div class="list_games table-responsive">
                         <table class="table table-condensed table-striped table-bordered">
                             <thead class="thead-dark">
@@ -85,14 +80,6 @@
                                     <th scope="col">Points</td>
                                 </tr>
                             </thead>
-                            <tbody>
-                                {% for item in user_data["games_played"] %}
-                                    <tr>
-                                        <th scope="row">{{ item[0] }}</td>
-                                        <td>{{ item[1] }}</td>
-                                    </tr>
-                                {% endfor %}
-                            </tbody>
                         </table>
                     </div>
                 </div>

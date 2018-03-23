@@ -81,7 +81,7 @@ def register():
 
     return render_template("register.html", username=username, allusers="", username_feedback=" Enter a valid username.", route="register")
 
-@app.route('/user')
+@app.route('/user', methods=['GET', 'POST'])
 def user():
     global logged
     global username
@@ -120,6 +120,12 @@ def contact():
     global username
     global allusers
     return render_template("contact.html", username=username, allusers=allusers, logged=logged, route="contact")
+
+@app.route('/game', methods=['GET', 'POST'])
+def game():
+    # return "<h2>Here " + username + " will play the game.</h2>"
+    return render_template("game.html", username=username, allusers=allusers, logged=logged, route="game") #, user_data=user_data)
+
     
 if __name__ == '__main__':
     app.run(host=os.getenv('IP'), port=int(os.getenv('PORT')), debug=True)

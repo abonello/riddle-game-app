@@ -493,3 +493,36 @@ this is so that I can quickly refer to it and study it. This will be beyond what
 I can do with the git versioning.
 
 Cleaned code run.py
+
+* * *
+### User page
+
+Now I need to create a User page. The menu for the user page should only appear
+in all other pages if the user is logged in.
+
+The code for the link in the menu is:
+~~~~html
+{% if logged %}
+    <li class="nav-item"><a class="nav-link scroll" href="/user" id="userNav">USER</a></li>
+{% endif %}
+~~~~
+
+The code for the route is:
+~~~~python
+@app.route('/user')
+def user():
+    global logged
+    global username
+    global allusers
+    return render_template("user.html", username=username, allusers=allusers, logged=logged)
+~~~~
+
+I created a temporary user.html  
+Now I need to make the register form in register.html and the login in other pages 
+to redirect to the logged in user page.
+Note: I am aware that the code related to login / register / logout is only on
+the index.html. I intend to do a base.html page which will make this code available
+for all pages.
+
+I added jinja templating code to automatically hide the current page's menu.
+In this way I have a code which is ready to be used in a base.html page.

@@ -22,10 +22,27 @@
                                     </button>
                                     <div class="collapse navbar-collapse navHeaderCollapse">
                                         <ul class="nav navbar-nav navbar-left navbar-main">
-                                            <li class="nav-item active"><a class="nav-link scroll" href="/" id="home2">Home</a></li>
-                                            <li class="nav-item"><a class="nav-link scroll" href="/halloffame" id="activitiesNav">Hall of Fame</a></li>
-                                            <li class="nav-item"><a class="nav-link scroll" href="/about" id="portfolioNav">About</a></li>
-                                            <li class="nav-item"><a class="nav-link scroll" href="/contact" id="contactNav">Contact</a></li>
+                                            {% if not(route == "index") %}
+                                                <li class="nav-item active"><a class="nav-link scroll" href="/" id="home">Home</a></li>
+                                            {% endif %}
+                                            {% if logged %}
+                                                <li class="nav-item"><a class="nav-link scroll" href="/user" id="userNav">USER</a></li>
+                                            {% endif %}
+                                            {% if not(route == "halloffame") %}
+                                                <li class="nav-item"><a class="nav-link scroll" href="/halloffame" id="hofNav">Hall of Fame</a></li>
+                                            {% endif %}
+                                            {% if not(route == "about") %}
+                                                <li class="nav-item"><a class="nav-link scroll" href="/about" id="aboutNav">About</a></li>
+                                            {% endif %}
+                                            {% if not(route == "contact") %}
+                                                <li class="nav-item"><a class="nav-link scroll" href="/contact" id="contactNav">Contact</a></li>
+                                            {% endif %}
+                                            <!--<li class="nav-item active"><a class="nav-link scroll" href="/" id="home">Home</a></li>-->
+                                            <!--{% if logged %}-->
+                                            <!--    <li class="nav-item"><a class="nav-link scroll" href="/user" id="userNav">USER</a></li>-->
+                                            <!--{% endif %}-->
+                                            <!--<li class="nav-item"><a class="nav-link scroll" href="/halloffame" id="hofNav">Hall of Fame</a></li>-->
+                                            <!--<li class="nav-item"><a class="nav-link scroll" href="/about" id="aboutNav">About</a></li>-->
                                         </ul>
                                     </div>
                                 </div>

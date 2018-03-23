@@ -28,7 +28,7 @@ def index():
             with open("data/users.txt", "r") as readusernames:
                 allusers = readusernames.read()
             if 'register' in request.form:
-                return render_template("register.html", register="",check_active="", register_active="btn-deactivated", username="", allusers="")
+                return render_template("register.html", register="", check_active="", register_active="btn-deactivated", username="", allusers="", route="register")
                     
             elif 'login' in request.form:
                 if username == "":
@@ -38,6 +38,7 @@ def index():
                 elif username in allusers:
                     username += " LOGGED IN"
                     logged = True
+                    return render_template("user.html", username=username, allusers=allusers, logged=logged, route="user")
                 else:
                     username = "That username does not exist. Please register first."
                     logged = False
@@ -45,7 +46,7 @@ def index():
     except Exception as e:
         return "<h1> Error: " + str(e) + "</h1>"
         
-    return render_template("index.html", username=username, allusers=allusers, logged=logged)
+    return render_template("index.html", username=username, allusers=allusers, logged=logged, route="index")
     
 @app.route('/register', methods=['GET','POST'])
 def register():
@@ -67,37 +68,44 @@ def register():
                 register_active=""
                 check_active="btn-deactivated"
                 username_feedback="Username available. Please click the register button."
-            return render_template("register.html", register=register, register_active=register_active, check_active=check_active, username_feedback=username_feedback, username=username)
+            return render_template("register.html", register=register, register_active=register_active, check_active=check_active, username_feedback=username_feedback, username=username, route="register")
             
         if 'register' in request.form:
             with open("data/users.txt", "a") as addusernames:
                 addusernames.write(username + "\n")
                 allusers += (username)
                 logged = True
-            return render_template("index.html", username=username, allusers=allusers, logged=logged)
+            return render_template("user.html", username=username, allusers=allusers, logged=logged, route="user")
 
-    return render_template("register.html", username=username, allusers="", username_feedback=" Enter a valid username.")
+    return render_template("register.html", username=username, allusers="", username_feedback=" Enter a valid username.", route="register")
+
+@app.route('/user')
+def user():
+    global logged
+    global username
+    global allusers
+    return render_template("user.html", username=username, allusers=allusers, logged=logged, route="user")
 
 @app.route('/halloffame')
 def halloffame():
     global logged
     global username
     global allusers
-    return render_template("halloffame.html", username=username, allusers=allusers, logged=logged)
+    return render_template("halloffame.html", username=username, allusers=allusers, logged=logged, route="halloffame")
     
 @app.route('/about')
 def about():
     global logged
     global username
     global allusers
-    return render_template("about.html", username=username, allusers=allusers, logged=logged)
+    return render_template("about.html", username=username, allusers=allusers, logged=logged, route="about")
     
 @app.route('/contact')
 def contact():
     global logged
     global username
     global allusers
-    return render_template("contact.html", username=username, allusers=allusers, logged=logged)
+    return render_template("contact.html", username=username, allusers=allusers, logged=logged, route="contact")
     
 if __name__ == '__main__':
     app.run(host=os.getenv('IP'), port=int(os.getenv('PORT')), debug=True)

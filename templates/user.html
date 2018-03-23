@@ -25,7 +25,7 @@
                                             {% if not(route == "index") %}
                                                 <li class="nav-item active"><a class="nav-link scroll" href="/" id="home">Home</a></li>
                                             {% endif %}
-                                            {% if logged %}
+                                            {% if logged and not(route == "user")%}
                                                 <li class="nav-item"><a class="nav-link scroll" href="/user" id="userNav">USER</a></li>
                                             {% endif %}
                                             {% if not(route == "halloffame") %}
@@ -38,10 +38,8 @@
                                                 <li class="nav-item"><a class="nav-link scroll" href="/contact" id="contactNav">Contact</a></li>
                                             {% endif %}
                                             <!--<li class="nav-item active"><a class="nav-link scroll" href="/" id="home">Home</a></li>-->
-                                            <!--{% if logged %}-->
-                                            <!--    <li class="nav-item"><a class="nav-link scroll" href="/user" id="userNav">USER</a></li>-->
-                                            <!--{% endif %}-->
                                             <!--<li class="nav-item"><a class="nav-link scroll" href="/halloffame" id="hofNav">Hall of Fame</a></li>-->
+                                            <!--<li class="nav-item"><a class="nav-link scroll" href="/about" id="aboutNav">About</a></li>-->
                                             <!--<li class="nav-item"><a class="nav-link scroll" href="/contact" id="contactNav">Contact</a></li>-->
                                         </ul>
                                     </div>
@@ -55,7 +53,6 @@
                 <div class="col-md-8 col-lg-9 title min-height-header">
                     <h1>Riddle Me This</h1>
                     <h2>A Guessing Game</h2>
-                    <h2>{{ username }}</h2>
                 </div>
             </div>
         </header>
@@ -66,9 +63,13 @@
                 <p>All users: {{ allusers }}</p>
                 <p>Logged: {{ logged }}</p>
                 <div class="col-md-12 main min-height-main">
-                    <h3>About</h3>
+                    <h3>{{ username }}</h3>
                     <p>This is a guessing game, which will be part of my protfolio.</p>
-                    <p>This will be the about page.</p>
+                    <p>This will be the hall of fame page. It will contain two tables with two 
+                    halls of fame.</p>
+                    <hr>
+                    <p>This is the page for a {{ username }}. It will hold information about
+                    the latest games and a button to start a new game.</p>
                 </div>
                 <!-- Will be needed in the pages which split in two columns -->
                 <!-- <div class="col-md-6 blue min-height-main"></div> -->

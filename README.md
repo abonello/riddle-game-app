@@ -467,3 +467,22 @@ I also made sure that the logged variable holds the value False
 logged = False
 return redirect(url_for('index'))
 ~~~~
+
+I need to make logged status and current username persistent between pages.  
+Done using global variables.
+
+I am loosing logged status. Need to pass it around.
+
+I created three global variable:
+1. username
+2. allusers
+3. logged
+
+and I am passing these to all pages. At the moment I am displaying them on all
+pages just to make sure that the values are correct. Later these will be removed 
+from the pages.
+~~~~html
+<p>User: {{ username }}</p>
+<p>All users: {{ allusers }}</p>
+<p>Logged: {{ logged }}</p>
+~~~~

@@ -243,7 +243,7 @@ def game():
             repeat = True
             while repeat:
                 choose_game=random.choice(all_riddles)
-                print choose_game.items()
+                # print choose_game.items()
                 if choose_game.items() not in current_game:
                     repeat = False
                 

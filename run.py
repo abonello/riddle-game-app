@@ -1,4 +1,6 @@
 import os
+import json
+import random
 from flask import Flask, render_template, request, redirect, url_for
 
 app = Flask(__name__)
@@ -10,8 +12,13 @@ app_info = {
     "check_active": "",     # Pass class for check button
     "register_active": "",  # Pass class for register button
     "route": "",            # Which is the current page
-    "game": ""              # Is there a current game active True/False
+    "game": False           # Is there a current game active True/False
 }
+current_game = []           # IDs of current riddles
+current_riddle = 0
+all_riddles = []            # All riddles available for the game
+riddle_counter = 0
+
 logged = False
 allusers = ""
 username = ""
@@ -29,6 +36,7 @@ def logout():
         app_info["logged"] = False
         app_info["username"] = ""
         app_info["allusers"] = ""
+        app_info["game"] = False
         return redirect(url_for('index'))
 
 @app.route('/', methods=['GET','POST'])
@@ -134,6 +142,10 @@ def user():
     # global username
     # global allusers
     global app_info
+    global current_game
+    global current_riddle
+    global all_riddles
+    global riddle_counter
     user_data = {
         "number_of_games" : 5,
         "date_best_game" : "15/3/2018",
@@ -146,6 +158,13 @@ def user():
             ("15/3/2018", 56),
             ("14/3/2018", 34)]
     }
+    
+    if app_info["game"] == False:  # RESET
+        current_game = []
+        current_riddle = 0
+        all_riddles = []
+        riddle_counter = 0
+        
     # return render_template("user.html", username=username, allusers=allusers, logged=logged, route="user", user_data=user_data)
     app_info["route"] = "user"
     return render_template("user.html", app_info=app_info, user_data=user_data)
@@ -203,10 +222,53 @@ def contact():
 @app.route('/game', methods=['GET', 'POST'])
 def game():
     global app_info
-    app_info["game"] = "contact"
+    global all_riddles
+    global current_game
+    global current_riddle
+    global riddle_counter
+    app_info["route"] = "game"
+    
+    # current_riddle += 1
+    this_riddle = current_game
+    
+    if app_info["game"] == False:
+        app_info["game"] = True  # Game On
+        # Read data from json and store them locally
+        with open("data/riddles.json", "r") as all_riddles_json:
+            all_riddles = json.load(all_riddles_json)
+        
+        for x in range(0, 5):
+            # Randomly select 5 riddles
+            
+            repeat = True
+            while repeat:
+                choose_game=random.choice(all_riddles)
+                print choose_game.items()
+                if choose_game.items() not in current_game:
+                    repeat = False
+                
+            current_game.append(choose_game.items())
+            
+            
+            # choose_game = random.choice(all_riddles)
+            # print choose_game.items()
+            # if choose_game.items() not in current_game:
+            #     current_game.append(choose_game.items())
+        
+        current_riddle = current_game[riddle_counter]
+            
+    if request.method == 'POST':
+        if 'answer_btn' in request.form:
+            riddle_counter += 1
+            if riddle_counter > len(current_game)-1:
+                app_info["game"] = False
+                return "<h1>Gama OVER</h1>"
+            current_riddle = current_game[riddle_counter]
+    
+    
     # return "<h2>Here " + username + " will play the game.</h2>"
     # return render_template("game.html", username=username, allusers=allusers, logged=logged, route="game") #, user_data=user_data)
-    return render_template("game.html", app_info=app_info)
+    return render_template("game.html", app_info=app_info, all_riddles=all_riddles, current_game=current_game, current_riddle=current_riddle, riddle_counter=riddle_counter)
     
 if __name__ == '__main__':
     app.run(host=os.getenv('IP'), port=int(os.getenv('PORT')), debug=True)

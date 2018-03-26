@@ -1,0 +1,52 @@
+[
+    {   
+        "id":       1,
+        "source":   "ObiWanKenobi.png",
+        "answer":   "Obi Wan Kenobi"
+    },
+    {   
+        "id":       2,
+        "source":   "AheadOfTheCurve.png",
+        "answer":   "ahead of the curve"
+    },
+    {   
+        "id":       3,
+        "source":   "DrawingTheShortStraw.png",
+        "answer":   "drawing the short straw"
+    },
+    {   
+        "id":       4,
+        "source":   "bulldozer.png",
+        "answer":   "bulldozer"
+    },
+    {   
+        "id":       5,
+        "source":   "CurtainCall.png",
+        "answer":   "curtain call"
+    },
+    {   
+        "id":       6,
+        "source":   "forklift.png",
+        "answer":   "forklifter"
+    },
+    {   
+        "id":       7,
+        "source":   "BowTie.png",
+        "answer":   "bow tie"
+    },
+    {   
+        "id":       8,
+        "source":   "EyeForAnEye.png",
+        "answer":   "eye for an eye"
+    },
+    {   
+        "id":       9,
+        "source":   "CoverLetter.png",
+        "answer":   "cover letter"
+    },
+    {   
+        "id":       10,
+        "source":   "PlayByEar.png",
+        "answer":   "play by ear"
+    }
+]

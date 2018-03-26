@@ -2,6 +2,7 @@
 
 body {
     font-family: 'Averia Serif Libre', cursive;
+    font-size: 16px;
     margin: 0;
     padding: 0;
 }
@@ -12,7 +13,7 @@ header h1 {
 }
 
 header h2 {
-    /*font-family: 'Bubblegum Sans', cursive;*/
+    font-family: 'Bubblegum Sans', cursive;
 }
 
 
@@ -149,6 +150,37 @@ header h2 {
     box-shadow: 0 0 40px blue;
     background: #b093f7;
     color: #d4ffae;
+}
+
+.game_title {
+    
+}
+
+/*.position_inline {*/
+/*    display: inline;*/
+/*}*/
+
+.game_text {
+    font-size: 1.2em;
+    margin-top: 10px;
+}
+
+.game_image img {
+    object-fit: cover;
+    width: 100%;
+}
+
+.game_instruction {
+    font-size: 1.6em;
+}
+.text-area {
+    height: 400px;
+}
+
+.btn-answer-width, .btn-pass-width {
+    width: 49%;
+    margin: 0;
+    
 }
 
 

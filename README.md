@@ -619,6 +619,58 @@ Done.
 
 
 
+### Images
+I processed 10 images and uploaded them for testing algorithms related to the game.
+I created a json file with related information "riddle.json".
+
+I need to import json in run.py
+
+
+Random selection of riddles  
+import random
+
+Now I have code that can randomly select 5 riddles out of a test group of 10.
+I noticed that sometimes the function selects less than 5 riddles. I do not know
+what is causing this but I will look into it later.
+It happens if an item is selected more than once. I will use a while loop.
+I can extract the name of the file and show the correct image for the riddle.
+Once all the riddles in the game have been used, the game will be over and 
+app_info["game"] will be set to False.
+
+Fixed a bug that resulted in a smaller selection of riddles due to the random
+process selecting an item multiple times.
+
+#### buggy code
+~~~~python
+for x in range(0, 5):
+    # Randomly select 5 riddles
+    choose_game = random.choice(all_riddles)
+    print choose_game.items()
+    if choose_game.items() not in current_game:
+        current_game.append(choose_game.items())
+
+current_riddle = current_game[riddle_counter]
+~~~~
+
+#### Fixed code
+~~~~python
+for x in range(0, 5):
+    # Randomly select 5 riddles
+    repeat = True
+    while repeat:
+        choose_game=random.choice(all_riddles)
+        print choose_game.items()
+        if choose_game.items() in current_game:
+            pass
+        else:
+            repeat = False
+        
+    current_game.append(choose_game.items())
+    
+current_riddle = current_game[riddle_counter]
+~~~~
+
+
 * * *
 * * *
 # To DO

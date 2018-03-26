@@ -19,9 +19,10 @@ current_riddle = 0
 all_riddles = []            # All riddles available for the game
 riddle_counter = 0
 
-logged = False
-allusers = ""
-username = ""
+
+# logged = False
+# allusers = ""
+# username = ""
 
 @app.route('/logout', methods=['GET', 'POST'])
 def logout():
@@ -248,8 +249,6 @@ def game():
                     repeat = False
                 
             current_game.append(choose_game.items())
-            
-            
             # choose_game = random.choice(all_riddles)
             # print choose_game.items()
             # if choose_game.items() not in current_game:
@@ -261,14 +260,34 @@ def game():
         if 'answer_btn' in request.form:
             riddle_counter += 1
             if riddle_counter > len(current_game)-1:
-                app_info["game"] = False
-                return "<h1>Gama OVER</h1>"
+                # app_info["game"] = False
+                # return "<h1>Gama OVER</h1>"
+                return redirect(url_for('game_over'))
             current_riddle = current_game[riddle_counter]
     
     
     # return "<h2>Here " + username + " will play the game.</h2>"
     # return render_template("game.html", username=username, allusers=allusers, logged=logged, route="game") #, user_data=user_data)
     return render_template("game.html", app_info=app_info, all_riddles=all_riddles, current_game=current_game, current_riddle=current_riddle, riddle_counter=riddle_counter)
+    
+    
+@app.route('/game_over')
+def game_over():
+    global app_info
+    global all_riddles
+    global current_game
+    global current_riddle
+    global riddle_counter
+    app_info["route"] = "game"
+    app_info["game"] = False
+    current_game = []
+    current_riddle = 0
+    all_riddles = []
+    riddle_counter = 0
+    # return "<h1>Gama OVER</h1>"
+    return redirect(url_for('user'))
+    
+    
     
 if __name__ == '__main__':
     app.run(host=os.getenv('IP'), port=int(os.getenv('PORT')), debug=True)

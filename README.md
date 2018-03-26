@@ -671,6 +671,17 @@ current_riddle = current_game[riddle_counter]
 ~~~~
 
 
+### Create Game over route
+Clears values of variables and redirect to user page. The points for the last game
+will eventually be listed as the first row of the list of games played.
+
+
+I need a variable to track the Attempt of a particular riddle and change what is 
+shown on the game page.
+
+
+
+
 * * *
 * * *
 # To DO

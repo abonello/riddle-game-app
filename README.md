@@ -679,6 +679,19 @@ will eventually be listed as the first row of the list of games played.
 I need a variable to track the Attempt of a particular riddle and change what is 
 shown on the game page.
 
+First and Second attempt working. Display only. Will deal with checking the 
+answer later.  
+I will add the code for the third attempt.  
+Finished code for third attempt layout including showing number of letters per 
+word.   
+
+
+Now I need to capture the input from the user and check the answer. Then decide 
+if it is correct or wrong. If it is correct assign the points and move to the next 
+riddle or end game if it is the last riddle. If it is wrong, move to the next 
+attempt or move to next riddle if it is the last attempt or end game if it is the 
+last attempt of the last riddle.
+
 
 
 

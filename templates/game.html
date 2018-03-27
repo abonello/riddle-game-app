@@ -140,7 +140,6 @@
                                                 {% elif word_count == 4 %}
                                                     bottom-4
                                                 {% endif %}">
-                                                <!--The above code will only work for now -->
                                                 <div class="red yellow-bg">
                                                     <p>Place for your previous wrong answer.</p>
                                                 </div>
@@ -156,7 +155,47 @@
                                         </div>
 
                                     {% elif attempt == 3 %}
-                                        This is your last chance to guess the riddle
+                                        <div class="row text-area">
+                                            {% set words = (current_riddle[0][1]).split() %}
+                                            {% set word_count = words|count %}
+                                            {% for word in words %}
+                                                <div class="row">
+                                                    <div class="col-xs-2 col-sm-3"><label>Word {{ loop.index }}</label></div>
+                                                    <div class="col-xs-9 col-sm-8">
+                                                        <textarea class="form-control" name="answer_text" rows="1" id="answer_block{{ loop.index }}" placeholder="type your answer here"></textarea>
+                                                    </div>
+                                                    <div class="col-xs-1 col-sm-1"><label>
+                                                        {% set length = word|length %}
+                                                        {{ length }}
+                                                        
+                                                        
+                                                    </label></div>
+                                                </div>
+                                            {% endfor %}
+                                            
+                                            <div class="row 
+                                                {% if word_count == 1 %}
+                                                    bottom-1
+                                                {% elif word_count == 2 %}
+                                                    bottom-2
+                                                {% elif word_count == 3 %}
+                                                    bottom-3
+                                                {% elif word_count == 4 %}
+                                                    bottom-4
+                                                {% endif %}">
+                                                <div class="red yellow-bg">
+                                                    <p>Place for your previous wrong answer.</p>
+                                                </div>
+                                                <p>The answer for this riddle has {{ word_count }} 
+                                                {% if (word_count) == 1 %}
+                                                    word.
+                                                {% elif (word_count) > 1 %}
+                                                    words.
+                                                {% endif %} <br>See the indicated number of letters.</p>
+                                            </div>
+                                            
+                                            
+                                        </div>
                                     {% endif %}
                                     
                                     

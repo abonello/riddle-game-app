@@ -217,29 +217,29 @@
                 
                 
             </div>
-            <h3>All_Riddles</h3>
-            {{ all_riddles }}
-            <h3>Current_Game</h3>
-            {{ current_game }}
-            <h3>Orderd Data</h3>
-            {{ ordered_data }}
-            <div class="row">
-                <table class="table">
-                    <thead>
-                        <th>ID</th>
-                        <th>Answer</th>
-                        <th>Source</th>
-                    </thead>
-                    {% for riddle in all_riddles %}
-                        <tr>
-                            <td>{{ riddle["id"] }}</td>
-                            <td>{{ riddle["answer"] }}</td>
-                            <td>{{ riddle["source"] }}</td>
-                        </tr>
-                    {% endfor %}
-                </table>
-                <h2>Current game</h2>
-                {{ current_game }}
+            <!--<h3>All_Riddles</h3>-->
+            <!--{#{ all_riddles }}-->
+            <!--<h3>Current_Game</h3>-->
+            <!--{{ current_game }}-->
+            <!--<h3>Orderd Data</h3>-->
+            <!--{{ ordered_data }#}-->
+            <!--<div class="row">-->
+            <!--    <table class="table">-->
+                    <!--<thead>-->
+                    <!--    <th>ID</th>-->
+                    <!--    <th>Answer</th>-->
+                    <!--    <th>Source</th>-->
+                    <!--</thead>-->
+                <!--    {#% for riddle in all_riddles %}-->
+                <!--        <tr>-->
+                <!--            <td>{{ riddle["id"] }}</td>-->
+                <!--            <td>{{ riddle["answer"] }}</td>-->
+                <!--            <td>{{ riddle["source"] }}</td>-->
+                <!--        </tr>-->
+                <!--    {% endfor %#}-->
+                <!--</table>-->
+                <!--<h2>Current game</h2>-->
+                {#{ current_game }#}
                 
                 <!--<table class="table">-->
                 <!--    <thead>-->
@@ -247,31 +247,32 @@
                 <!--        <th>Answer</th>-->
                 <!--        <th>Source</th>-->
                 <!--    </thead>-->
-                <!--    {% for data in current_game %}-->
+                <!--    {#% for data in current_game %#}-->
                 <!--        <tr>-->
                 <!--            <td>{#{ data[2][1] }#}</td>-->
                 <!--            <td>{#{ data[0][1] }#}</td>-->
                 <!--            <td>{#{ data[1][1] }#}</td>-->
                 <!--        </tr>-->
-                <!--    {% endfor %}-->
+                <!--    {#% endfor %#}-->
                 <!--</table>-->
                 
-                <h2>Current Riddle {{ riddle_counter }}</h2>
-                {{ current_riddle }}
-                <ul>
-                    {% for info in current_riddle %}
-                        <li>{{ info[1] }}</li>
-                    {% endfor %}
-                </ul>
+                <!--<h2>Current Riddle {#{ riddle_counter }}</h2>-->
+                <!--{{ current_riddle }#}-->
+                <!--<ul>-->
+                <!--    {% for info in current_riddle %}-->
+                <!--        <li>{#{ info[1] }#}</li>-->
+                <!--    {% endfor %}-->
+                <!--</ul>-->
                 
-                <p>{{ current_riddle[1] }}</p>
-                <p>{{ current_riddle[0] }}</p>
+                <!--<p>{#{ current_riddle[1] }}</p>-->
+                <!--<p>{{ current_riddle[0] }#}</p>-->
                 
                 {#% set words = "" %#}
                 {#% set word1, word2, word3, word4 = current_riddle[2] %}#
                 {#% if word1.len() > 0 %#}
                     <!--words.append(word1 + " ")-->
                 {#% endif %#}
+                {#% for word in (current_riddle[0][1]).split() %#}
                 {#% for word in (words).split() %#}
                 {#% for word in current_riddle[2].split() %#}
                     <p>{#{ loop.index }} {{ word }#}</p>

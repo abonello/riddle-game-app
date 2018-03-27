@@ -714,6 +714,10 @@ I refactored the code related to creating the list of the current riddle. I chan
 the tuple holding the answer into a string. I also have a fixed order to the data.
 I will try to deply to heroku and see if it works.
 
+Had to comment out some debugging code and after committing and pushing again to 
+heroku it is working well. Now I commented out all the debuging code that was 
+at the bottom of the page.
+
 
 * * *
 * * *

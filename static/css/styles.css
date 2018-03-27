@@ -177,6 +177,25 @@ header h2 {
     height: 400px;
 }
 
+.red {
+    color: red;
+}
+.yellow-bg {
+    background: yellow;
+}
+.bottom-1 {
+    margin-top: 200px;
+}
+.bottom-2 {
+    margin-top: 150px;
+}
+.bottom-3 {
+    margin-top: 125px;
+}
+.bottom-4 {
+    margin-top: 100px;
+}
+
 .btn-answer-width, .btn-pass-width {
     width: 49%;
     margin: 0;

@@ -75,6 +75,7 @@
                 <p>All users: {{ app_info["allusers"] }}</p>
                 <p>Logged: {{ app_info["logged"] }}</p>
                 <p>Game on: {{ app_info["game"] }}</p>
+                <p>Attempt: {{ attempt }}</p>
                 <div class="col-md-6  min-height-main">
                     <div class="row">
                         <div class="col-md-6"><h3 class="game_title">{{ app_info["username"] }}</h3></div>
@@ -91,20 +92,74 @@
                     
                 </div>
                 <!-- Will be needed in the pages which split in two columns -->
+                
+                
                 <div class="col-md-6  min-height-main">
                     <div class="row">
                         <div class="col col-md-10 col-md-offset-1">
                             <p class="game_text">Points: ##</p>
-                            <p class="game_text">First attempt: 10 points</p>
+                            <p class="game_text
+                            {% if attempt > 1 %} 
+                            red 
+                            {% endif %}">First attempt: {{ points }} points</p>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col col-md-10 col-md-offset-1">
-                            <form class="play_game" method="POST" action="/game">
+                            <form class="play_game 
+                            {% if attempt > 1 %} 
+                            red 
+                            {% endif %}" method="POST" action="/game">
                                 <div class="form-group">
+                                    
+                                    {% if attempt == 1 %}
                                     <div class="row text-area">
                                         <textarea class="form-control" name="answer_text" rows="10" id="answer_block" placeholder="type your answer here"></textarea>
                                     </div>
+                                    
+                                    {% elif attempt == 2 %}
+                                        <div class="row text-area">
+                                            {% set words = (current_riddle[0][1]).split() %}
+                                            {% set word_count = words|count %}
+                                            {% for word in words %}
+                                                <div class="row">
+                                                    <div class="col-xs-2 col-sm-3"><label>Word {{ loop.index }}</label></div>
+                                                    <div class="col-xs-10 col-sm-9">
+                                                        <textarea class="form-control" name="answer_text" rows="1" id="answer_block{{ loop.index }}" placeholder="type your answer here"></textarea>
+                                                    </div>
+                                                </div>
+                                            {% endfor %}
+                                            
+                                            <div class="row 
+                                                {% if word_count == 1 %}
+                                                    bottom-1
+                                                {% elif word_count == 2 %}
+                                                    bottom-2
+                                                {% elif word_count == 3 %}
+                                                    bottom-3
+                                                {% elif word_count == 4 %}
+                                                    bottom-4
+                                                {% endif %}">
+                                                <!--The above code will only work for now -->
+                                                <div class="red yellow-bg">
+                                                    <p>Place for your previous wrong answer.</p>
+                                                </div>
+                                                <p>The answer for this riddle has {{ word_count }} 
+                                                {% if (word_count) == 1 %}
+                                                    word.
+                                                {% elif (word_count) > 1 %}
+                                                    words.
+                                                {% endif %}</p>
+                                            </div>
+                                            
+                                            
+                                        </div>
+
+                                    {% elif attempt == 3 %}
+                                        This is your last chance to guess the riddle
+                                    {% endif %}
+                                    
+                                    
                                     <div class="row">
                                         <button type="submit" class="btn btn-default form-align btn-answer-width" name="answer_btn" type="submit" value="answer" alt="Submit Answer">Submit Answer</button>
                                         <button type="submit" class="btn btn-default form-align btn-pass-width" name="pass_btn" type="submit" alt="Pass" value="pass">Pass</button>
@@ -114,6 +169,11 @@
                         </div>
                     </div>
                 </div>
+                
+                
+                
+                
+                
             </div>
             <div class="row">
                 <table class="table">
@@ -156,7 +216,12 @@
                     {% endfor %}
                 </ul>
                 
-                {{ current_riddle[1][1] }}
+                <p>{{ current_riddle[1][1] }}</p>
+                <p>{{ current_riddle[0][1] }}</p>
+                
+                {% for word in (current_riddle[0][1]).split() %}
+                    <p>{{ loop.index }} {{ word }}</p>
+                {% endfor %}
 
             </div>
         </section>

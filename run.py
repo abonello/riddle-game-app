@@ -18,6 +18,8 @@ current_game = []           # IDs of current riddles
 current_riddle = 0
 all_riddles = []            # All riddles available for the game
 riddle_counter = 0
+attempt = 1                 # There are three attempts per riddle.
+points = 10
 
 
 # logged = False
@@ -228,9 +230,11 @@ def game():
     global current_riddle
     global riddle_counter
     app_info["route"] = "game"
+    global attempt
+    global points
     
     # current_riddle += 1
-    this_riddle = current_game
+    this_riddle = current_game  # What is this for??????????????????????????????
     
     if app_info["game"] == False:
         app_info["game"] = True  # Game On
@@ -257,18 +261,56 @@ def game():
         current_riddle = current_game[riddle_counter]
             
     if request.method == 'POST':
-        if 'answer_btn' in request.form:
+        if 'play' in request.form:
+            points = 10
+            attempt = 1
+        elif 'answer_btn' in request.form:
             riddle_counter += 1
             if riddle_counter > len(current_game)-1:
                 # app_info["game"] = False
                 # return "<h1>Gama OVER</h1>"
                 return redirect(url_for('game_over'))
             current_riddle = current_game[riddle_counter]
+            
+            #If I guess the answer set points to 10
+            #I still need to add code to check the answer
+            if True:
+                points = 10
+                attempt = 1
+            elif False:
+                attempt += 1
+                if attempt == 2:
+                    points = 6
+                elif attempt == 3:
+                    points = 2
+                
+        
+        #This will happen if the answer is wrong Or pass
+        # increase attempt
+        elif 'pass_btn' in request.form:
+            attempt += 1
+            if attempt == 2:
+                points = 6
+            elif attempt == 3:
+                points = 2
+                if riddle_counter > len(current_game)-1:
+                    return redirect(url_for('game_over'))
+                current_riddle = current_game[riddle_counter]
+            elif attempt == 4:
+                points = 10
+                attempt = 1
+                riddle_counter += 1
+                # Call next riddle
+                if riddle_counter > len(current_game)-1:
+                    return redirect(url_for('game_over'))
+                current_riddle = current_game[riddle_counter]
+
+        
     
     
     # return "<h2>Here " + username + " will play the game.</h2>"
     # return render_template("game.html", username=username, allusers=allusers, logged=logged, route="game") #, user_data=user_data)
-    return render_template("game.html", app_info=app_info, all_riddles=all_riddles, current_game=current_game, current_riddle=current_riddle, riddle_counter=riddle_counter)
+    return render_template("game.html", app_info=app_info, all_riddles=all_riddles, current_game=current_game, current_riddle=current_riddle, riddle_counter=riddle_counter, attempt=attempt, points=points)
     
     
 @app.route('/game_over')

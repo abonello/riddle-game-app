@@ -692,7 +692,27 @@ riddle or end game if it is the last riddle. If it is wrong, move to the next
 attempt or move to next riddle if it is the last attempt or end game if it is the 
 last attempt of the last riddle.
 
+## HEROKU bug: Problem with Heroku
+It is not finding the image files
 
+~~~~
+<img class="img-responsive" src="static/img/{{ current_riddle[1][1] }}" alt="riddle image"></img>
+File "/app/.heroku/python/lib/python3.6/site-packages/jinja2/environment.py", line 411, in getitem
+~~~~
+I suspect that this will not be the only line of code that will have to be changed.  
+
+I suspect that the items in current_riddle appear in heroku appear in a different 
+order than locally so instead of finding the image name the code is returning 
+something else.  
+current_riddle is a list
+This is filled from current_game which is another list.  
+In turn this contains dictionaries from the json which will be unordered.  
+I need to use a different way to call for that data that I need.
+
+
+I refactored the code related to creating the list of the current riddle. I changed 
+the tuple holding the answer into a string. I also have a fixed order to the data.
+I will try to deply to heroku and see if it works.
 
 
 * * *

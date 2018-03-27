@@ -84,7 +84,8 @@
                     
                     <div class="list_games game_image">
                         <!--<img class="img-responsive" src="static/img/ObiWanKenobi.png" alt="riddle image"></img>-->
-                        <img class="img-responsive" src="static/img/{{ current_riddle[1][1] }}" alt="riddle image"></img>
+                        <!--<img class="img-responsive" src="static/img/{{ current_riddle[1][1] }}" alt="riddle image"></img>-->
+                        <img class="img-responsive" src="static/img/{{ current_riddle[1] }}" alt="riddle image"></img>
                     </div>
                     <div class="game_instruction">
                         <p>Type your answer and press Submit button. Otherwise Pass.</p>
@@ -119,7 +120,8 @@
                                     
                                     {% elif attempt == 2 %}
                                         <div class="row text-area">
-                                            {% set words = (current_riddle[0][1]).split() %}
+                                            {#% set words = (current_riddle[0][1]).split() %#}
+                                            {% set words = (current_riddle[2]).split() %}
                                             {% set word_count = words|count %}
                                             {% for word in words %}
                                                 <div class="row">
@@ -156,7 +158,8 @@
 
                                     {% elif attempt == 3 %}
                                         <div class="row text-area">
-                                            {% set words = (current_riddle[0][1]).split() %}
+                                            {#% set words = (current_riddle[0][1]).split() %#}
+                                            {% set words = (current_riddle[2]).split() %}
                                             {% set word_count = words|count %}
                                             {% for word in words %}
                                                 <div class="row">
@@ -214,6 +217,12 @@
                 
                 
             </div>
+            <h3>All_Riddles</h3>
+            {{ all_riddles }}
+            <h3>Current_Game</h3>
+            {{ current_game }}
+            <h3>Orderd Data</h3>
+            {{ ordered_data }}
             <div class="row">
                 <table class="table">
                     <thead>
@@ -255,12 +264,18 @@
                     {% endfor %}
                 </ul>
                 
-                <p>{{ current_riddle[1][1] }}</p>
-                <p>{{ current_riddle[0][1] }}</p>
+                <p>{{ current_riddle[1] }}</p>
+                <p>{{ current_riddle[0] }}</p>
                 
-                {% for word in (current_riddle[0][1]).split() %}
-                    <p>{{ loop.index }} {{ word }}</p>
-                {% endfor %}
+                {#% set words = "" %#}
+                {#% set word1, word2, word3, word4 = current_riddle[2] %}#
+                {#% if word1.len() > 0 %#}
+                    <!--words.append(word1 + " ")-->
+                {#% endif %#}
+                {#% for word in (words).split() %#}
+                {#% for word in current_riddle[2].split() %#}
+                    <p>{#{ loop.index }} {{ word }#}</p>
+                {#% endfor %#}
 
             </div>
         </section>

@@ -14,7 +14,7 @@ app_info = {
     "route": "",            # Which is the current page
     "game": False           # Is there a current game active True/False
 }
-current_game = []           # IDs of current riddles
+current_game = []           # 
 current_riddle = 0
 all_riddles = []            # All riddles available for the game
 riddle_counter = 0
@@ -222,6 +222,18 @@ def contact():
     # return render_template("contact.html", username=username, allusers=allusers, logged=logged, route="contact")
     return render_template("contact.html", app_info=app_info)
 
+def set_current_riddle(data):
+    ordered_data = [0,0,0]
+    for cr in data:
+        if cr[0] == "id":
+            ordered_data[0] = cr[1]
+        elif cr[0] == "source":
+            ordered_data[1] = cr[1]
+        elif cr[0] == "answer":
+            ordered_data[2] = ''.join(list(cr[1]))
+    return ordered_data
+    
+
 @app.route('/game', methods=['GET', 'POST'])
 def game():
     global app_info
@@ -229,9 +241,10 @@ def game():
     global current_game
     global current_riddle
     global riddle_counter
-    app_info["route"] = "game"
     global attempt
     global points
+    
+    app_info["route"] = "game"  # I will need this to control the menu
     
     # current_riddle += 1
     this_riddle = current_game  # What is this for??????????????????????????????
@@ -243,7 +256,7 @@ def game():
             all_riddles = json.load(all_riddles_json)
         
         for x in range(0, 5):
-            # Randomly select 5 riddles
+            # Randomly select 5 riddles - Later this will be 10 from a larger pool.
             
             repeat = True
             while repeat:
@@ -258,7 +271,8 @@ def game():
             # if choose_game.items() not in current_game:
             #     current_game.append(choose_game.items())
         
-        current_riddle = current_game[riddle_counter]
+        # current_riddle = current_game[riddle_counter]
+        current_riddle = set_current_riddle(current_game[riddle_counter])
             
     if request.method == 'POST':
         if 'play' in request.form:
@@ -270,7 +284,19 @@ def game():
                 # app_info["game"] = False
                 # return "<h1>Gama OVER</h1>"
                 return redirect(url_for('game_over'))
-            current_riddle = current_game[riddle_counter]
+            # current_riddle = current_game[riddle_counter]
+            # ordered_data = [0,0,0]
+            # for cr in current_riddle:
+            #     if cr[0] == "id":
+            #         ordered_data[0] = cr[1]
+            #     elif cr[0] == "source":
+            #         ordered_data[1] = cr[1]
+            #     elif cr[0] == "answer":
+            #         ordered_data[2] = ''.join(list(cr[1]))
+            #         # Need to unpack the tuple with the answer into a list.
+                    
+            # current_riddle = ordered_data
+            current_riddle = set_current_riddle(current_game[riddle_counter])
             
             #If I guess the answer set points to 10
             #I still need to add code to check the answer
@@ -295,7 +321,8 @@ def game():
                 points = 2
                 if riddle_counter > len(current_game)-1:
                     return redirect(url_for('game_over'))
-                current_riddle = current_game[riddle_counter]
+                # current_riddle = current_game[riddle_counter] #This code is changing
+                current_riddle = set_current_riddle(current_game[riddle_counter])
             elif attempt == 4:
                 points = 10
                 attempt = 1
@@ -303,9 +330,12 @@ def game():
                 # Call next riddle
                 if riddle_counter > len(current_game)-1:
                     return redirect(url_for('game_over'))
-                current_riddle = current_game[riddle_counter]
+                #current_riddle = current_game[riddle_counter] #This code is changing
+                current_riddle = set_current_riddle(current_game[riddle_counter])
+                
+                
+                
 
-        
     
     
     # return "<h2>Here " + username + " will play the game.</h2>"

@@ -7,4 +7,3 @@ user7
 user88
 abc
 bnm
-<i>USER</i>

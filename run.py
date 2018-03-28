@@ -311,10 +311,7 @@ def game():
             points = 10
             attempt = 1
             
-            
-            
-            
-            
+
         elif 'answer_btn' in request.form:
             # Check Answer
             
@@ -368,9 +365,9 @@ def game():
                 # print "answer is: " + answer
                 # return "<h1>Reached attempt 2 built answer " + index + "</h1>"
                 # return index+answer
-                print len(answer)
-                answer = answer[0:-1]
-                print len(answer)
+                # print len(answer)
+                answer = answer[0:-1]      # Strip final space
+                # print len(answer)
                 
                 if answer == current_riddle[2]: # Answer correct
                     gained_points += 6          # Gain points
@@ -384,41 +381,37 @@ def game():
                 
                 # Otherwise answer is wrong
                 else:
-                    attempt = 3                # This is your next attempt
+                    attempt = 3                 # This is your next attempt
                     points = 2                  # Set correct number of points
                 
             elif attempt == 3:
-                return "<h1>Now this is Attempt 3</h1>"
-                # Get all words and concatenate them
-                # answer = ""
-                # for ndx, each_word in enumerate(current_riddle[2]):
-                #     index = 'answer_text' + str(ndx)
-                #     answer += (request.form['index'] + " ")
+                answer = ""
+                index = ""
+                local_answer = current_riddle[2].split()
+                
+                for ndx, each_word in enumerate(local_answer):
+                    index = 'answer_text' + str(ndx+1)
+                    answer += (request.form[index] + " ")
                     
-                # if answer == current_riddle[2]: # Answer correct
-                #     gained_points += 6          # Gain points
-                #     attemp = 1                  # Reset attempt
+                answer = answer[0:-1]      # Strip final space
+                
+                if answer == current_riddle[2]:  # Answer correct
+                    gained_points += 2           # Gain points
+                    attempt = 1                  # Reset attempt
 
-                #     riddle_counter += 1
-                #     if riddle_counter > len(current_game)-1:
-                #         return redirect(url_for('game_over'))
+                    riddle_counter += 1
+                    if riddle_counter > len(current_game)-1:
+                        return redirect(url_for('game_over'))
 
-                #     current_riddle = set_current_riddle(current_game[riddle_counter])
+                    current_riddle = set_current_riddle(current_game[riddle_counter])
                 
                 # Otherwise answer is wrong
-                # else:
-                #     attempt == 3                # This is your next attempt
-                #     points = 2                  # Set correct number of points
+                else:
+                    attempt = 1                 # This is your next attempt
+                    points = 10                 # Set correct number of points
                 
-                
-                # attempt += 1
-                # if attempt == 2:
-                #     points = 6
-                # elif attempt == 3:
-                #     points = 2
-                
-        
-        #This will happen if the answer is wrong Or pass
+
+        #This will happen if pass
         # increase attempt
         elif 'pass_btn' in request.form:
             attempt += 1

@@ -82,19 +82,24 @@
                         <div class="col-md-6"><h3 class="game_title">{{ app_info["username"] }}</h3></div>
                         <div class="col-md-6"><p class="game_text">Riddle {{ riddle_counter }} of 10</p></div>
                     </div>
+                    
                     <div class="list_games game_image">
+                        <!--<img class="img-responsive" src="static/img/ObiWanKenobi.png" alt="riddle image"></img>-->
+                        <!--<img class="img-responsive" src="static/img/{{ current_riddle[1][1] }}" alt="riddle image"></img>-->
                         <img class="img-responsive" src="static/img/{{ current_riddle[1] }}" alt="riddle image"></img>
                     </div>
                     <div class="game_instruction">
                         <p>Type your answer and press Submit button. Otherwise Pass.</p>
                     </div>
+                    
                 </div>
-                
                 <!-- Will be needed in the pages which split in two columns -->
+                
+                
                 <div class="col-md-6  min-height-main">
                     <div class="row">
                         <div class="col col-md-10 col-md-offset-1">
-                            <p class="game_text">Points: {{ gained_points }}</p>
+                            <p class="game_text">Points: ##{{ gained_points }}</p>
                             <p class="game_text
                             {% if attempt > 1 %} 
                             red 
@@ -116,6 +121,7 @@
                                     
                                     {% elif attempt == 2 %}
                                         <div class="row text-area">
+                                            {#% set words = (current_riddle[0][1]).split() %#}
                                             {% set words = (current_riddle[2]).split() %}
                                             {% set word_count = words|count %}
                                             {% for word in words %}
@@ -153,6 +159,7 @@
 
                                     {% elif attempt == 3 %}
                                         <div class="row text-area">
+                                            {#% set words = (current_riddle[0][1]).split() %#}
                                             {% set words = (current_riddle[2]).split() %}
                                             {% set word_count = words|count %}
                                             {% for word in words %}
@@ -205,12 +212,12 @@
                         </div>
                     </div>
                 </div>
+                
+                
+                
+                
+                
             </div>
-            
-            <!-- BELOW HERE IS DEBUGGING CODE -->
-            <!-- Will be removed at the end -->
-            
-            
             <!--<h3>All_Riddles</h3>-->
             <!--{#{ all_riddles }}-->
             <!--<h3>Current_Game</h3>-->

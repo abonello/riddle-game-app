@@ -103,18 +103,26 @@
                     </div>
                     <div class="row">
                         <div class="col col-md-10 col-md-offset-1">
-                            <form class="play_game 
-                            {% if attempt > 1 %} 
-                            red 
-                            {% endif %}" method="POST" action="/game">
-                                <div class="form-group">
-                                    
-                                    {% if attempt == 1 %}
-                                    <div class="row text-area">
-                                        <textarea class="form-control" name="answer_text" rows="10" id="answer_block" placeholder="type your answer here"></textarea>
+                            
+                            <!-- SPLIT THE FORM-->
+                            <!-- ATTEMPT = 1 -->
+                            {% if attempt == 1 %}
+                                <form class="play_game" method="POST" action="/game1">
+                                    <div class="form-group">
+                                        <div class="row text-area">
+                                            <textarea class="form-control" name="answer_text" rows="10" id="answer_block" placeholder="type your answer here"></textarea>
+                                        </div>
+                                        <div class="row">
+                                            <button type="submit" class="btn btn-default form-align btn-answer-width" name="answer_btn" type="submit" value="answer" alt="Submit Answer">Submit Answer</button>
+                                            <button type="submit" class="btn btn-default form-align btn-pass-width" name="pass_btn" type="submit" alt="Pass" value="pass">Pass</button>
+                                        </div>
                                     </div>
-                                    
-                                    {% elif attempt == 2 %}
+                                </form>
+                            
+                            <!-- ATTEMPT = 2 -->
+                            {% elif attempt == 2 %}
+                                <form class="play_game red" method="POST" action="/game2">
+                                    <div class="form-group">
                                         <div class="row text-area">
                                             {% set words = (current_riddle[2]).split() %}
                                             {% set word_count = words|count %}
@@ -147,11 +155,18 @@
                                                     words.
                                                 {% endif %}</p>
                                             </div>
-                                            
-                                            
                                         </div>
-
-                                    {% elif attempt == 3 %}
+                                        <div class="row">
+                                            <button type="submit" class="btn btn-default form-align btn-answer-width" name="answer_btn" type="submit" value="answer" alt="Submit Answer">Submit Answer</button>
+                                            <button type="submit" class="btn btn-default form-align btn-pass-width" name="pass_btn" type="submit" alt="Pass" value="pass">Pass</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            
+                            <!-- ATTEMPT = 2 -->
+                            {% elif attempt == 3 %}
+                                <form class="play_game red" method="POST" action="/game3">
+                                    <div class="form-group">
                                         <div class="row text-area">
                                             {% set words = (current_riddle[2]).split() %}
                                             {% set word_count = words|count %}
@@ -164,8 +179,6 @@
                                                     <div class="col-xs-1 col-sm-1"><label>
                                                         {% set length = word|length %}
                                                         {{ length }}
-                                                        
-                                                        
                                                     </label></div>
                                                 </div>
                                             {% endfor %}
@@ -190,18 +203,14 @@
                                                     words.
                                                 {% endif %} <br>See the indicated number of letters.</p>
                                             </div>
-                                            
-                                            
                                         </div>
-                                    {% endif %}
-                                    
-                                    
-                                    <div class="row">
-                                        <button type="submit" class="btn btn-default form-align btn-answer-width" name="answer_btn" type="submit" value="answer" alt="Submit Answer">Submit Answer</button>
-                                        <button type="submit" class="btn btn-default form-align btn-pass-width" name="pass_btn" type="submit" alt="Pass" value="pass">Pass</button>
+                                        <div class="row">
+                                            <button type="submit" class="btn btn-default form-align btn-answer-width" name="answer_btn" type="submit" value="answer" alt="Submit Answer">Submit Answer</button>
+                                            <button type="submit" class="btn btn-default form-align btn-pass-width" name="pass_btn" type="submit" alt="Pass" value="pass">Pass</button>
+                                        </div>
                                     </div>
-                                </div>
-                            </form>
+                                </form>
+                            {% endif %}
                         </div>
                     </div>
                 </div>

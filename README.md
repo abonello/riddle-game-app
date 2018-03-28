@@ -718,10 +718,71 @@ Had to comment out some debugging code and after committing and pushing again to
 heroku it is working well. Now I commented out all the debuging code that was 
 at the bottom of the page.
 
+* * *
+### Show riddle number
+Added this code
+
+I added code to start checking answers  
+
+I need to clean run.py and game.html. I will be deleating all commented out code 
+that is not going to be used.
+
+
+
+## 400 Bad Request error in game.html
+The routing and action for the form did not change however when I try to POST an 
+answer during attempt=2 I m getting this error. Attempt = 1 works well.
+This error was not there before.
+
+I found that enumeration starts counting from 0 and loop.index starts from 1
+Therefore when I tried to get information from the table the reference was wrong
+The bad request related to getting information from the page not the page posting 
+to the server.
+
+There was also a problem with enumeration which was counting all letters rather 
+than words.
+
+Now it is fixed. Codes as:  
+~~~~python
+elif attempt == 2:
+    # Get all words and concatenate them
+    answer = ""
+    index = ""
+    local_answer = current_riddle[2].split()
+    # for ndx, each_word in enumerate(current_riddle[2]):
+    for ndx, each_word in enumerate(local_answer):
+        index = 'answer_text' + str(ndx+1)
+        answer += (request.form[index] + " ")
+
+    answer = answer[0:-1]           # Strip last space
+    
+    if answer == current_riddle[2]: # Answer correct
+        gained_points += 6          # Gain points
+        attempt = 1                 # Reset attempt
+
+        riddle_counter += 1
+        if riddle_counter > len(current_game)-1:
+            return redirect(url_for('game_over'))
+
+        current_riddle = set_current_riddle(current_game[riddle_counter])
+    
+    # Otherwise answer is wrong
+    else:
+        attempt = 3                 # This is your next attempt
+        points = 2                  # Set correct number of points
+~~~~
+
+Now code for Attempt 1 and Attempt 2 of the game is done.
+
+
 
 * * *
 * * *
 # To DO
+
+Strip any trailing spaces at the end to an input string
+
+
 I will need to add a game menu item that will appear only when a user is logged in and
 only while a game is running. This should allow the user to navigate away from the
 game and return to the game by using this menu item.

@@ -310,13 +310,13 @@ def game():
         if 'play' in request.form:
             points = 10
             attempt = 1
-            
 
         elif 'answer_btn' in request.form:
             # Check Answer
             
             if attempt == 1:
                 answer = request.form['answer_text']
+                answer = answer.strip()         # Strip trailing spaces
                 if answer == current_riddle[2]: # answer correct
                     gained_points += 10
                     attemp = 1                  # First attempt of
@@ -330,21 +330,7 @@ def game():
                 else:
                     attempt = 2                 # This is your next attempt
                     points = 6                  # Set correct number of points
-                    # elif attempt == 3:
-                    #     points = 2
 
-            # if c in container:    
-                        #If I guess the answer set points to 10
-                        #I still need to add code to check the answer
-                    # if True:
-                    #     points = 10
-                    #     attempt = 1
-                    # elif False:
-                    #     attempt += 1
-                    #     if attempt == 2:
-                    #         points = 6
-                    #     elif attempt == 3:
-                    #         points = 2       # This code is placed in this container to collapse it
             elif attempt == 2:
                 
                 # Get all words and concatenate them
@@ -359,19 +345,21 @@ def game():
                     # answer += (request.form['index'] + " ")
                     # print request.form['answer_text1']
                     # print request.form[index]
-                    answer += (request.form[index] + " ")
+                    answer += (request.form[index].strip() + " ") #Strip any typed white spaces
                     
                     
                 # print "answer is: " + answer
                 # return "<h1>Reached attempt 2 built answer " + index + "</h1>"
                 # return index+answer
                 # print len(answer)
-                answer = answer[0:-1]      # Strip final space
+                # answer = answer[0:-1]      # Strip final space
+                answer = answer.strip()         # Strip trailing spaces
                 # print len(answer)
                 
                 if answer == current_riddle[2]: # Answer correct
                     gained_points += 6          # Gain points
                     attempt = 1                  # Reset attempt
+                    points = 10
 
                     riddle_counter += 1
                     if riddle_counter > len(current_game)-1:
@@ -391,7 +379,7 @@ def game():
                 
                 for ndx, each_word in enumerate(local_answer):
                     index = 'answer_text' + str(ndx+1)
-                    answer += (request.form[index] + " ")
+                    answer += (request.form[index].strip() + " ") #Strip any typed white spaces
                     
                 answer = answer[0:-1]      # Strip final space
                 
@@ -409,7 +397,6 @@ def game():
                 else:
                     attempt = 1                 # This is your next attempt
                     points = 10                 # Set correct number of points
-                
 
         #This will happen if pass
         # increase attempt

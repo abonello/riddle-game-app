@@ -779,12 +779,19 @@ Now code for Attempt 1 and Attempt 2 of the game is done.
 Finished code for attempt 3.
 
 
+Added stripping of white spaces
+
+
 
 * * *
 * * *
 # To DO
 
 Strip any trailing spaces at the end to an input string
+
+For attempt 1 make sure there is only one space between words.
+
+Make it case sensitive
 
 
 I will need to add a game menu item that will appear only when a user is logged in and

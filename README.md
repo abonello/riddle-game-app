@@ -810,6 +810,30 @@ the answer.
 Done  
 Store and display wrong answers during attempt 2 and attempt 3.
 
+#### Correcting a bug in displaying answers.
+If I am on the second or more riddles of a game, there is some information that 
+is already stored in the wrong_answers list. This needs to be cleared before
+starting subsequent riddles otherwise it will appear erroneously if one passes.
+
+
+
+#### Looking for Bugs
+I am going through the logic and running the game through different possibilities.
+I am finding a number of errors mostly related to not reseting variables. I have 
+neglected the branch of the game which deals with Pass. variables like answer need to 
+be global so that they can reach here too.
+Since I have to reset all variables at least in two places, when a game is over 
+and when a person logs out I will create a function for this.
+
+
+Changed the code to make it more robust. It can now accept the all the input for 
+attempts 2 and 3 even if typed all in one text field EVEN IF they contain 
+multiple spaces in between or a new line. [NB. Not escaped characters - I will 
+treat this as spelling mistakes and will be marked as incorrect.]
+
+All manual checks of the logic done up to this stage.
+
+
 
 
 * * *

@@ -14,6 +14,7 @@ app_info = {
     "route": "",            # Which is the current page
     "game": False           # Is there a current game active True/False
 }
+
 current_game = []           # 
 current_riddle = 0
 all_riddles = []            # All riddles available for the game
@@ -22,26 +23,50 @@ attempt = 1                 # There are three attempts per riddle.
 points = 10
 gained_points = 0
 wrong_answers =[]           # This will hold wrong answers
+answer = ""                 # Current answer of current riddle
 
+
+def global_game_reset():
+    global current_game
+    global current_riddle
+    global all_riddles
+    global riddle_counter
+    global attempt
+    global points
+    global gained_points
+    global wrong_answers         # This will hold wrong answers
+    global answer                 # Current answer of current riddle
+
+    current_game = []
+    current_riddle = 0
+    all_riddles = []
+    riddle_counter = 0
+    attempt = 1
+    points = 10
+    gained_points = 0
+    wrong_answers =[]           # This will hold wrong answers
+    answer = ""                 # Current answer of current riddle
+    
 
 @app.route('/logout', methods=['GET', 'POST'])
 def logout():
     global app_info
-    global attempt
-    global points
-    global gained_points
-    global riddle_counter
-    global wrong_answers
+    # global attempt
+    # global points
+    # global gained_points
+    # global riddle_counter
+    # global wrong_answers
     if request.method == 'POST':    #RESET
         app_info["logged"] = False
         app_info["username"] = ""
         app_info["allusers"] = ""
         app_info["game"] = False
-        attempt = 1
-        points = 10
-        gained_points = 0
-        riddle_counter = 0
-        wrong_answers =[] 
+        # attempt = 1
+        # points = 10
+        # gained_points = 0
+        # riddle_counter = 0
+        # wrong_answers =[] 
+        global_game_reset()
         return redirect(url_for('index'))
 
 @app.route('/', methods=['GET','POST'])
@@ -288,6 +313,7 @@ def game():
     global points
     global gained_points
     global wrong_answers
+    global answer
     
     app_info["route"] = "game"  # I will need this to control the menu
     
@@ -323,7 +349,7 @@ def game():
                 
                 # Clean the answer
                 # If there are multiple spaces or other white characters in between the words
-                temp =[]
+                temp =[]                    # Clean answer
                 temp = answer.split()
                 answer=""
                 for item in temp:
@@ -335,6 +361,7 @@ def game():
                 
                 if answer.lower() == current_riddle[2].lower(): # answer correct
                     gained_points += 10
+                    wrong_answers = []
                     attemp = 1                  # First attempt of
                     riddle_counter += 1         # Next Riddle
                     if riddle_counter > len(current_game)-1:    # If that was last riddle then
@@ -345,7 +372,10 @@ def game():
                 # Otherwise answer is wrong
                 else:
                     # wrong_answers = [answer]
-                    wrong_answers.append(answer)
+                    if len(answer) == 0:                #if no answer is given
+                        wrong_answers.append("-")
+                    else:
+                        wrong_answers.append(answer)
                     attempt = 2                 # This is your next attempt
                     points = 6                  # Set correct number of points
 
@@ -371,6 +401,11 @@ def game():
                 # return index+answer
                 # print len(answer)
                 # answer = answer[0:-1]      # Strip final space
+                temp =[]                    # Clean answer
+                temp = answer.split()
+                answer=""
+                for item in temp:
+                    answer += item + " "
                 answer = answer.strip()         # Strip trailing spaces
                 # print len(answer)
                 
@@ -378,6 +413,7 @@ def game():
                     gained_points += 6          # Gain points
                     attempt = 1                  # Reset attempt
                     points = 10
+                    wrong_answers = []
 
                     riddle_counter += 1
                     if riddle_counter > len(current_game)-1:
@@ -387,9 +423,14 @@ def game():
                 
                 # Otherwise answer is wrong
                 else:
-                    wrong_answers.append(answer)
+                    # wrong_answers.append(answer)
+                    if len(answer) == 0:                #if no answer is given
+                        wrong_answers.append("-")
+                    else:
+                        wrong_answers.append(answer)
                     attempt = 3                 # This is your next attempt
                     points = 2                  # Set correct number of points
+                    
                 
             elif attempt == 3:
                 answer = ""
@@ -400,11 +441,18 @@ def game():
                     index = 'answer_text' + str(ndx+1)
                     answer += (request.form[index].strip() + " ") #Strip any typed white spaces
                     
-                answer = answer[0:-1]      # Strip final space
+                # answer = answer[0:-1]      # Strip final space
+                temp =[]                    # Clean answer
+                temp = answer.split()
+                answer=""
+                for item in temp:
+                    answer += item + " "
+                answer = answer.strip()         # Strip trailing spaces
                 
                 if answer.lower() == current_riddle[2].lower():  # Answer correct
                     gained_points += 2           # Gain points
                     attempt = 1                  # Reset attempt
+                    points = 10
                     wrong_answers = []           # Reset wrong answers
 
                     riddle_counter += 1
@@ -426,18 +474,32 @@ def game():
         #This will happen if pass
         # increase attempt
         elif 'pass_btn' in request.form:
-            attempt += 1
-            if attempt == 2:
+            if attempt == 1:
+                # wrong_answers.append("-")
+                wrong_answers = []
+                wrong_answers = ["-"]
+                attempt = 2
                 points = 6
-            elif attempt == 3:
+            # else:
+                # attempt += 1
+            elif attempt == 2:
                 points = 2
+                wrong_answers.append("-")
+                # wrong_answers[1] = "-"
+                attempt = 3
+            elif attempt == 3:
+                # points = 2
                 if riddle_counter > len(current_game)-1:
                     return redirect(url_for('game_over'))
                 current_riddle = set_current_riddle(current_game[riddle_counter])
-            elif attempt == 4:
                 points = 10
                 attempt = 1
                 riddle_counter += 1
+                wrong_answers = []
+            # elif attempt == 4:
+            #     points = 10
+            #     attempt = 1
+            #     riddle_counter += 1
                 
                 if riddle_counter > len(current_game)-1:     # Call next riddle
                     # Store the gained_points
@@ -453,16 +515,28 @@ def game():
 @app.route('/game_over')
 def game_over():
     global app_info
-    global all_riddles
-    global current_game
-    global current_riddle
-    global riddle_counter
     app_info["route"] = "game"
     app_info["game"] = False
-    current_game = []
-    current_riddle = 0
-    all_riddles = []
-    riddle_counter = 0
+    
+    # global current_game
+    # global current_riddle
+    # global all_riddles
+    # global riddle_counter
+    # global gained_points
+    # global points
+    # global wrong_answers         # This will hold wrong answers
+    # global answer                 # Current answer of current riddle
+
+    # current_game = []
+    # current_riddle = 0
+    # all_riddles = []
+    # riddle_counter = 0
+    # gained_points = 0
+    # points = 10
+    # wrong_answers =[]           # This will hold wrong answers
+    # answer = ""                 # Current answer of current riddle
+    
+    global_game_reset()
     return redirect(url_for('user'))
     
     

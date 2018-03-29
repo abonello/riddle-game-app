@@ -807,7 +807,7 @@ if answer.lower() == current_riddle[2].lower():
 
 * * *
 * * *
-# To DO
+## TO DO -- ESSENTIAL
 
 _~~Strip any trailing spaces at the end to an input string~~_
 
@@ -815,6 +815,7 @@ _~~For attempt 1 make sure there is only one space between words.~~_
 
 _~~Make it case insensitive~~_
 
+Store and display wrong answers during attempt 2 and attempt 3.
 
 I will need to add a game menu item that will appear only when a user is logged in and
 only while a game is running. This should allow the user to navigate away from the
@@ -827,6 +828,13 @@ Text or JSON?
 
 Clean the templates using base.html
 
+Build contact form
+
+Better text for **About** including rules for game, input types expected. Case insensitive,
+No extra characters expected, numbers as text.
+Attempt 2 and 3 can accept the answer all typed in one of the text fields.
+(Just a visual clue)
+
 Put more images and increase the game to 10 riddles.
 
 How can I prevent certain routes from being accessed directly. I want them to 
@@ -834,3 +842,8 @@ be accessible only through the menus AND when the user is logged in.
 
 Check that the game can be accessed independently by more than one user at the 
 same time.
+
+## TO DO -- EXTRA
+Timed game
+
+Sounds

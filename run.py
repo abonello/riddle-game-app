@@ -316,7 +316,19 @@ def game():
             
             if attempt == 1:
                 answer = request.form['answer_text']
+                
+                # Clean the answer
+                # If there are multiple spaces or other white characters in between the words
+                temp =[]
+                temp = answer.split()
+                answer=""
+                for item in temp:
+                    answer += item + " "
+                    
+                    
                 answer = answer.strip()         # Strip trailing spaces
+                
+                
                 if answer == current_riddle[2]: # answer correct
                     gained_points += 10
                     attemp = 1                  # First attempt of

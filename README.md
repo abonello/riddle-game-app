@@ -779,7 +779,14 @@ Now code for Attempt 1 and Attempt 2 of the game is done.
 Finished code for attempt 3.
 
 
-Added stripping of white spaces
+Added stripping of white spaces  
+Clean input for attempt 1:  
+Removed multiple space or a new line between words that the user might type  
+before the answer is checked.
+
+
+
+
 
 
 
@@ -787,11 +794,11 @@ Added stripping of white spaces
 * * *
 # To DO
 
-Strip any trailing spaces at the end to an input string
+_~~Strip any trailing spaces at the end to an input string~~_
 
-For attempt 1 make sure there is only one space between words.
+_~~For attempt 1 make sure there is only one space between words.~~_
 
-Make it case sensitive
+Make it case insensitive
 
 
 I will need to add a game menu item that will appear only when a user is logged in and

@@ -21,6 +21,7 @@ riddle_counter = 0
 attempt = 1                 # There are three attempts per riddle.
 points = 10
 gained_points = 0
+wrong_answers =[]           # This will hold wrong answers
 
 
 @app.route('/logout', methods=['GET', 'POST'])
@@ -30,7 +31,8 @@ def logout():
     global points
     global gained_points
     global riddle_counter
-    if request.method == 'POST':
+    global wrong_answers
+    if request.method == 'POST':    #RESET
         app_info["logged"] = False
         app_info["username"] = ""
         app_info["allusers"] = ""
@@ -39,6 +41,7 @@ def logout():
         points = 10
         gained_points = 0
         riddle_counter = 0
+        wrong_answers =[] 
         return redirect(url_for('index'))
 
 @app.route('/', methods=['GET','POST'])
@@ -189,89 +192,89 @@ def set_current_riddle(data):
             ordered_data[2] = ''.join(list(cr[1]))
     return ordered_data
 
-@app.route('/game1', methods=['GET', 'POST'])
-def game1():
-    global app_info
-    global all_riddles
-    global current_game
-    global current_riddle
-    global riddle_counter
-    global attempt
-    global points
-    global gained_points
+# @app.route('/game1', methods=['GET', 'POST'])
+# def game1():
+#     global app_info
+#     global all_riddles
+#     global current_game
+#     global current_riddle
+#     global riddle_counter
+#     global attempt
+#     global points
+#     global gained_points
     
-    if request.method == 'POST':
+#     if request.method == 'POST':
 
-        if 'answer_btn' in request.form:
-            # Check Answer
-            if attempt == 1:
-                answer = request.form['answer_text']
-                if answer == current_riddle[2]: # answer correct
-                    gained_points += 10
-                    attemp = 1                  # First attempt of
-                    riddle_counter += 1         # Next Riddle
-                    if riddle_counter > len(current_game)-1:    # If that was last riddle then
-                        return redirect(url_for('game_over'))   # GAME OVER
-                    # Trigger next riddle
-                    current_riddle = set_current_riddle(current_game[riddle_counter]) 
-                    # return render_template("game_1.html", app_info=app_info, all_riddles=all_riddles, current_game=current_game, current_riddle=current_riddle, riddle_counter=riddle_counter+1, attempt=attempt, points=points, gained_points=gained_points)
+#         if 'answer_btn' in request.form:
+#             # Check Answer
+#             if attempt == 1:
+#                 answer = request.form['answer_text']
+#                 if answer == current_riddle[2]: # answer correct
+#                     gained_points += 10
+#                     attemp = 1                  # First attempt of
+#                     riddle_counter += 1         # Next Riddle
+#                     if riddle_counter > len(current_game)-1:    # If that was last riddle then
+#                         return redirect(url_for('game_over'))   # GAME OVER
+#                     # Trigger next riddle
+#                     current_riddle = set_current_riddle(current_game[riddle_counter]) 
+#                     # return render_template("game_1.html", app_info=app_info, all_riddles=all_riddles, current_game=current_game, current_riddle=current_riddle, riddle_counter=riddle_counter+1, attempt=attempt, points=points, gained_points=gained_points)
 
             
-                # Otherwise answer is wrong
-                else:
-                    attempt = 2                 # This is your next attempt
-                    points = 6                  # Set correct number of points
-                    # elif attempt == 3:
-                    #     points = 2
-                    # return render_template("game_2.html", app_info=app_info, all_riddles=all_riddles, current_game=current_game, current_riddle=current_riddle, riddle_counter=riddle_counter+1, attempt=attempt, points=points, gained_points=gained_points)
-        return redirect(url_for('game'))
+#                 # Otherwise answer is wrong
+#                 else:
+#                     attempt = 2                 # This is your next attempt
+#                     points = 6                  # Set correct number of points
+#                     # elif attempt == 3:
+#                     #     points = 2
+#                     # return render_template("game_2.html", app_info=app_info, all_riddles=all_riddles, current_game=current_game, current_riddle=current_riddle, riddle_counter=riddle_counter+1, attempt=attempt, points=points, gained_points=gained_points)
+#         return redirect(url_for('game'))
         
-@app.route('/game2', methods=['GET', 'POST'])
-def game2():
+# @app.route('/game2', methods=['GET', 'POST'])
+# def game2():
     
     
-    global app_info
-    global all_riddles
-    global current_game
-    global current_riddle
-    global riddle_counter
-    global attempt
-    global points
-    global gained_points
+#     global app_info
+#     global all_riddles
+#     global current_game
+#     global current_riddle
+#     global riddle_counter
+#     global attempt
+#     global points
+#     global gained_points
     
-    if request.method == 'POST':
+#     if request.method == 'POST':
         
         
     
 
-        if 'answer_btn' in request.form:
-            # return "<h1>Now this is Attempt 2 POST ACCEPTED - FORM WORKS</h1>"
+#         if 'answer_btn' in request.form:
+#             # return "<h1>Now this is Attempt 2 POST ACCEPTED - FORM WORKS</h1>"
             
-        # return "<h1>Now this is Attempt 2 POST ACCEPTED</h1>"
-            # Check Answer
-            if attempt == 2:
-                # Get all words and concatenate them
-                answer = ""
-                for ndx, each_word in enumerate(current_riddle[2]):
-                    index = 'answer_text' + str(ndx)
-                    answer += (request.form['index'] + " ")
+#         # return "<h1>Now this is Attempt 2 POST ACCEPTED</h1>"
+#             # Check Answer
+#             if attempt == 2:
+#                 # Get all words and concatenate them
+#                 answer = ""
+#                 for ndx, each_word in enumerate(current_riddle[2]):
+#                     index = 'answer_text' + str(ndx)
+#                     answer += (request.form['index'] + " ")
                     
-                if answer == current_riddle[2]: # Answer correct
-                    gained_points += 6          # Gain points
-                    attemp = 1                  # Reset attempt
+#                 if answer == current_riddle[2]: # Answer correct
+#                     gained_points += 6          # Gain points
+#                     attemp = 1                  # Reset attempt
     
-                    riddle_counter += 1
-                    if riddle_counter > len(current_game)-1:
-                        return redirect(url_for('game_over'))
+#                     riddle_counter += 1
+#                     if riddle_counter > len(current_game)-1:
+#                         return redirect(url_for('game_over'))
     
-                    current_riddle = set_current_riddle(current_game[riddle_counter])
+#                     current_riddle = set_current_riddle(current_game[riddle_counter])
                 
-                # Otherwise answer is wrong
-                else:
-                    attempt == 3                # This is your next attempt
-                    points = 2                  # Set correct number of points
-        return redirect(url_for('game'))
-    return "<h1>Now this is Attempt 2 POST NOT ACCEPTED - FORM PROBLEM</h1>"
+#                 # Otherwise answer is wrong
+#                 else:
+#                     attempt == 3                # This is your next attempt
+#                     points = 2                  # Set correct number of points
+#         return redirect(url_for('game'))
+#     return "<h1>Now this is Attempt 2 POST NOT ACCEPTED - FORM PROBLEM</h1>"
 
 
 @app.route('/game', methods=['GET', 'POST'])
@@ -284,6 +287,7 @@ def game():
     global attempt
     global points
     global gained_points
+    global wrong_answers
     
     app_info["route"] = "game"  # I will need this to control the menu
     
@@ -340,6 +344,7 @@ def game():
             
                 # Otherwise answer is wrong
                 else:
+                    wrong_answers = [answer]
                     attempt = 2                 # This is your next attempt
                     points = 6                  # Set correct number of points
 
@@ -381,6 +386,7 @@ def game():
                 
                 # Otherwise answer is wrong
                 else:
+                    wrong_answers.append([answer])
                     attempt = 3                 # This is your next attempt
                     points = 2                  # Set correct number of points
                 
@@ -435,7 +441,7 @@ def game():
                 current_riddle = set_current_riddle(current_game[riddle_counter])
                 
                 
-    return render_template("game.html", app_info=app_info, all_riddles=all_riddles, current_game=current_game, current_riddle=current_riddle, riddle_counter=riddle_counter+1, attempt=attempt, points=points, gained_points=gained_points)
+    return render_template("game.html", app_info=app_info, all_riddles=all_riddles, current_game=current_game, current_riddle=current_riddle, riddle_counter=riddle_counter+1, attempt=attempt, points=points, gained_points=gained_points, wrong_answers=wrong_answers)
 
 @app.route('/game_over')
 def game_over():

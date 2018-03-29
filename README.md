@@ -803,6 +803,13 @@ if answer.lower() == current_riddle[2].lower():
 ~~~~
 
 
+Changed place holders in text fields to indicate the number of the word within
+the answer.
+
+
+Working on  
+Store and display wrong answers during attempt 2 and attempt 3.
+
 
 
 * * *
@@ -842,6 +849,14 @@ be accessible only through the menus AND when the user is logged in.
 
 Check that the game can be accessed independently by more than one user at the 
 same time.
+
+At the end of each riddle I need some form of feedback about outcome and 
+number of points gained. Similarly at end of game need to display the amount of 
+points earned for the whole game before moving on to the user page.   
+***Perhaps a breakdown of points and answers, but this can be placed in EXTRAS.***
+
+
+
 
 ## TO DO -- EXTRA
 Timed game

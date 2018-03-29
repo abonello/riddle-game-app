@@ -834,6 +834,23 @@ treat this as spelling mistakes and will be marked as incorrect.]
 All manual checks of the logic done up to this stage.
 
 
+#### Bug in game.html
+I noticed that all three attempts where saying First attempt. This has been fixed.
+~~~~html
+<div class="col col-md-10 col-md-offset-1">
+    <p class="game_text">Points: {{ gained_points }}</p>
+    <p class="game_text
+    {% if attempt > 1 %}red 
+    {% endif %}">
+    {% if attempt == 1 %}First 
+    {% elif attempt == 2 %}Second 
+    {% elif attempt == 3 %}Third 
+    {% endif %}attempt: {{ points }} points</p>
+</div>
+~~~~
+
+
+
 
 
 * * *

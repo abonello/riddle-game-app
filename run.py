@@ -329,7 +329,7 @@ def game():
                 answer = answer.strip()         # Strip trailing spaces
                 
                 
-                if answer == current_riddle[2]: # answer correct
+                if answer.lower() == current_riddle[2].lower(): # answer correct
                     gained_points += 10
                     attemp = 1                  # First attempt of
                     riddle_counter += 1         # Next Riddle
@@ -368,7 +368,7 @@ def game():
                 answer = answer.strip()         # Strip trailing spaces
                 # print len(answer)
                 
-                if answer == current_riddle[2]: # Answer correct
+                if answer.lower() == current_riddle[2].lower(): # Answer correct
                     gained_points += 6          # Gain points
                     attempt = 1                  # Reset attempt
                     points = 10
@@ -395,7 +395,7 @@ def game():
                     
                 answer = answer[0:-1]      # Strip final space
                 
-                if answer == current_riddle[2]:  # Answer correct
+                if answer.lower() == current_riddle[2].lower():  # Answer correct
                     gained_points += 2           # Gain points
                     attempt = 1                  # Reset attempt
 

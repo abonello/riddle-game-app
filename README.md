@@ -777,15 +777,30 @@ Now code for Attempt 1 and Attempt 2 of the game is done.
 
 
 Finished code for attempt 3.
-
+* * *
 
 Added stripping of white spaces  
-Clean input for attempt 1:  
+
+#### Clean input for attempt 1:  
 Removed multiple space or a new line between words that the user might type  
 before the answer is checked.
+~~~~python
+# Clean the answer
+# If there are multiple spaces or other white characters in between the words
+temp =[]
+temp = answer.split()
+answer=""
+for item in temp:
+    answer += item + " "
 
+answer = answer.strip()     # Strip trailing spaces
+~~~~
 
-
+#### Make it case insensitive:  
+I turn both answer and stored value to lower case before comparing
+~~~~python
+if answer.lower() == current_riddle[2].lower():
+~~~~
 
 
 
@@ -798,7 +813,7 @@ _~~Strip any trailing spaces at the end to an input string~~_
 
 _~~For attempt 1 make sure there is only one space between words.~~_
 
-Make it case insensitive
+_~~Make it case insensitive~~_
 
 
 I will need to add a game menu item that will appear only when a user is logged in and

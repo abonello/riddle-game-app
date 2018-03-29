@@ -819,3 +819,15 @@ _~~Make it case insensitive~~_
 I will need to add a game menu item that will appear only when a user is logged in and
 only while a game is running. This should allow the user to navigate away from the
 game and return to the game by using this menu item.
+
+Clean the run.py - Refactor using functions and unit tests for the functions
+
+Clean the templates using base.html
+
+Put more images and increase the game to 10 riddles.
+
+How can I prevent certain routes from being accessed directly. I want them to 
+be accessible only through the menus AND when the user is logged in.
+
+Check that the game can be accessed independently by more than one user at the 
+same time.

@@ -807,7 +807,7 @@ Changed place holders in text fields to indicate the number of the word within
 the answer.
 
 
-Working on  
+Done  
 Store and display wrong answers during attempt 2 and attempt 3.
 
 
@@ -822,7 +822,7 @@ _~~For attempt 1 make sure there is only one space between words.~~_
 
 _~~Make it case insensitive~~_
 
-Store and display wrong answers during attempt 2 and attempt 3.
+_~~Store and display wrong answers during attempt 2 and attempt 3.~~_
 
 I will need to add a game menu item that will appear only when a user is logged in and
 only while a game is running. This should allow the user to navigate away from the

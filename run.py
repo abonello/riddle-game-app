@@ -344,7 +344,8 @@ def game():
             
                 # Otherwise answer is wrong
                 else:
-                    wrong_answers = [answer]
+                    # wrong_answers = [answer]
+                    wrong_answers.append(answer)
                     attempt = 2                 # This is your next attempt
                     points = 6                  # Set correct number of points
 
@@ -386,7 +387,7 @@ def game():
                 
                 # Otherwise answer is wrong
                 else:
-                    wrong_answers.append([answer])
+                    wrong_answers.append(answer)
                     attempt = 3                 # This is your next attempt
                     points = 2                  # Set correct number of points
                 
@@ -404,6 +405,7 @@ def game():
                 if answer.lower() == current_riddle[2].lower():  # Answer correct
                     gained_points += 2           # Gain points
                     attempt = 1                  # Reset attempt
+                    wrong_answers = []           # Reset wrong answers
 
                     riddle_counter += 1
                     if riddle_counter > len(current_game)-1:
@@ -415,6 +417,11 @@ def game():
                 else:
                     attempt = 1                 # This is your next attempt
                     points = 10                 # Set correct number of points
+                    wrong_answers = []           # Reset wrong answers
+                    riddle_counter += 1
+                    if riddle_counter > len(current_game)-1:
+                        return redirect(url_for('game_over'))
+                    current_riddle = set_current_riddle(current_game[riddle_counter])
 
         #This will happen if pass
         # increase attempt

@@ -822,6 +822,9 @@ game and return to the game by using this menu item.
 
 Clean the run.py - Refactor using functions and unit tests for the functions
 
+Store Points, Games Played by User and Hall of Fame in a permanent way.
+Text or JSON?
+
 Clean the templates using base.html
 
 Put more images and increase the game to 10 riddles.

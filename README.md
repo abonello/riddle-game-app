@@ -849,7 +849,9 @@ I noticed that all three attempts where saying First attempt. This has been fixe
 </div>
 ~~~~
 
-
+Added a game menu item that will appear only when a user is logged in and
+only while a game is running. This should allow the user to navigate away from the
+game and return to the game by using this menu item.
 
 
 
@@ -865,9 +867,9 @@ _~~Make it case insensitive~~_
 
 _~~Store and display wrong answers during attempt 2 and attempt 3.~~_
 
-I will need to add a game menu item that will appear only when a user is logged in and
+_~~I will need to add a game menu item that will appear only when a user is logged in and
 only while a game is running. This should allow the user to navigate away from the
-game and return to the game by using this menu item.
+game and return to the game by using this menu item.~~_
 
 Clean the run.py - Refactor using functions and unit tests for the functions
 

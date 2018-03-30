@@ -28,6 +28,9 @@
                                             {% if app_info["logged"] and not(app_info["route"] == "user") %}
                                                 <li class="nav-item"><a class="nav-link scroll" href="/user" id="userNav">USER</a></li>
                                             {% endif %}
+                                            {% if app_info["logged"] and app_info["game"] and not(app_info["route"] == "game") %}
+                                                <li class="nav-item"><a class="nav-link scroll" href="/game" id="gameNav">CURRENT GAME</a></li>
+                                            {% endif %}
                                             {% if not(app_info["route"] == "halloffame") %}
                                                 <li class="nav-item"><a class="nav-link scroll" href="/halloffame" id="hofNav">Hall of Fame</a></li>
                                             {% endif %}

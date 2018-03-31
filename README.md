@@ -831,6 +831,10 @@ attempts 2 and 3 even if typed all in one text field EVEN IF they contain
 multiple spaces in between or a new line. [NB. Not escaped characters - I will 
 treat this as spelling mistakes and will be marked as incorrect.]
 
+NB: Attempt 2 and 3 can accept the answer all typed in one of the text fields.
+(Text fields act just as a visual clue) This is not undesirable. It can make typing
+easier and if a user chooses to do this the answer will be accepted.
+
 All manual checks of the logic done up to this stage.
 
 
@@ -852,6 +856,145 @@ I noticed that all three attempts where saying First attempt. This has been fixe
 Added a game menu item that will appear only when a user is logged in and
 only while a game is running. This should allow the user to navigate away from the
 game and return to the game by using this menu item.
+
+
+### Prepare unittest
+The aim is to clean the run.py - Refactor using functions and unit test the 
+functions that need them.
+I have already manually tested the draft code up to now but adding unit tests
+will make the process easier and avoids human error. Since this is my first 
+large project that I am building on my own from scratch I took a more organic
+improvisatory approach to arrive at this point. I chose this approach because as
+a composer and sound designer I am familiar and confident with it and have 
+transferrable skills that I can use.  
+I now want to make the rest of the development more systematic.
+
+unittest module is in standard library -- no need to install anything  
+Create a test_run.py file. This will hold the test code.
+
+Import unittest module and the module we will be testing, ie run.py
+~~~~python
+import unittest
+import run
+~~~~
+
+#### Create Test Cases
+Create a test class that inherits from unittest.TestCase. This inheritance will
+give us access to a lot of testing capabilities. 
+
+|Method	| Checks that | New in |
+|-------|-------------|--------|
+|assertEqual(a, b) | a == b |  |
+|assertNotEqual(a, b) | a != b |  |
+|assertTrue(x) | bool(x) is True |  |
+|assertFalse(x) | bool(x) is False |  |
+|assertIs(a, b) | a is b | 2.7 |
+|assertIsNot(a, b) | a is not b | 2.7 |
+|assertIsNone(x) | x is None | 2.7 |
+|assertIsNotNone(x) | x is not None | 2.7 |
+|assertIn(a, b) | a in b | 2.7 |
+|assertNotIn(a, b) | a not in b | 2.7 |
+|assertIsInstance(a, b) | isinstance(a, b) | 2.7 |
+|assertNotIsInstance(a, b) | not isinstance(a, b) | 2.7 |
+
+assertRaises(exc, fun, *args, **kwds)	fun(*args, **kwds) raises exc	 
+assertRaisesRegexp(exc, r, fun, *args, **kwds)	fun(*args, **kwds) raises exc and the message matches regex r	2.7
+
+assertAlmostEqual(a, b)	round(a-b, 7) == 0	 
+assertNotAlmostEqual(a, b)	round(a-b, 7) != 0	 
+assertGreater(a, b)	a > b	2.7
+assertGreaterEqual(a, b)	a >= b	2.7
+assertLess(a, b)	a < b	2.7
+assertLessEqual(a, b)	a <= b	2.7
+assertRegexpMatches(s, r)	r.search(s)	2.7
+assertNotRegexpMatches(s, r)	not r.search(s)	2.7
+assertItemsEqual(a, b)	sorted(a) == sorted(b) and works with unhashable objs	2.7
+assertDictContainsSubset(a, b)	all the key/value pairs in a exist in b	2.7
+
+
+
+Each test will be in its own method. The naming convention for these methods is 
+to start with **test_** which is required. Any test method whose name does not 
+start in this way will not run. These test_methods will take **self** as a 
+first argument.
+
+I am going to create a simple add function in a temp_run.py and create a test 
+for it to check that everything is set up properly. 
+Using the usual Fail Change Pass
+
+~~~~python
+# Method to test in temp_run.py
+def add(x,y):
+    """Add Function"""
+    return 0
+~~~~
+
+~~~~python
+# Testing code in test_run.py
+import unittest
+import temp_run         # The code that we are testing
+
+class TestRun(unittest.TestCase):
+    '''
+    Test suite for run.py
+    '''
+    def test_add(self):
+        '''
+        test a testing add method to check that set up is ok
+        '''
+        answer = run.add(10, 3)
+        self.assertEqual(answer, 13, "Failed")
+~~~~
+
+To run from command line:
+~~~~
+python -m unittest test_run.py
+~~~~
+This method of running unittest is not working in cloud9
+
+I added 
+~~~~python
+if __name__ == "__main__":
+    unittest.main()
+~~~~
+and now I can call the test by using the run button.
+
+Function to test:
+~~~~python
+def add(x,y):
+    """Add Function"""
+    return x + y
+~~~~
+
+Test: test_run.py
+~~~~python
+import unittest
+import run              # The code that we are testing
+
+class TestRun(unittest.TestCase):
+    '''
+    Test suite for run.py
+    '''
+    def test_add(self):
+        '''
+        test a testing add method to check that set up is ok
+        '''
+        answer = run.add(10, 3)
+        self.assertEqual(answer, 13, "Failed")
+        self.assertEqual(run.add(10, 3), 13, "Failed: add positive to positive")
+        self.assertEqual(run.add(0, 3), 3, "Failed: add 0 to positive")
+        self.assertEqual(run.add(0, -5), -5, "Failed: add 0 to negative")
+        self.assertEqual(run.add(-7, -5), -12, "Failed: add negative to negative")
+        self.assertEqual(run.add(7, -5), 2, "Failed: add positive to negative, positive answer")
+        self.assertEqual(run.add(7, -9), -2, "Failed: add positive to negative, negative answer")
+        self.assertEqual(run.add(0, 0), 0, "Failed: add 0 to 0")
+
+if __name__ == "__main__":
+    unittest.main()
+~~~~
+
+Now that I know that unittest is working properly I will delete both the add method
+and its test.
 
 
 
@@ -876,7 +1019,14 @@ Clean the run.py - Refactor using functions and unit tests for the functions
 Store Points, Games Played by User and Hall of Fame in a permanent way.
 Text or JSON?
 
-Clean the templates using base.html
+Template Inheritance -- Clean the templates using base.html  
+This will extend the base code. EX:
+~~~~html
+{% extends 'base.html' %}
+{% block content %}
+<h2>{{ page_title }}</h2><!-- Home Page -->
+{% endblock %}
+~~~~
 
 Build contact form
 

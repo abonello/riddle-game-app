@@ -539,7 +539,15 @@ def game_over():
     global_game_reset()
     return redirect(url_for('user'))
     
-    
+def add(x,y):
+    """Add Function"""
+    return x + y
     
 if __name__ == '__main__':
     app.run(host=os.getenv('IP'), port=int(os.getenv('PORT')), debug=True)
+
+# def assert_equal(actual, expected): 
+#     assert expected == actual, "\n\n===========\nExpected {1} to be equal to {0}\n".format(expected, actual)
+
+# assert_equal(5, 5)
+# print("\n\nAll tests passed!\n")

@@ -106,23 +106,26 @@ def json_tuple_helper_function(obj):
         return obj
 
 def find_loggedin_user(data):
+    # print("DATA:\n")
+    # print(data)
     for each in data:
         # print(each)
         # print("\n")
         if each["user"] == app_info["username"]:
             # print("\nA Match found\n")
             # print("user is {}".format(each["user"]))
+            # print(each)
             return each
             
     #Need to return an empty set of data
     empty = {
-            "user":"",
+            "user":app_info["username"],
             "number_of_games":0,
             "date_best_game":"",
             "points_best_game":0,
             "total_user_points":0,
             "games_played":[{"item": ["",0], "__istuple__": True}]}
-        
+    # print(empty)
     return empty
 
 @app.route('/logout', methods=['GET', 'POST'])

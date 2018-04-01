@@ -86,9 +86,10 @@ def logout_reset_app_info():
     app_info["game"] = False
     global_game_reset()
 
-def set_current_riddle(data):
+def sort_current_riddle(data):
+    ''' Sort the data so that it is always id, source, answer '''
     ordered_data = [0,0,0]
-    for cr in data:
+    for cr in data:   # Select a riddle
         if cr[0] == "id":
             ordered_data[0] = cr[1]
         elif cr[0] == "source":
@@ -211,10 +212,6 @@ def register():
     username_feedback="Enter a valid username."
     return render_template("register.html", app_info=app_info)
 
-
-
-
-
 @app.route('/user', methods=['GET', 'POST'])
 @login_required
 def user():
@@ -322,7 +319,7 @@ def game():
                     repeat = False
             current_game.append(choose_game.items())
         
-        current_riddle = set_current_riddle(current_game[riddle_counter])
+        current_riddle = sort_current_riddle(current_game[riddle_counter])
             
     if request.method == 'POST':
         if 'play' in request.form:

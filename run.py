@@ -349,7 +349,7 @@ def game():
                     if riddle_counter > len(current_game)-1:    # If that was last riddle then
                         return redirect(url_for('game_over'))   # GAME OVER
                     # Trigger next riddle
-                    current_riddle = set_current_riddle(current_game[riddle_counter]) 
+                    current_riddle = sort_current_riddle(current_game[riddle_counter]) 
             
                 else:                           # Otherwise answer is wrong
                     if len(answer) == 0:        #if no answer is given
@@ -386,7 +386,7 @@ def game():
                     if riddle_counter > len(current_game)-1:
                         return redirect(url_for('game_over'))
 
-                    current_riddle = set_current_riddle(current_game[riddle_counter])
+                    current_riddle = sort_current_riddle(current_game[riddle_counter])
                 
                 else:                           # Otherwise answer is wrong
                     # wrong_answers.append(answer)
@@ -396,7 +396,6 @@ def game():
                         wrong_answers.append(answer)
                     attempt = 3                 # This is your next attempt
                     points = 2                  # Set correct number of points
-                    
                 
             elif attempt == 3:
                 answer = ""
@@ -425,7 +424,7 @@ def game():
                     if riddle_counter > len(current_game)-1:
                         return redirect(url_for('game_over'))
 
-                    current_riddle = set_current_riddle(current_game[riddle_counter])
+                    current_riddle = sort_current_riddle(current_game[riddle_counter])
                 
                 # Otherwise answer is wrong
                 else:
@@ -435,7 +434,7 @@ def game():
                     riddle_counter += 1
                     if riddle_counter > len(current_game)-1:
                         return redirect(url_for('game_over'))
-                    current_riddle = set_current_riddle(current_game[riddle_counter])
+                    current_riddle = sort_current_riddle(current_game[riddle_counter])
 
         #This will happen if pass
         # increase attempt
@@ -452,7 +451,7 @@ def game():
             elif attempt == 3:
                 if riddle_counter > len(current_game)-1:
                     return redirect(url_for('game_over'))
-                current_riddle = set_current_riddle(current_game[riddle_counter])
+                current_riddle = sort_current_riddle(current_game[riddle_counter])
                 points = 10
                 attempt = 1
                 riddle_counter += 1

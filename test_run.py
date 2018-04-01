@@ -309,6 +309,26 @@ class TestOtherFunctions(unittest.TestCase):
         self.assertEqual(run.app_info["allusers"], "")
         self.assertEqual(run.app_info["game"], False)
         print("test_logout_reset_app_info -- PASS")
+        
+        
+    def test_sort_current_riddle(self):
+        ''' Check the sorting of current riddle 
+            Check that the order of the output is always the same.'''
+        data1 = [('answer', 'text1'), ('source', 'file1.png'), ('id', 1)]
+        data2 = [('answer', 'text1'), ('id', 1), ('source', 'file1.png')]
+        data3 = [('source', 'file1.png'), ('answer', 'text1'), ('id', 1)]
+        data4 = [('source', 'file1.png'), ('id', 1), ('answer', 'text1')]
+        data5 = [('id', 1), ('answer', 'text1'), ('source', 'file1.png')]
+        data6 = [('id', 1), ('source', 'file1.png'), ('answer', 'text1')]
+        self.assertEqual(run.sort_current_riddle(data1), [1, 'file1.png', 'text1'])
+        self.assertEqual(run.sort_current_riddle(data2), [1, 'file1.png', 'text1'])
+        self.assertEqual(run.sort_current_riddle(data3), [1, 'file1.png', 'text1'])
+        self.assertEqual(run.sort_current_riddle(data4), [1, 'file1.png', 'text1'])
+        self.assertEqual(run.sort_current_riddle(data5), [1, 'file1.png', 'text1'])
+        self.assertEqual(run.sort_current_riddle(data6), [1, 'file1.png', 'text1'])
+        print("test_sort_current_riddle -- PASS")
+        
+
 
 if __name__ == "__main__":
     unittest.main()

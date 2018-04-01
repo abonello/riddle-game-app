@@ -1047,9 +1047,26 @@ that needs to be done to the **json.load** method. This expects an object that h
 a **.read** attribute. My function turns the data into a string so I will use 
 **json.loads** instead. The **s** at the end means that it expects a string.
 
+#### Games Played by User
+At the moment it is a simple dictionary. I want to store it into a text file. 
+Later I want to turn it into a json file so that I can store the data for different 
+users.
+~~~~python
+user_data = ast.literal_eval(read_from_file("user_game_data.txt"))
+~~~~
+Now I added a user name to the data. I had a bit of a problem with the tuples 
+but I found a way of hiding these within a dictionary. A sort of encoding and 
+decoding. There might be more elegant ways of doing this but it works.
 
+Now I can read data about the games played by a user from a json file and display 
+them in the user's page. If a player has not played any games yet an empty set 
+of data is returned and the display adapts accordingly.
 
+Tidied the test_run.py
 
+Now I need to add any games played by a user. I will need to know the date, 
+build the set of data including best points and corresponding date and total
+points
 
 
 * * *
@@ -1068,9 +1085,10 @@ _~~I will need to add a game menu item that will appear only when a user is logg
 only while a game is running. This should allow the user to navigate away from the
 game and return to the game by using this menu item.~~_
 
-Clean the run.py - Refactor using functions and unit tests for the functions
+_Clean the run.py - Refactor using functions and unit tests for the functions._  
+Some has been done. More to go
 
-Store Points, Games Played by User and Hall of Fame in a permanent way.
+Store Points, **Games Played by User** and Hall of Fame in a permanent way.
 Text or JSON?
 
 Template Inheritance -- Clean the templates using base.html  

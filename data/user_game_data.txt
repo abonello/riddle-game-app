@@ -1,0 +1,1 @@
+{"user":"user1","number_of_games":5,"date_best_game":"15/3/2018","points_best_game":56,"total_user_points":340,"games_played":[("17/3/2018",48),("16/3/2018",50),("16/3/2018",54),("15/3/2018",56),("14/3/2018",34)]}

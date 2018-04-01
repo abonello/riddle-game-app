@@ -1,5 +1,6 @@
 import os
 import json
+import ast
 import random
 from flask import Flask, render_template, request, redirect, url_for, session, flash
 from functools import wraps  #decorators for requires login
@@ -95,6 +96,33 @@ def set_current_riddle(data):
         elif cr[0] == "answer":
             ordered_data[2] = ''.join(list(cr[1]))
     return ordered_data
+    
+def json_tuple_helper_function(obj):
+    """ I added marked tuples with __istuple__ in the json """
+    if '__istuple__' in obj:
+        return tuple(obj['item'])
+    else:
+        return obj
+
+def find_loggedin_user(data):
+    for each in data:
+        # print(each)
+        # print("\n")
+        if each["user"] == app_info["username"]:
+            # print("\nA Match found\n")
+            # print("user is {}".format(each["user"]))
+            return each
+            
+    #Need to return an empty set of data
+    empty = {
+            "user":"",
+            "number_of_games":0,
+            "date_best_game":"",
+            "points_best_game":0,
+            "total_user_points":0,
+            "games_played":[{"item": ["",0], "__istuple__": True}]}
+        
+    return empty
 
 @app.route('/logout', methods=['GET', 'POST'])
 @login_required
@@ -183,6 +211,10 @@ def register():
     username_feedback="Enter a valid username."
     return render_template("register.html", app_info=app_info)
 
+
+
+
+
 @app.route('/user', methods=['GET', 'POST'])
 @login_required
 def user():
@@ -192,18 +224,28 @@ def user():
     global all_riddles
     global riddle_counter
     global attempt      #Needed only for debugging
-    user_data = {  # This will be replaced by data from a file.
-        "number_of_games" : 5,
-        "date_best_game" : "15/3/2018",
-        "points_best_game" : 56,
-        "total_user_points" : 340,
-        "games_played": [
-            ("17/3/2018", 48),
-            ("16/3/2018", 50),
-            ("16/3/2018", 54),
-            ("15/3/2018", 56),
-            ("14/3/2018", 34)]
-    }
+    # user_data = {  # This will be replaced by data from a file.
+    #     "number_of_games" : 5,
+    #     "date_best_game" : "15/3/2018",
+    #     "points_best_game" : 56,
+    #     "total_user_points" : 340,
+    #     "games_played": [
+    #         ("17/3/2018", 48),
+    #         ("16/3/2018", 50),
+    #         ("16/3/2018", 54),
+    #         ("15/3/2018", 56),
+    #         ("14/3/2018", 34)]
+    # }
+    # user_data = ast.literal_eval(read_from_file("user_game_data.txt"))
+    # print(user_data)
+    user_data_json = json.loads(read_from_file("user_game_data_json.json"), object_hook=json_tuple_helper_function)
+    # print(user_data_json)
+    
+    # print("\n\n")
+    # user_data_temp = find_loggedin_user(user_data_json)
+    user_data = find_loggedin_user(user_data_json)
+            
+    # print(user_data_temp)
     
     if app_info["game"] == False:  # RESET
         current_game = []

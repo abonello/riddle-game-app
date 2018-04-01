@@ -1066,7 +1066,17 @@ Tidied the test_run.py
 
 Now I need to add any games played by a user. I will need to know the date, 
 build the set of data including best points and corresponding date and total
-points
+points  
+
+Build test for sort_current_riddle  -- I did this function to make sure that 
+the order of the data is always the same. This was giving an error when I 
+deployed on heroku.
+
+Created unittest for json_tuple_helper_function - this is useful for useing 
+tuples in json files
+
+Created test for find_loggedin_user  -- this is the function which will look up 
+for stored games to display for a particular user.
 
 
 * * *

@@ -46,6 +46,10 @@ header h2 {
     display: inline;
 }
 
+.login {
+    margin-right: 80px;
+}
+
 
 /*Transition only comes into play if someone resizes the browser window.*/
 .logo {

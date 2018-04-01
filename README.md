@@ -997,6 +997,60 @@ Now that I know that unittest is working properly I will delete both the add met
 and its test.
 
 
+I will start by testing each route that I have.
+
+
+Created a /login route. Remove the related code from / route
+
+Added Sessions. Now tests for routes which require login are not working well.  
+**I Need to discuss this with Nishant**
+
+I created a new class in the test suite. This will be used to test functions
+that need to read or append data to files. Two @classmethod are used, one will 
+create test files at the beginning  and the other will remove the test files at 
+the end of all the tests in this class.
+
+The test_user.txt contains  
+    test_user1  
+    test_user2  
+    test_user3  
+    
+The function I am testing is the following:
+~~~~python
+def read_from_file(file_name):
+    store=""
+    file = "data/" + file_name
+    with open(file, "r") as readusernames:
+        store = readusernames.read()
+    return store
+~~~~
+
+The test is  
+~~~~python
+def test_read_from_file(self):
+    """ Read from a text file """
+    data = run.read_from_file("test_users.txt")
+    print(data)
+    self.assertIn("test_user1", data)
+    self.assertIn("test_user2", data)
+    self.assertIn("test_user3", data)
+    self.assertNotIn("test_user4", data)
+~~~~
+It passes. Now I will apply the function whenever I need to read a file. I 
+need to read the users.txt for registration and login.
+
+Later I need to add other txt or json files to hold list of games for a user and 
+hall of fame.
+
+I will use the same read function to read json files. There is an important change
+that needs to be done to the **json.load** method. This expects an object that has
+a **.read** attribute. My function turns the data into a string so I will use 
+**json.loads** instead. The **s** at the end means that it expects a string.
+
+
+
+
+
 
 * * *
 * * *

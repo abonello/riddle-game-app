@@ -100,7 +100,7 @@ def sort_current_riddle(data):
     
 def json_tuple_helper_function(obj):
     """ I added marked tuples with __istuple__ in the json """
-    if '__istuple__' in obj:
+    if 'istuple' in obj:
         return tuple(obj['item'])
     else:
         return obj

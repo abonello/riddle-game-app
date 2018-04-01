@@ -6,11 +6,11 @@
         "points_best_game":560,
         "total_user_points":34000,
         "games_played":[
-            {"item": ["17/3/2018", 48], "__istuple__": true}, 
-            {"item": ["16/3/2018", 50], "__istuple__": true}, 
-            {"item": ["16/3/2018", 54], "__istuple__": true}, 
-            {"item": ["15/3/2018", 56], "__istuple__": true}, 
-            {"item": ["14/3/2018", 34], "__istuple__": true}]
+            {"item": ["17/3/2018", 48], "istuple": true}, 
+            {"item": ["16/3/2018", 50], "istuple": true}, 
+            {"item": ["16/3/2018", 54], "istuple": true}, 
+            {"item": ["15/3/2018", 56], "istuple": true}, 
+            {"item": ["14/3/2018", 34], "istuple": true}]
     },
     {
         "user":"user2",
@@ -19,15 +19,15 @@
         "points_best_game":76,
         "total_user_points":790,
         "games_played":[
-            {"item": ["15/3/2018",54], "__istuple__": true},
-            {"item": ["1/3/2018",52], "__istuple__": true},
-            {"item": ["20/2/2018",54], "__istuple__": true},
-            {"item": ["17/2/2018",58], "__istuple__": true},
-            {"item": ["16/2/2018",66], "__istuple__": true},
-            {"item": ["3/2/2018",76], "__istuple__": true},
-            {"item": ["3/2/2018",48], "__istuple__": true},
-            {"item": ["2/2/2018",50], "__istuple__": true},
-            {"item": ["28/1/2018",54], "__istuple__": true},
-            {"item": ["26/1/2018",34], "__istuple__": true}]
+            {"item": ["15/3/2018",54], "istuple": true},
+            {"item": ["1/3/2018",52], "istuple": true},
+            {"item": ["20/2/2018",54], "istuple": true},
+            {"item": ["17/2/2018",58], "istuple": true},
+            {"item": ["16/2/2018",66], "istuple": true},
+            {"item": ["3/2/2018",76], "istuple": true},
+            {"item": ["3/2/2018",48], "istuple": true},
+            {"item": ["2/2/2018",50], "istuple": true},
+            {"item": ["28/1/2018",54], "istuple": true},
+            {"item": ["26/1/2018",34], "istuple": true}]
     }
 ]

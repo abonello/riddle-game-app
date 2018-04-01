@@ -309,8 +309,7 @@ class TestOtherFunctions(unittest.TestCase):
         self.assertEqual(run.app_info["allusers"], "")
         self.assertEqual(run.app_info["game"], False)
         print("test_logout_reset_app_info -- PASS")
-        
-        
+
     def test_sort_current_riddle(self):
         ''' Check the sorting of current riddle 
             Check that the order of the output is always the same.'''
@@ -327,7 +326,22 @@ class TestOtherFunctions(unittest.TestCase):
         self.assertEqual(run.sort_current_riddle(data5), [1, 'file1.png', 'text1'])
         self.assertEqual(run.sort_current_riddle(data6), [1, 'file1.png', 'text1'])
         print("test_sort_current_riddle -- PASS")
-        
+
+    def test_json_tuple_helper_function(self):
+        '''This is a function that allows the use of tuples in json'''
+        data1 = {'istuple': True, 'item': ['17/3/2018', 48]}
+        data2 = {'item': ['16/3/2018', 50], 'istuple': True}
+        data3 = {'date_best_game': '3/2/2018', 'number_of_games': 10}
+        data4 = {'date_best_game': '3/2/2018', 'number_of_games': 10, 'points_best_game': 76, 'user': 'user2', 'games_played': [('15/3/2018', 54), ('1/3/2018', 52)], 'total_user_points': 790}
+        self.assertEqual(run.json_tuple_helper_function(data1), ('17/3/2018', 48))
+        self.assertEqual(run.json_tuple_helper_function(data2), ('16/3/2018', 50))
+        self.assertEqual(run.json_tuple_helper_function(data3), {'date_best_game': '3/2/2018', 'number_of_games': 10})
+        self.assertEqual(run.json_tuple_helper_function(data4), {'date_best_game': '3/2/2018', 'number_of_games': 10, 'points_best_game': 76, 'user': 'user2', 'games_played': [('15/3/2018', 54), ('1/3/2018', 52)], 'total_user_points': 790})
+        print("test_json_tuple_helper_function -- PASS")
+
+
+
+
 
 
 if __name__ == "__main__":

@@ -1,35 +1,110 @@
-
-{ "user1":
-    {
-        "user":"user1",
-        "number_of_games":5,
-        "date_best_game":"15/3/2018",
-        "points_best_game":36,
-        "total_user_points":340,
-        "games_played":[
-            {"item": ["17/3/2018", 48], "istuple": true}, 
-            {"item": ["16/3/2018", 50], "istuple": true}, 
-            {"item": ["16/3/2018", 54], "istuple": true}, 
-            {"item": ["15/3/2018", 56], "istuple": true}, 
-            {"item": ["14/3/2018", 34], "istuple": true}]
+{
+    "user1": {
+        "date_best_game": "15/3/2018",
+        "games_played": [
+            [
+                "17/3/2018",
+                48
+            ],
+            [
+                "16/3/2018",
+                50
+            ],
+            [
+                "16/3/2018",
+                54
+            ],
+            [
+                "15/3/2018",
+                56
+            ],
+            [
+                "14/3/2018",
+                34
+            ]
+        ],
+        "number_of_games": 5,
+        "points_best_game": 36,
+        "total_user_points": 340,
+        "user": "user1"
     },
-    "user2":
-    {
-        "user":"user2",
-        "number_of_games":10,
-        "date_best_game":"3/2/2018",
-        "points_best_game":76,
-        "total_user_points":790,
-        "games_played":[
-            {"item": ["15/3/2018",54], "istuple": true},
-            {"item": ["1/3/2018",52], "istuple": true},
-            {"item": ["20/2/2018",54], "istuple": true},
-            {"item": ["17/2/2018",58], "istuple": true},
-            {"item": ["16/2/2018",66], "istuple": true},
-            {"item": ["3/2/2018",76], "istuple": true},
-            {"item": ["3/2/2018",48], "istuple": true},
-            {"item": ["2/2/2018",50], "istuple": true},
-            {"item": ["28/1/2018",54], "istuple": true},
-            {"item": ["26/1/2018",34], "istuple": true}]
+    "user2": {
+        "date_best_game": "3/2/2018",
+        "games_played": [
+            [
+                "15/3/2018",
+                54
+            ],
+            [
+                "1/3/2018",
+                52
+            ],
+            [
+                "20/2/2018",
+                54
+            ],
+            [
+                "17/2/2018",
+                58
+            ],
+            [
+                "16/2/2018",
+                66
+            ],
+            [
+                "3/2/2018",
+                76
+            ],
+            [
+                "3/2/2018",
+                48
+            ],
+            [
+                "2/2/2018",
+                50
+            ],
+            [
+                "28/1/2018",
+                54
+            ],
+            [
+                "26/1/2018",
+                34
+            ]
+        ],
+        "number_of_games": 10,
+        "points_best_game": 76,
+        "total_user_points": 790,
+        "user": "user2"
+    },
+    "user3": {
+        "date_best_game": "1/4/2018",
+        "games_played": [
+            [
+                "1/4/2018",
+                12
+            ],
+            [
+                "1/4/2018",
+                2
+            ]
+        ],
+        "number_of_games": 2,
+        "points_best_game": 12,
+        "total_user_points": 14,
+        "user": "user3"
+    },
+    "user89": {
+        "date_best_game": "1/4/2018",
+        "games_played": [
+            [
+                "1/4/2018",
+                34
+            ]
+        ],
+        "number_of_games": 1,
+        "points_best_game": 34,
+        "total_user_points": 34,
+        "user": "user89"
     }
 }

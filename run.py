@@ -398,7 +398,7 @@ def game():
                     attemp = 1                  # First attempt of
                     riddle_counter += 1         # Next Riddle
                     if riddle_counter > len(current_game)-1:    # If that was last riddle then
-                        store_game_info()
+                        # store_game_info()
                         return redirect(url_for('game_over'))   # GAME OVER
                     # Trigger next riddle
                     current_riddle = sort_current_riddle(current_game[riddle_counter]) 
@@ -436,7 +436,7 @@ def game():
 
                     riddle_counter += 1
                     if riddle_counter > len(current_game)-1:
-                        store_game_info()
+                        # store_game_info()
                         return redirect(url_for('game_over'))
 
                     current_riddle = sort_current_riddle(current_game[riddle_counter])
@@ -475,7 +475,7 @@ def game():
 
                     riddle_counter += 1
                     if riddle_counter > len(current_game)-1:
-                        store_game_info()
+                        # store_game_info()
                         return redirect(url_for('game_over'))
 
                     current_riddle = sort_current_riddle(current_game[riddle_counter])
@@ -487,7 +487,7 @@ def game():
                     wrong_answers = []           # Reset wrong answers
                     riddle_counter += 1
                     if riddle_counter > len(current_game)-1:
-                        store_game_info()
+                        # store_game_info()
                         return redirect(url_for('game_over'))
                     current_riddle = sort_current_riddle(current_game[riddle_counter])
 
@@ -505,7 +505,7 @@ def game():
                 attempt = 3
             elif attempt == 3:
                 if riddle_counter > len(current_game)-1:
-                    store_game_info()
+                    # store_game_info()
                     return redirect(url_for('game_over'))
                 current_riddle = sort_current_riddle(current_game[riddle_counter])
                 points = 10
@@ -515,8 +515,8 @@ def game():
                 
                 if riddle_counter > len(current_game)-1:     # Call next riddle
                     # Store the gained_points-----------TODO
-                    gained_points = 0                         # Reset gained_points
-                    store_game_info()
+                    # gained_points = 0           NOT NOW              # Reset gained_points
+                    # store_game_info()
                     return redirect(url_for('game_over'))
                 current_riddle = sort_current_riddle(current_game[riddle_counter])
                 
@@ -528,6 +528,7 @@ def store_game_info():
     global user_data
     
     user_data["number_of_games"] += 1
+    # user_data["number_of_games"] = int(user_data["number_of_games"]) + 1
     user_data["total_user_points"] += gained_points
     # info = {}
     # info["item"] = ["1/4/2018",  gained_points]
@@ -550,9 +551,32 @@ def store_game_info():
         user_data["points_best_game"] = gained_points
         user_data["date_best_game"] = "1/4/2018"   # Today's date
     
-    # user_data_json = json.loads(read_from_file("user_game_data_json.json"), object_hook=json_tuple_helper_function)
+    
+    # print("User Data:\n")
+    # print(user_data, "\n\n\n")
+    
+    current_json_data = json.loads(read_from_file("user_game_data_json.json"), object_hook=json_tuple_helper_function)
+    # write temporary file
+    # json.dumps(current_json_data(/data/temp.json, current_json_data,  sort_keys=True, indent=4)))
+    # current_json_data.upadate(user_data)
+    
+    username = user_data["user"]
+    # print(username)
+    # if username in current_json_data.keys():
+    #     current_json_data[username] = user_data
+        
+    # else:
+    #     current_json_data[username] = user_data
+    
+    current_json_data[username] = user_data
+    with open('data/user_game_data_json.json', 'w') as outfile:
+        json.dump(current_json_data, outfile,  sort_keys=True, indent=4)
+        
+    
+    
     # print(user_data_json)
     # print(user_data)
+    # print(type(user_data))
     
     # I NEED TO STORE THIS DATA BACK TO THE JSON FILE
     
@@ -579,8 +603,10 @@ def game_over():
     global user_data
     app_info["route"] = "game"
     app_info["game"] = False
+    store_game_info()
     global_game_reset()
     # return redirect(url_for('user', app_info=app_info, user_data=user_data, attempt=attempt))
+    app_info["route"] = "user"
     return render_template("user.html", app_info=app_info, user_data=user_data, attempt=attempt, gained_points=gained_points)
 
 

@@ -1143,10 +1143,36 @@ I need the first group of data to be like the second. -- DONE.
 
 Now I need to save it to json.
 
+#### bug with unittest test_game_over
+
+It is rendering the user template correctly but the unittest is receiving a 
+500 error instead of status_code 200.
+ I cannot find the error it is tied to the occasional error in store_game_info:  
+ about indeces and strings for line of code  
+ TypeError: string indices must be integers
+ ~~~~python
+ user_data["number_of_games"] += 1
+ ~~~~
+That value is stored as int. I am trying the following to see if I can eliminate it:  
+~~~~python
+user_data["number_of_games"] = int(user_data["number_of_games"]) + 1
+~~~~
+This did not solve the problem. user_data is a dictionary. The keys should be strings.
+
+
 
 
 #### Now I need to update the json file
 At the end of a game, the json file need to be updated.
+
+This is working.
+
+I noticed a bug: When a new user registers, the user is not taken to the user page.
+Trying to force the userpage will keep redirecting to the home page. I need to 
+set the session
+~~~~
+session['logged_in'] = True
+~~~~
 
 
 

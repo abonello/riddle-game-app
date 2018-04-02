@@ -1175,6 +1175,11 @@ session['logged_in'] = True
 ~~~~
 
 
+# Problem
+If two users log in from two different machines they will interfere with each other's
+game. It looks like the latest person to log in takes over.
+
+
 
 * * *
 * * *
@@ -1195,7 +1200,7 @@ game and return to the game by using this menu item.~~_
 _Clean the run.py - Refactor using functions and unit tests for the functions._  
 Some has been done. More to go
 
-Store Points, **Games Played by User** and Hall of Fame in a permanent way.
+_~~Store Points, **Games Played by User**~~_ and Hall of Fame in a permanent way.
 Text or JSON?
 
 Template Inheritance -- Clean the templates using base.html  

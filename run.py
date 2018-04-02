@@ -254,6 +254,7 @@ def register():
                 addusernames.write(app_info["username"] + "\n")
                 app_info["allusers"] += (app_info["username"])
                 app_info["logged"] = True
+                session['logged_in'] = True
             return redirect(url_for('user'))
 
     app_info["register"] = "register"

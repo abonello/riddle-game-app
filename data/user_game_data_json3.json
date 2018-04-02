@@ -1,5 +1,4 @@
-
-{ "user1":
+[
     {
         "user":"user1",
         "number_of_games":5,
@@ -13,7 +12,6 @@
             {"item": ["15/3/2018", 56], "istuple": true}, 
             {"item": ["14/3/2018", 34], "istuple": true}]
     },
-    "user2":
     {
         "user":"user2",
         "number_of_games":10,
@@ -32,4 +30,4 @@
             {"item": ["28/1/2018",54], "istuple": true},
             {"item": ["26/1/2018",34], "istuple": true}]
     }
-}
+]

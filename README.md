@@ -1078,6 +1078,77 @@ tuples in json files
 Created test for find_loggedin_user  -- this is the function which will look up 
 for stored games to display for a particular user.
 
+I worked on a function that will update the data for a particular user; number 
+of games played, date of best game, points for best game, total points gained, and 
+a list of games played.  
+Now I need to write this back to the json file, but I want it to amend the data
+in the file if a record for the user already exist, otherwise I want it to
+add a new record if it is a new user.
+
+I was thinking of using this function in the game over function but it was breaking 
+the unittest for that routing. Probably because the routing will be doing 
+some processing instead of redirecting immediately. Now I placed it at exit 
+points of the game function before it redirects to the game_over function.
+I really do not understand why this is happening because I do call the 
+global_game_reset() function and the test works fine.
+
+
+
+To Check: Do I need to change the structure of my json to give an identifier for 
+each record?
+
+#### Simplify Json structure
+I can simplify the jason structure to be able to locate a user's record by using 
+the username as a key for the related data. I already have code to check that 
+usernames are unique which will be useful for this data format. Ex:  
+~~~~
+{'one': {
+    'col1': 'data1', 
+    'col2': ['a', 'b', 78], 
+    'col3': ('d1', 'd2', 56)}, 
+ 'two': {
+    'col1': 'data2', 
+    'col2': ['c', 'd', 53], 
+    'col3': ('e1', 'e2', 25)}
+}
+~~~~
+This means that I need to revisit **find_loggedin_user**. The unittests for this 
+function assume a different format of data so they will need to be reworked too.
+
+I saved the current file with a different name "user_game_data_json3.json" and 
+duplicated the function with a name of find_loggedin_user_OLD. I prefer this 
+way of working as I can cross reference without having to undo or rely 
+on versioning (Although versioning is still being used).
+
+I made the changes in the json file and as expected the unittest failed. I am 
+going to prepare a unittest for the new format which should fail at first and 
+then work on the function.
+
+Finished refactoring find_loggedin_user to work with new data. **NB:** the output 
+of the function did not change so there should be no effect on any calls to this
+function. All tests pass.
+
+The user page is not updating the data displayed at the end of a game
+I found the error in:
+~~~~python
+info = {}
+    info["item"] = ["1/4/2018",  gained_points]
+    info["istuple"] = True
+~~~~
+which results in 
+~~~~
+[{'item': ['1/4/2018', 10], 'istuple': True}, ('17/3/2018', 48), 
+~~~~
+I need the first group of data to be like the second. -- DONE.  
+
+Now I need to save it to json.
+
+
+
+#### Now I need to update the json file
+At the end of a game, the json file need to be updated.
+
+
 
 * * *
 * * *

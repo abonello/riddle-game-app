@@ -33,6 +33,7 @@ points = 10
 gained_points = 0
 wrong_answers =[]           # This will hold wrong answers
 answer = ""                 # Current answer of current riddle
+user_data = ""               # Data related to current logged in user
 
 
 def add(x,y):           #This is a testing function -- Will be removed at that end.
@@ -105,7 +106,9 @@ def json_tuple_helper_function(obj):
     else:
         return obj
 
-def find_loggedin_user(data):
+
+# user_data = find_loggedin_user(user_data_json)
+def find_loggedin_user_OLD(data):
     # print("DATA:\n")
     # print(data)
     for each in data:
@@ -127,6 +130,49 @@ def find_loggedin_user(data):
             "games_played":[{"item": ["",0], "__istuple__": True}]}
     # print(empty)
     return empty
+
+def find_loggedin_user(data):
+    global app_info
+    # print("DATA:\n")
+    # print(data)
+    # print("\n\n")
+    
+    username = app_info["username"]
+    # username = "user3"
+    # for each in data:
+        # print(each)
+        # print(data[each])
+        # print("\n")
+        # if each["user"] == app_info["username"]:
+            # print("\nA Match found\n")
+            # print("user is {}".format(each["user"]))
+            # print(each)
+            # return each
+            
+    #Need to return an empty set of data
+    empty = {
+        "user":username,
+        "number_of_games":0,
+        "date_best_game":"",
+        "points_best_game":0,
+        "total_user_points":0,
+        # "games_played":[{"item": ["",0], "istuple": True}]}
+        "games_played":[]}
+    # print(empty)
+    # return empty
+    if username in data.keys():
+        pass
+        # print("This data is for {}".format(username))
+        # print(data[username])
+        # print("\n\n\n")
+        # return data[username]
+    else:
+        # print("This data is for all users including {}".format(username))
+        data[username] = empty
+        # print(data)
+        # print("\n\n\n")
+        # return data[username]
+    return data[username]
 
 @app.route('/logout', methods=['GET', 'POST'])
 @login_required
@@ -219,10 +265,12 @@ def register():
 @login_required
 def user():
     global app_info
+    global user_data
     global current_game
     global current_riddle
     global all_riddles
     global riddle_counter
+    global gained_points
     global attempt      #Needed only for debugging
     # user_data = {  # This will be replaced by data from a file.
     #     "number_of_games" : 5,
@@ -254,7 +302,7 @@ def user():
         riddle_counter = 0
         
     app_info["route"] = "user"
-    return render_template("user.html", app_info=app_info, user_data=user_data, attempt=attempt)
+    return render_template("user.html", app_info=app_info, user_data=user_data, attempt=attempt, gained_points=gained_points)
 
 @app.route('/halloffame')
 def halloffame():
@@ -350,6 +398,7 @@ def game():
                     attemp = 1                  # First attempt of
                     riddle_counter += 1         # Next Riddle
                     if riddle_counter > len(current_game)-1:    # If that was last riddle then
+                        store_game_info()
                         return redirect(url_for('game_over'))   # GAME OVER
                     # Trigger next riddle
                     current_riddle = sort_current_riddle(current_game[riddle_counter]) 
@@ -387,6 +436,7 @@ def game():
 
                     riddle_counter += 1
                     if riddle_counter > len(current_game)-1:
+                        store_game_info()
                         return redirect(url_for('game_over'))
 
                     current_riddle = sort_current_riddle(current_game[riddle_counter])
@@ -425,6 +475,7 @@ def game():
 
                     riddle_counter += 1
                     if riddle_counter > len(current_game)-1:
+                        store_game_info()
                         return redirect(url_for('game_over'))
 
                     current_riddle = sort_current_riddle(current_game[riddle_counter])
@@ -436,6 +487,7 @@ def game():
                     wrong_answers = []           # Reset wrong answers
                     riddle_counter += 1
                     if riddle_counter > len(current_game)-1:
+                        store_game_info()
                         return redirect(url_for('game_over'))
                     current_riddle = sort_current_riddle(current_game[riddle_counter])
 
@@ -453,6 +505,7 @@ def game():
                 attempt = 3
             elif attempt == 3:
                 if riddle_counter > len(current_game)-1:
+                    store_game_info()
                     return redirect(url_for('game_over'))
                 current_riddle = sort_current_riddle(current_game[riddle_counter])
                 points = 10
@@ -463,18 +516,74 @@ def game():
                 if riddle_counter > len(current_game)-1:     # Call next riddle
                     # Store the gained_points-----------TODO
                     gained_points = 0                         # Reset gained_points
+                    store_game_info()
                     return redirect(url_for('game_over'))
-                current_riddle = set_current_riddle(current_game[riddle_counter])
+                current_riddle = sort_current_riddle(current_game[riddle_counter])
                 
     return render_template("game.html", app_info=app_info, all_riddles=all_riddles, current_game=current_game, current_riddle=current_riddle, riddle_counter=riddle_counter+1, attempt=attempt, points=points, gained_points=gained_points, wrong_answers=wrong_answers)
+
+def store_game_info():
+    global app_info   # get username
+    global gained_points
+    global user_data
+    
+    user_data["number_of_games"] += 1
+    user_data["total_user_points"] += gained_points
+    # info = {}
+    # info["item"] = ["1/4/2018",  gained_points]
+    # info["istuple"] = True
+    
+    
+    # print("GAINED POINTS IN THIS GAME:")
+    # print(gained_points)
+    
+    info = ("1/4/2018",  gained_points)
+    
+    # [{'item': ['1/4/2018', 10], 'istuple': True}, ('17/3/2018', 48), 
+    
+    extract_games_played = user_data["games_played"]
+    # Add nex game data
+    user_data["games_played"].insert(0, info)
+    # Put it back in user_data["games_played"]
+     
+    if gained_points > user_data["points_best_game"]:
+        user_data["points_best_game"] = gained_points
+        user_data["date_best_game"] = "1/4/2018"   # Today's date
+    
+    # user_data_json = json.loads(read_from_file("user_game_data_json.json"), object_hook=json_tuple_helper_function)
+    # print(user_data_json)
+    # print(user_data)
+    
+    # I NEED TO STORE THIS DATA BACK TO THE JSON FILE
+    
+    
+    return
+    
+    # print("\n\n")
+    # user_data_temp = find_loggedin_user(user_data_json)
+    # user_data = find_loggedin_user(user_data_json)
+
+    # print("number of games played: {0:d}".format(user_data["number_of_games"]))
+    # print("Gained points todate: {0:d}".format(user_data["total_user_points"]))
+    # print("Current best points: {0:d}".format(user_data["points_best_game"]))
+    # print("Date best points: {}".format(user_data["date_best_game"]))
+    # print(info)
+    # print(user_data["games_played"])
+    
 
 @app.route('/game_over')
 def game_over():
     global app_info
+    global gained_points
+    global attempt
+    global user_data
     app_info["route"] = "game"
     app_info["game"] = False
     global_game_reset()
-    return redirect(url_for('user'))
+    # return redirect(url_for('user', app_info=app_info, user_data=user_data, attempt=attempt))
+    return render_template("user.html", app_info=app_info, user_data=user_data, attempt=attempt, gained_points=gained_points)
+
+
     
 if __name__ == '__main__':
     app.run(host=os.getenv('IP'), port=int(os.getenv('PORT')), debug=True)

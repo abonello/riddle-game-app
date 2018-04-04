@@ -106,10 +106,48 @@ def json_tuple_helper_function(obj):
     else:
         return obj
 
+
+# user_data = find_loggedin_user(user_data_json)
+def find_loggedin_user_OLD(data):
+    # print("DATA:\n")
+    # print(data)
+    for each in data:
+        # print(each)
+        # print("\n")
+        if each["user"] == app_info["username"]:
+            # print("\nA Match found\n")
+            # print("user is {}".format(each["user"]))
+            # print(each)
+            return each
+            
+    #Need to return an empty set of data
+    empty = {
+            "user":app_info["username"],
+            "number_of_games":0,
+            "date_best_game":"",
+            "points_best_game":0,
+            "total_user_points":0,
+            "games_played":[{"item": ["",0], "__istuple__": True}]}
+    # print(empty)
+    return empty
+
 def find_loggedin_user(data):
     global app_info
+    # print("DATA:\n")
+    # print(data)
+    # print("\n\n")
     
     username = app_info["username"]
+    # username = "user3"
+    # for each in data:
+        # print(each)
+        # print(data[each])
+        # print("\n")
+        # if each["user"] == app_info["username"]:
+            # print("\nA Match found\n")
+            # print("user is {}".format(each["user"]))
+            # print(each)
+            # return each
             
     #Need to return an empty set of data
     empty = {
@@ -120,12 +158,20 @@ def find_loggedin_user(data):
         "total_user_points":0,
         # "games_played":[{"item": ["",0], "istuple": True}]}
         "games_played":[]}
-
+    # print(empty)
+    # return empty
     if username in data.keys():
         pass
+        # print("This data is for {}".format(username))
+        # print(data[username])
+        # print("\n\n\n")
+        # return data[username]
     else:
+        # print("This data is for all users including {}".format(username))
         data[username] = empty
-
+        # print(data)
+        # print("\n\n\n")
+        # return data[username]
     return data[username]
 
 @app.route('/logout', methods=['GET', 'POST'])
@@ -133,6 +179,7 @@ def find_loggedin_user(data):
 def logout():
     if request.method == 'POST':    #RESET
         logout_reset_app_info()
+        # global_game_reset()
         session.pop('logged_in', None)
         return redirect(url_for('index'))
 
@@ -186,6 +233,8 @@ def register():
     global app_info
     if request.method == 'POST':
         app_info["username"] = request.form['username']
+        # with open("data/users.txt", "r") as readusernames:
+        #     app_info["allusers"] = readusernames.read()
         app_info["allusers"] = read_from_file("users.txt")
         if 'check' in request.form:
             if app_info["username"] in app_info["allusers"]:
@@ -224,10 +273,28 @@ def user():
     global riddle_counter
     global gained_points
     global attempt      #Needed only for debugging
-    
+    # user_data = {  # This will be replaced by data from a file.
+    #     "number_of_games" : 5,
+    #     "date_best_game" : "15/3/2018",
+    #     "points_best_game" : 56,
+    #     "total_user_points" : 340,
+    #     "games_played": [
+    #         ("17/3/2018", 48),
+    #         ("16/3/2018", 50),
+    #         ("16/3/2018", 54),
+    #         ("15/3/2018", 56),
+    #         ("14/3/2018", 34)]
+    # }
+    # user_data = ast.literal_eval(read_from_file("user_game_data.txt"))
+    # print(user_data)
     user_data_json = json.loads(read_from_file("user_game_data_json.json"), object_hook=json_tuple_helper_function)
+    # print(user_data_json)
     
+    # print("\n\n")
+    # user_data_temp = find_loggedin_user(user_data_json)
     user_data = find_loggedin_user(user_data_json)
+            
+    # print(user_data_temp)
     
     if app_info["game"] == False:  # RESET
         current_game = []
@@ -448,6 +515,9 @@ def game():
                 wrong_answers = []
                 
                 if riddle_counter > len(current_game)-1:     # Call next riddle
+                    # Store the gained_points-----------TODO
+                    # gained_points = 0           NOT NOW              # Reset gained_points
+                    # store_game_info()
                     return redirect(url_for('game_over'))
                 current_riddle = sort_current_riddle(current_game[riddle_counter])
                 
@@ -459,12 +529,22 @@ def store_game_info():
     global user_data
     
     user_data["number_of_games"] += 1
+    # user_data["number_of_games"] = int(user_data["number_of_games"]) + 1
     user_data["total_user_points"] += gained_points
+    # info = {}
+    # info["item"] = ["1/4/2018",  gained_points]
+    # info["istuple"] = True
+    
+    
+    # print("GAINED POINTS IN THIS GAME:")
+    # print(gained_points)
     
     info = ("1/4/2018",  gained_points)
     
+    # [{'item': ['1/4/2018', 10], 'istuple': True}, ('17/3/2018', 48), 
+    
     extract_games_played = user_data["games_played"]
-    # Add next game data
+    # Add nex game data
     user_data["games_played"].insert(0, info)
     # Put it back in user_data["games_played"]
      
@@ -472,15 +552,49 @@ def store_game_info():
         user_data["points_best_game"] = gained_points
         user_data["date_best_game"] = "1/4/2018"   # Today's date
     
+    
+    # print("User Data:\n")
+    # print(user_data, "\n\n\n")
+    
     current_json_data = json.loads(read_from_file("user_game_data_json.json"), object_hook=json_tuple_helper_function)
-     
+    # write temporary file
+    # json.dumps(current_json_data(/data/temp.json, current_json_data,  sort_keys=True, indent=4)))
+    # current_json_data.upadate(user_data)
+    
     username = user_data["user"]
+    # print(username)
+    # if username in current_json_data.keys():
+    #     current_json_data[username] = user_data
+        
+    # else:
+    #     current_json_data[username] = user_data
     
     current_json_data[username] = user_data
     with open('data/user_game_data_json.json', 'w') as outfile:
         json.dump(current_json_data, outfile,  sort_keys=True, indent=4)
+        
+    
+    
+    # print(user_data_json)
+    # print(user_data)
+    # print(type(user_data))
+    
+    # I NEED TO STORE THIS DATA BACK TO THE JSON FILE
+    
     
     return
+    
+    # print("\n\n")
+    # user_data_temp = find_loggedin_user(user_data_json)
+    # user_data = find_loggedin_user(user_data_json)
+
+    # print("number of games played: {0:d}".format(user_data["number_of_games"]))
+    # print("Gained points todate: {0:d}".format(user_data["total_user_points"]))
+    # print("Current best points: {0:d}".format(user_data["points_best_game"]))
+    # print("Date best points: {}".format(user_data["date_best_game"]))
+    # print(info)
+    # print(user_data["games_played"])
+    
 
 @app.route('/game_over')
 def game_over():
@@ -491,8 +605,8 @@ def game_over():
     app_info["route"] = "game"
     app_info["game"] = False
     store_game_info()
-    # Update Hall of fame
     global_game_reset()
+    # return redirect(url_for('user', app_info=app_info, user_data=user_data, attempt=attempt))
     app_info["route"] = "user"
     return render_template("user.html", app_info=app_info, user_data=user_data, attempt=attempt, gained_points=gained_points)
 

@@ -17,6 +17,14 @@
         "games_played": [
             [
                 "1/4/2018",
+                22
+            ],
+            [
+                "1/4/2018",
+                16
+            ],
+            [
+                "1/4/2018",
                 0
             ],
             [
@@ -24,9 +32,26 @@
                 22
             ]
         ],
-        "number_of_games": 2,
+        "number_of_games": 4,
         "points_best_game": 22,
-        "total_user_points": 22,
+        "total_user_points": 60,
         "user": "user1"
+    },
+    "user2": {
+        "date_best_game": "1/4/2018",
+        "games_played": [
+            [
+                "1/4/2018",
+                22
+            ],
+            [
+                "1/4/2018",
+                26
+            ]
+        ],
+        "number_of_games": 2,
+        "points_best_game": 26,
+        "total_user_points": 48,
+        "user": "user2"
     }
 }

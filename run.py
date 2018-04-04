@@ -490,6 +490,8 @@ def game_over():
     global user_data
     app_info["route"] = "game"
     app_info["game"] = False
+    # gained_points_this_game = gained_points # I want to flash this to the user.
+    flash(gained_points)
     store_game_info()
     # Update Hall of fame
     global_game_reset()

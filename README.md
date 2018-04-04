@@ -1183,6 +1183,16 @@ Turned each html into an extension for a base.html file. This has reduced
 drastically the amount of code in the html files.
 
 
+#### Flash Points Just Gained in latest game
+
+Flashing the points gained at the end of a game. This will be displayed when
+the user is returned to the user's page at the end of a game.
+
+
+
+
+
+
 * * *
 * * *
 ## TO DO -- ESSENTIAL

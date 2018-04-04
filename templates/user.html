@@ -15,6 +15,16 @@
             <hr>
             <p>This is the page for a {{ app_info["username"] }}. It will hold information about
             the latest games and a button to start a new game.</p>
+            
+            <!-- Flash the points gained for game just played -->
+            {% with messages = get_flashed_messages() %}
+                {% if messages %} <!-- Process if there are any messages  -->
+                    {% for message in messages %}  <!-- Loop through messages and process them -->
+                        <h3 class="red">Points Gained in the game just played: {{ message }}</h3>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            
             <p>You have played {{ user_data["number_of_games"] }} games up to now.
             {% if user_data["number_of_games"] > 0 %}
             <br>Your best game was on {{ user_data["date_best_game"] }} and you gained

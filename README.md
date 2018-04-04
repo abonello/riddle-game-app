@@ -1176,9 +1176,11 @@ session['logged_in'] = True
 
 
 # Problem
-If two users log in from two different machines they will interfere with each other's
-game. It looks like the latest person to log in takes over.
+## If two users log in from two different machines they will interfere with each other's game. It looks like the latest person to log in takes over.
 
+#### Template Inheritance
+Turned each html into an extension for a base.html file. This has reduced 
+drastically the amount of code in the html files.
 
 
 * * *

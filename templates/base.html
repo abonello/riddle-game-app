@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Riddle-Me-This</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+        <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css" />
+        <link rel="stylesheet" type="text/css" media="screen" href="static/css/styles.css" />
+    </head>
+    <body>
+        <!-- Page Header & Navigation -->
+        <header class="container-fluid">
+            <div class="row">
+                <div class="col-md-4 col-lg-3 min-height-header">
+                    <div class="row">
+                        <div class="logo">
+                            <div class="navbar navbar-default restrict-size">
+                                <div class="container-fluid">
+                                    <button class="navbar-toggle" data-toggle="collapse" data-target=".navHeaderCollapse">
+                                        Menu
+                                    </button>
+                                    <div class="collapse navbar-collapse navHeaderCollapse">
+                                        <ul class="nav navbar-nav navbar-left navbar-main">
+                                            {% if not(app_info["route"] == "index") %}
+                                                <li class="nav-item active"><a class="nav-link scroll" href="/" id="home">Home</a></li>
+                                            {% endif %}
+                                            {% if app_info["logged"] and not(app_info["route"] == "user") %}
+                                                <li class="nav-item"><a class="nav-link scroll" href="/user" id="userNav">USER</a></li>
+                                            {% endif %}
+                                            {% if app_info["logged"] and app_info["game"] and not(app_info["route"] == "game") %}
+                                                <li class="nav-item"><a class="nav-link scroll" href="/game" id="gameNav">CURRENT GAME</a></li>
+                                            {% endif %}
+                                            {% if not(app_info["route"] == "halloffame") %}
+                                                <li class="nav-item"><a class="nav-link scroll" href="/halloffame" id="hofNav">Hall of Fame</a></li>
+                                            {% endif %}
+                                            {% if not(app_info["route"] == "about") %}
+                                                <li class="nav-item"><a class="nav-link scroll" href="/about" id="aboutNav">About</a></li>
+                                            {% endif %}
+                                            {% if not(app_info["route"] == "contact") %}
+                                                <li class="nav-item"><a class="nav-link scroll" href="/contact" id="contactNav">Contact</a></li>
+                                            {% endif %}
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div> 
+                            <!-- Registration Login Form-->
+                            {%if app_info["logged"] %}
+                                <form class="align-right" method="POST" action="/logout">
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-default form-align" name="logout" type="submit" value="logout">Logout</button>
+                                    </div>
+                                </form>
+                            {% elif not app_info["logged"] %}
+                                <form class="align-right" method="POST" action="/login">
+                                    <div class="form-group login">
+                                        <input type="text" class="form-control form-username form-align" name="username" id="username" placeholder="username">
+                                        <button type="submit" class="btn btn-default form-align" name="login" type="submit" value="login" alt="login">Login</button>
+                                        <!--<button type="submit" class="btn btn-default form-align" name="register" type="submit" value="register">Register</button>-->
+                                    </div>
+                                </form>
+                                <form class="align-right" method="POST" action="/">
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-default form-align" name="register" type="submit" value="register">Register</button>
+                                    </div>
+                                </form>
+                            {% endif %}
+                            
+                            <img class="img-responsive" src="static/img/guess.png" alt="logo image"></img>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-8 col-lg-9 title min-height-header">
+                    <h1>Riddle Me This</h1>
+                    <h2>A Guessing Game</h2>
+                    <h2>{{ app_info["username"] }}</h2>
+                </div>
+            </div>
+        </header>
+    
+        <!-- Main Content -->
+        <section class="container">
+            {% block content %} 
+            {% endblock %}
+        </section>
+
+    
+        <!-- Footer -->
+        <footer class="container-fluid">
+            <div class="row">
+        
+                <div class="col-sm-6 col-md-4 col-md-offset-2 copyright min-height-footer">
+                    <p>Copyright &copy; 2018, Anthony Bonello</p>
+                </div>
+        
+                <div class="col-sm-6 col-md-4 links min-height-footer">
+                    <ul class="list-inline social-links">
+                        <li><a href = "https://github.com/abonello/riddle-game-app" target = "_blank"><i class="fa fa-github"></i> Github Repository</a></li>
+                        <li><a href = "https://www.linkedin.com/in/anthonybonello/" target = "_blank"><i class="fa fa-linkedin"></i> My Linkedin</a></li>
+                    </ul>
+                </div>
+        
+            </div>
+        </footer>
+    
+        <!-- Bootstrap core JavaScript -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        
+        <!-- Custom scripts for this template -->
+         <!--<script src="static/js/main.js"></script> -->
+    </body>
+</html>

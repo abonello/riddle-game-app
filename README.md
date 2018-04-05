@@ -1205,6 +1205,9 @@ Later it may be needed for HOF too if data need to be updated.
 I need to update the unittest for test_store_game_info since at the moment it is 
 using a hardcoded date.  --- DONE
 
+#### Contact form
+Drafted.
+
 
 * * *
 * * *

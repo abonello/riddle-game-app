@@ -2,6 +2,7 @@ import os
 import json
 import ast
 import random
+import datetime
 from flask import Flask, render_template, request, redirect, url_for, session, flash
 from functools import wraps  #decorators for requires login
 
@@ -461,7 +462,11 @@ def store_game_info():
     user_data["number_of_games"] += 1
     user_data["total_user_points"] += gained_points
     
+    # now = datetime.datetime.now()
+    # today = now.strftime("%d/%m/%Y")
+    today = datetime.datetime.now().strftime("%d/%m/%Y")
     info = ("1/4/2018",  gained_points)
+    info = (today,  gained_points)
     
     extract_games_played = user_data["games_played"]
     # Add next game data
@@ -470,7 +475,8 @@ def store_game_info():
      
     if gained_points > user_data["points_best_game"]:
         user_data["points_best_game"] = gained_points
-        user_data["date_best_game"] = "1/4/2018"   # Today's date
+        # user_data["date_best_game"] = "1/4/2018"   # Today's date
+        user_data["date_best_game"] = today   # Today's date
     
     current_json_data = json.loads(read_from_file("user_game_data_json.json"), object_hook=json_tuple_helper_function)
      

@@ -1188,9 +1188,22 @@ drastically the amount of code in the html files.
 Flashing the points gained at the end of a game. This will be displayed when
 the user is returned to the user's page at the end of a game.
 
+#### Starting planning files needed for recording Hall of Fame (HOF)
 
+#### Using datetime to store today's date in records of games and HOF
+~~~~python
+import datetime
 
+# in store_game_info()
+today = datetime.datetime.now().strftime("%d/%m/%Y")
+~~~~
+For now this will be used to store the information about last played game and 
+date_best_game played (if it applies) in user_game_data_json.json.
 
+Later it may be needed for HOF too if data need to be updated.
+
+I need to update the unittest for test_store_game_info since at the moment it is 
+using a hardcoded date.  --- DONE
 
 
 * * *
@@ -1215,14 +1228,16 @@ Some has been done. More to go
 _~~Store Points, **Games Played by User**~~_ and Hall of Fame in a permanent way.
 Text or JSON?
 
-Template Inheritance -- Clean the templates using base.html  
-This will extend the base code. EX:
+_~~Template Inheritance -- Clean the templates using base.html  
+This will extend the base code. EX:~~_
 ~~~~html
 {% extends 'base.html' %}
 {% block content %}
 <h2>{{ page_title }}</h2><!-- Home Page -->
 {% endblock %}
 ~~~~
+
+_~~Add code for today's date~~_
 
 Build contact form
 
@@ -1237,7 +1252,7 @@ How can I prevent certain routes from being accessed directly. I want them to
 be accessible only through the menus AND when the user is logged in.
 
 Check that the game can be accessed independently by more than one user at the 
-same time.
+same time.  NOT WORKING
 
 At the end of each riddle I need some form of feedback about outcome and 
 number of points gained. Similarly at end of game need to display the amount of 

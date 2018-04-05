@@ -1,5 +1,6 @@
 import os
 import json
+import datetime
 import unittest
 import run              # The code that we are testing
 from run import app, app_info, global_game_reset, current_game
@@ -482,6 +483,7 @@ class TestOtherFunctions(unittest.TestCase):
         pass
 
     def test_store_game_info(self):
+        today = datetime.datetime.now().strftime("%d/%m/%Y")
         empty = {
             "user":"test_user",
             # "user":"user1",
@@ -498,8 +500,10 @@ class TestOtherFunctions(unittest.TestCase):
         self.assertEqual(run.user_data["number_of_games"], 6)
         self.assertEqual(run.user_data["points_best_game"], 30)
         self.assertEqual(run.user_data["total_user_points"], 80)
-        self.assertEqual(run.user_data["date_best_game"], '1/4/2018')
-        self.assertEqual(run.user_data["games_played"], [('1/4/2018', 30)])
+        # self.assertEqual(run.user_data["date_best_game"], '1/4/2018')
+        # self.assertEqual(run.user_data["games_played"], [('1/4/2018', 30)])
+        self.assertEqual(run.user_data["date_best_game"], today)
+        self.assertEqual(run.user_data["games_played"], [(today, 30)])
         print("test_store_game_info -- PASS")
         
         

@@ -1213,6 +1213,10 @@ Now reading from file
 Turned best_individual_games into a global variable so that I can access it from
 other functions, specifically the store_game_info().
 
+Individual Hall of Fame is working well. It displays data from a json file and it 
+will update and save the data to the same file after a game is played if the 
+points make it to the hall of fame.
+
 
 * * *
 * * *

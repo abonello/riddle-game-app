@@ -237,9 +237,19 @@ def user():
         all_riddles = []
         riddle_counter = 0
         
+    fill_best_individual_games()
+        
     app_info["route"] = "user"
     return render_template("user.html", app_info=app_info, user_data=user_data, attempt=attempt, gained_points=gained_points)
 
+def fill_best_individual_games():
+    global best_individual_games
+    store=""
+    with open("data/hof_individual.json", "r") as readdata:
+        store = readdata.read()  # Read as a string
+    store = ast.literal_eval(store) # Turn string to dictionary
+    best_individual_games = store["best_individual_games"]
+    
 @app.route('/halloffame')
 def halloffame():
     global app_info
@@ -267,22 +277,23 @@ def halloffame():
             
     #READ File
     # all_riddles = json.loads(read_from_file("data.json"))
-    store=""
-    with open("data/hof_individual.json", "r") as readdata:
-        store = readdata.read()  # Read as a string
-    # print(all_riddles)
-    # print("AS READ FROM FILE: ")
-    # print(store)
-    # print("Store Type: {}".format(type(store)))
-    store = ast.literal_eval(store) # Turn string to dictionary
-    # print("AFTER AST: ")
-    # print(store) 
-    # print("Store Type: {}".format(type(store)))
-    # store_list = store["best_individual_games"]
-    # print(store_list)
-    best_individual_games = store["best_individual_games"]
-    # print(best_individual_games)
-    # print("best_individual_games Type: {}".format(type(best_individual_games)))
+    # store=""
+    # with open("data/hof_individual.json", "r") as readdata:
+    #     store = readdata.read()  # Read as a string
+    # # print(all_riddles)
+    # # print("AS READ FROM FILE: ")
+    # # print(store)
+    # # print("Store Type: {}".format(type(store)))
+    # store = ast.literal_eval(store) # Turn string to dictionary
+    # # print("AFTER AST: ")
+    # # print(store) 
+    # # print("Store Type: {}".format(type(store)))
+    # # store_list = store["best_individual_games"]
+    # # print(store_list)
+    # best_individual_games = store["best_individual_games"]
+    # # print(best_individual_games)
+    # # print("best_individual_games Type: {}".format(type(best_individual_games)))
+    fill_best_individual_games()
     
     app_info["route"] = "halloffame"
     return render_template("halloffame.html", app_info=app_info, best_individual_games=best_individual_games, best_all_games=best_all_games)
@@ -487,7 +498,7 @@ def store_game_info():
     # now = datetime.datetime.now()
     # today = now.strftime("%d/%m/%Y")
     today = datetime.datetime.now().strftime("%d/%m/%Y")
-    info = ("1/4/2018",  gained_points)
+    # info = ("1/4/2018",  gained_points)
     info = (today,  gained_points)
     
     extract_games_played = user_data["games_played"]
@@ -508,6 +519,119 @@ def store_game_info():
     with open('data/user_game_data_json.json', 'w') as outfile:
         json.dump(current_json_data, outfile,  sort_keys=True, indent=4)
     
+    
+    # Update hof_individual.json
+    # insert = ["17/04/2018", "PG", 71]   This is the format I need
+    insert=[]
+    insert.append(today)
+    insert.append(username)
+    insert.append(gained_points)
+    print("DATA to insert: {}".format(insert))
+    insert_in_hof_individual(insert)
+    
+    
+    return
+
+@app.route('/testing')
+def testing():
+    global app_info   # get username
+    global gained_points
+    global user_data
+    global best_individual_games
+    
+    
+    store=""
+    with open("data/hof_individual.json", "r") as readdata:
+        store = readdata.read()  # Read as a string
+    store = ast.literal_eval(store) # Turn string to dictionary
+    best_individual_games = store["best_individual_games"]
+    
+    username = user_data["user"]
+    gained_points = 58
+    today = datetime.datetime.now().strftime("%d/%m/%Y")
+    
+    insert=[]
+    insert.append(today)
+    insert.append(username)
+    insert.append(gained_points)
+    # print("DATA to insert: {}".format(insert))
+    sorted_points = insert_in_hof_individual(insert)
+    
+    return render_template("testing.html", data=insert, hof_individual = best_individual_games, sorted_points=sorted_points)
+
+def insert_in_hof_individual(data):
+    print("Call insert_in_hof_individual")
+    global best_individual_games
+
+    # Get list of points from json - already sorted
+    sorted_points = [] #Reverse order
+    for item in best_individual_games:
+        sorted_points.insert(0, item[3])
+    
+    print(sorted_points)
+    
+    # Add new points - only if it is more than at least the smallest number 
+    if data[2] > min(sorted_points):
+        print("Checked minimum")
+        sorted_points.insert(0, data[2])
+    #     #Sort
+        sorted_points.sort()
+        print(sorted_points)
+        
+    #     # Reduce length of list to 10 so that I will have the best 10 
+        # when I insert the new data
+        while len(sorted_points) > 10:
+            del sorted_points[0]
+            
+        print(sorted_points)
+
+    #     # Build new list of sorted data
+        insert_done = False
+        
+        new_points_list =[]
+        counter = len(best_individual_games)-1
+        pointer = 0
+        print(sorted_points)
+        
+        for item in sorted_points:
+            print("Counter: {}".format(counter))
+            print("Pointer: {}".format(pointer))
+            if item == data[2] and insert_done == False: # New item
+                # new_points_list.insert(len(new_points_list), insert)
+                new_points_list.insert(0, (counter + 1, data[0], data[1], data[2]))
+                # new_points_list.insert(0, insert)
+                print(data)
+                insert_done = True
+            else:
+                # print(points["best_individual_games"][counter])
+                # new_points_list.insert(len(new_points_list), points["best_individual_games"][counter])
+                if insert_done:
+                    new_points_list.insert(0, best_individual_games[counter-1])
+                else:
+                    # ("best_individual_games"][counter-1][0] + 1, 
+                    # store["best_individual_games"][counter-1][1],
+                    # store["best_individual_games"][counter-1][2], 
+                    # store["best_individual_games"][counter-1][3])
+                    
+                    new_points_list.insert(0, [best_individual_games[counter-1][0] + 1, best_individual_games[counter-1][1],best_individual_games[counter-1][2], best_individual_games[counter-1][3]])
+                    
+                counter -= 1
+                pointer += 1
+    else:
+        new_points_list = best_individual_games
+    
+    # Prepare dictionary to write as jason
+    print(best_individual_games)
+    print(new_points_list)
+    to_write = {}
+    to_write['best_individual_games'] = new_points_list
+    print(to_write)
+    
+    
+    # # Store to file
+    with open('data/hof_individual.json', 'w') as outfile:
+        json.dump(to_write, outfile,  sort_keys=True, indent=4)
+    # return sorted_points
     return
 
 @app.route('/game_over')

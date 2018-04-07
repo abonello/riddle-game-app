@@ -238,6 +238,7 @@ def user():
         riddle_counter = 0
         
     fill_best_individual_games()
+    fill_best_all_games()
         
     app_info["route"] = "user"
     return render_template("user.html", app_info=app_info, user_data=user_data, attempt=attempt, gained_points=gained_points)
@@ -250,10 +251,19 @@ def fill_best_individual_games():
     store = ast.literal_eval(store) # Turn string to dictionary
     best_individual_games = store["best_individual_games"]
     
+def fill_best_all_games():
+    global best_all_games
+    store=""
+    with open("data/hof_all_games.json", "r") as readdata:
+        store = readdata.read()  # Read as a string
+    store = ast.literal_eval(store) # Turn string to dictionary
+    best_all_games = store["best_all_games"]
+    
 @app.route('/halloffame')
 def halloffame():
     global app_info
     global best_individual_games
+    global best_all_games
     # best_individual_games = [     # This will be replaced by data from a file.
     #         [1, "20/3/2018", "AB", 72],
     #         [2, "21/3/2018", "BC", 63],
@@ -263,17 +273,17 @@ def halloffame():
     #         [6, "16/3/2018", "BC", 50],
     #         [7, "17/3/2018", "AB", 48],
     #         [8, "14/3/2018", "FDG", 34]] # This will be replaced by a text file or json
-    best_all_games = [            # This will be replaced by data from a file.
-            (1, "AB", 890),
-            (2, "BC", 825),
-            (3, "DE", 710),
-            (4, "CD", 700),
-            (5, "CDDF", 540),
-            (6, "BCOE", 500),
-            (7, "ABDF", 480),
-            (8, "FDG", 450),
-            (9, "OFDG", 420),
-            (10, "AFFDG", 410)] # This will be replaced by a text file or json
+    # best_all_games = [            # This will be replaced by data from a file.
+    #         (1, "AB", 890),
+    #         (2, "BC", 825),
+    #         (3, "DE", 710),
+    #         (4, "CD", 700),
+    #         (5, "CDDF", 540),
+    #         (6, "BCOE", 500),
+    #         (7, "ABDF", 480),
+    #         (8, "FDG", 450),
+    #         (9, "OFDG", 420),
+    #         (10, "AFFDG", 410)] # This will be replaced by a text file or json
             
     #READ File
     # all_riddles = json.loads(read_from_file("data.json"))
@@ -294,6 +304,7 @@ def halloffame():
     # # print(best_individual_games)
     # # print("best_individual_games Type: {}".format(type(best_individual_games)))
     fill_best_individual_games()
+    fill_best_all_games()
     
     app_info["route"] = "halloffame"
     return render_template("halloffame.html", app_info=app_info, best_individual_games=best_individual_games, best_all_games=best_all_games)
@@ -528,8 +539,12 @@ def store_game_info():
     insert.append(gained_points)
     print("DATA to insert: {}".format(insert))
     insert_in_hof_individual(insert)
-    
-    
+    insert_all_games=[]
+    insert_all_games.append(username)
+    insert_all_games.append(user_data["total_user_points"])
+    print("DATA to insert: {}".format(insert_all_games))
+    insert_in_hof_all_games(insert_all_games)
+
     return
 
 @app.route('/testing')
@@ -630,6 +645,81 @@ def insert_in_hof_individual(data):
     
     # # Store to file
     with open('data/hof_individual.json', 'w') as outfile:
+        json.dump(to_write, outfile,  sort_keys=True, indent=4)
+    # return sorted_points
+    return
+
+def insert_in_hof_all_games(data):
+    print("Call insert_in_hof_all_games")
+    global best_all_games
+
+    # Get list of points from json - already sorted
+    sorted_points = [] #Reverse order
+    for item in best_all_games:
+        sorted_points.insert(0, item[2])
+    
+    print(sorted_points)
+    
+    # Add new points - only if it is more than at least the smallest number 
+    if data[1] > min(sorted_points):
+        print("Checked minimum")
+        sorted_points.insert(0, data[1])
+    #     #Sort
+        sorted_points.sort()
+        print(sorted_points)
+        
+    #     # Reduce length of list to 10 so that I will have the best 10 
+        # when I insert the new data
+        while len(sorted_points) > 10:
+            del sorted_points[0]
+            
+        print(sorted_points)
+
+    #     # Build new list of sorted data
+        insert_done = False
+        
+        new_points_list =[]
+        counter = len(best_all_games)-1
+        pointer = 0
+        print(sorted_points)
+        
+        for item in sorted_points:
+            print("Counter: {}".format(counter))
+            print("Pointer: {}".format(pointer))
+            if item == data[1] and insert_done == False: # New item
+                # new_points_list.insert(len(new_points_list), insert)
+                new_points_list.insert(0, (counter + 1, data[0], data[1]))
+                # new_points_list.insert(0, insert)
+                print(data)
+                insert_done = True
+            else:
+                # print(points["best_individual_games"][counter])
+                # new_points_list.insert(len(new_points_list), points["best_individual_games"][counter])
+                if insert_done:
+                    new_points_list.insert(0, best_all_games[counter-1])
+                else:
+                    # ("best_individual_games"][counter-1][0] + 1, 
+                    # store["best_individual_games"][counter-1][1],
+                    # store["best_individual_games"][counter-1][2], 
+                    # store["best_individual_games"][counter-1][3])
+                    
+                    new_points_list.insert(0, [best_all_games[counter-1][0] + 1, best_all_games[counter-1][1],best_all_games[counter-1][2]])
+                    
+                counter -= 1
+                pointer += 1
+    else:
+        new_points_list = best_all_games
+    
+    # Prepare dictionary to write as jason
+    print(best_all_games)
+    print(new_points_list)
+    to_write = {}
+    to_write['best_all_games'] = new_points_list
+    print(to_write)
+    
+    
+    # # Store to file
+    with open('data/hof_all_games.json', 'w') as outfile:
         json.dump(to_write, outfile,  sort_keys=True, indent=4)
     # return sorted_points
     return

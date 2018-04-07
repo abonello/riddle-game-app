@@ -1217,6 +1217,8 @@ Individual Hall of Fame is working well. It displays data from a json file and i
 will update and save the data to the same file after a game is played if the 
 points make it to the hall of fame.
 
+Added code for total points HOF.
+
 
 * * *
 * * *

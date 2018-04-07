@@ -17,6 +17,10 @@
         "games_played": [
             [
                 "07/04/2018",
+                36
+            ],
+            [
+                "07/04/2018",
                 20
             ],
             [
@@ -80,14 +84,22 @@
                 22
             ]
         ],
-        "number_of_games": 16,
+        "number_of_games": 17,
         "points_best_game": 42,
-        "total_user_points": 314,
+        "total_user_points": 350,
         "user": "user1"
     },
     "user2": {
         "date_best_game": "07/04/2018",
         "games_played": [
+            [
+                "07/04/2018",
+                32
+            ],
+            [
+                "07/04/2018",
+                36
+            ],
             [
                 "07/04/2018",
                 24
@@ -113,9 +125,9 @@
                 26
             ]
         ],
-        "number_of_games": 8,
+        "number_of_games": 10,
         "points_best_game": 36,
-        "total_user_points": 230,
+        "total_user_points": 298,
         "user": "user2"
     },
     "user3": {
@@ -146,5 +158,18 @@
         "points_best_game": 30,
         "total_user_points": 96,
         "user": "user3"
+    },
+    "user4": {
+        "date_best_game": "07/04/2018",
+        "games_played": [
+            [
+                "07/04/2018",
+                32
+            ]
+        ],
+        "number_of_games": 1,
+        "points_best_game": 32,
+        "total_user_points": 32,
+        "user": "user4"
     }
 }

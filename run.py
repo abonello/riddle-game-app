@@ -242,15 +242,15 @@ def user():
 @app.route('/halloffame')
 def halloffame():
     global app_info
-    best_individual_games = [     # This will be replaced by data from a file.
-            (1, "20/3/2018", "AB", 72),
-            (2, "21/3/2018", "BC", 63),
-            (3, "17/3/2018", "DE", 60),
-            (4, "15/3/2018", "AB", 56),
-            (5, "16/3/2018", "CD", 54),
-            (6, "16/3/2018", "BC", 50),
-            (7, "17/3/2018", "AB", 48),
-            (8, "14/3/2018", "FDG", 34)] # This will be replaced by a text file or json
+    # best_individual_games = [     # This will be replaced by data from a file.
+    #         [1, "20/3/2018", "AB", 72],
+    #         [2, "21/3/2018", "BC", 63],
+    #         [3, "17/3/2018", "DE", 60],
+    #         [4, "15/3/2018", "AB", 56],
+    #         [5, "16/3/2018", "CD", 54],
+    #         [6, "16/3/2018", "BC", 50],
+    #         [7, "17/3/2018", "AB", 48],
+    #         [8, "14/3/2018", "FDG", 34]] # This will be replaced by a text file or json
     best_all_games = [            # This will be replaced by data from a file.
             (1, "AB", 890),
             (2, "BC", 825),
@@ -262,6 +262,23 @@ def halloffame():
             (8, "FDG", 450),
             (9, "OFDG", 420),
             (10, "AFFDG", 410)] # This will be replaced by a text file or json
+            
+    #READ File
+    # all_riddles = json.loads(read_from_file("data.json"))
+    store=""
+    with open("data/hof_individual.json", "r") as readdata:
+        store = readdata.read()
+    # print(all_riddles)
+    print("AS READ FROM FILE: ")
+    print(store)
+    store = ast.literal_eval(store)
+    print("AFTER AST: ")
+    print(store) 
+    # store_list = store["best_individual_games"]
+    # print(store_list)
+    best_individual_games = store["best_individual_games"]
+    print(best_individual_games)
+    
     app_info["route"] = "halloffame"
     return render_template("halloffame.html", app_info=app_info, best_individual_games=best_individual_games, best_all_games=best_all_games)
 

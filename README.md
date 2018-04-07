@@ -1208,6 +1208,9 @@ using a hardcoded date.  --- DONE
 #### Contact form
 Drafted.
 
+#### Hall of fame
+Now reading from file
+
 
 * * *
 * * *

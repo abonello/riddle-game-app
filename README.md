@@ -1210,6 +1210,8 @@ Drafted.
 
 #### Hall of fame
 Now reading from file
+Turned best_individual_games into a global variable so that I can access it from
+other functions, specifically the store_game_info().
 
 
 * * *

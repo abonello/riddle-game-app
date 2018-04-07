@@ -542,6 +542,7 @@ def store_game_info():
     insert_all_games=[]
     insert_all_games.append(username)
     insert_all_games.append(user_data["total_user_points"])
+    insert_all_games.append(user_data["number_of_games"])
     print("DATA to insert: {}".format(insert_all_games))
     insert_in_hof_all_games(insert_all_games)
 
@@ -688,7 +689,7 @@ def insert_in_hof_all_games(data):
             print("Pointer: {}".format(pointer))
             if item == data[1] and insert_done == False: # New item
                 # new_points_list.insert(len(new_points_list), insert)
-                new_points_list.insert(0, (counter + 1, data[0], data[1]))
+                new_points_list.insert(0, (counter + 1, data[0], data[1], data[2]))
                 # new_points_list.insert(0, insert)
                 print(data)
                 insert_done = True
@@ -703,7 +704,7 @@ def insert_in_hof_all_games(data):
                     # store["best_individual_games"][counter-1][2], 
                     # store["best_individual_games"][counter-1][3])
                     
-                    new_points_list.insert(0, [best_all_games[counter-1][0] + 1, best_all_games[counter-1][1],best_all_games[counter-1][2]])
+                    new_points_list.insert(0, [best_all_games[counter-1][0] + 1, best_all_games[counter-1][1],best_all_games[counter-1][2],best_all_games[counter-1][3]])
                     
                 counter -= 1
                 pointer += 1

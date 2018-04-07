@@ -1219,6 +1219,10 @@ points make it to the hall of fame.
 
 Added code for total points HOF.
 
+#### HOF all games add # of games played
+Added code in halloffame.html for the table to hold and display the data.  
+Adjusted template of hof_all_games.json  
+Code for all games to read and write json
 
 * * *
 * * *

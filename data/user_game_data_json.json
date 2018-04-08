@@ -1,9 +1,9 @@
 {
     "test_user": {
-        "date_best_game": "07/04/2018",
+        "date_best_game": "08/04/2018",
         "games_played": [
             [
-                "07/04/2018",
+                "08/04/2018",
                 30
             ]
         ],
@@ -13,8 +13,12 @@
         "user": "test_user"
     },
     "user1": {
-        "date_best_game": "07/04/2018",
+        "date_best_game": "08/04/2018",
         "games_played": [
+            [
+                "08/04/2018",
+                32
+            ],
             [
                 "07/04/2018",
                 18
@@ -24,9 +28,9 @@
                 16
             ]
         ],
-        "number_of_games": 2,
-        "points_best_game": 18,
-        "total_user_points": 34,
+        "number_of_games": 3,
+        "points_best_game": 32,
+        "total_user_points": 66,
         "user": "user1"
     },
     "user2": {

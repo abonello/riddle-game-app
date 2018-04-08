@@ -1206,7 +1206,7 @@ I need to update the unittest for test_store_game_info since at the moment it is
 using a hardcoded date.  --- DONE
 
 #### Contact form
-Drafted.
+Drafted. Does it need to be working for this project?
 
 #### Hall of fame
 Now reading from file
@@ -1223,6 +1223,11 @@ Added code for total points HOF.
 Added code in halloffame.html for the table to hold and display the data.  
 Adjusted template of hof_all_games.json  
 Code for all games to read and write json
+
+#### changed Contact form
+
+
+
 
 * * *
 * * *
@@ -1257,7 +1262,7 @@ This will extend the base code. EX:~~_
 
 _~~Add code for today's date~~_
 
-Build contact form
+_~~Build contact form~~_
 
 Better text for **About** including rules for game, input types expected. Case insensitive,
 No extra characters expected, numbers as text.
@@ -1277,10 +1282,18 @@ number of points gained. Similarly at end of game need to display the amount of
 points earned for the whole game before moving on to the user page.   
 ***Perhaps a breakdown of points and answers, but this can be placed in EXTRAS.***
 
+Register button is logging in a user with an empty name. Button should be
+inactive if no username is typed.
+
 
 
 
 ## TO DO -- EXTRA
+If a user is added to the HOF all games, I need to check if he already is on the
+list. If yes, his entry will be updated, ie older entry removed. Need to check 
+that this does not end with less than the current of entries. ie do not drop 
+entries before checking and updating.
+
 Timed game
 
 Sounds

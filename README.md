@@ -1226,7 +1226,7 @@ Code for all games to read and write json
 
 #### changed Contact form
 
-
+#### Cleaned run.py and rearranged order of functions.
 
 
 * * *

@@ -1282,36 +1282,35 @@ _~~Attempt 2 and 3 can accept the answer all typed in one of the text fields.
 
 Put more images and increase the game to 10 riddles.
 
-<span style="color:red">`How can I prevent certain routes from being accessed directly. I want them to 
-be accessible only through the menus AND when the user is logged in.`</span>
+```diff
+- How can I prevent certain routes from being accessed directly. 
+- I want them to be accessible only through the menus AND 
+- when the user is logged in.
+```
 
-<span style="color:red">`Check that the game can be accessed independently by more than one user at the 
-same time.  NOT WORKING`</span>
+```diff
+- Check that the game can be accessed independently by more 
+- than one user at the same time.  NOT WORKING
+```
 
-<span style="color:red">`At the end of each riddle I need some form of feedback about outcome and 
-number of points gained. Similarly at end of game need to display the amount of 
-points earned for the whole game before moving on to the user page.  
-I was thinking some form of modal before progressing to the next riddle or the 
-user page if it is the end of the game.`</span>  
+```diff
+- At the end of each riddle I need some form of feedback 
+- about outcome and number of points gained. 
+- Similarly at end of game need to display the amount of 
+- points earned for the whole game before moving on to 
+- the user page.  
+
+- I was thinking some form of modal before progressing 
+- to the next riddle or the user page if it is the end 
+- of the game.
+```
 ***Perhaps a breakdown of points and answers, but this can be placed in EXTRAS.***
 
 _~~Register button is logging in a user with an empty name. Button should be
 inactive if no username is typed.~~_
 
-´´´´Deprecated´´´´
-<span style="color:red">Some text</span>
-
-´´´´
-
-- ![#f03c15](https://placehold.it/15/f03c15/000000?text=+) `#f03c15`
-- ![#c5f015](https://placehold.it/15/c5f015/000000?text=+) `#c5f015`
-- ![#1589F0](https://placehold.it/15/1589F0/000000?text=+) `#1589F0`
 
 
-```diff
-+ this will be highlighted in green
-- this will be highlighted in red
-```
 
 
 ## TO DO -- EXTRA
@@ -1323,3 +1322,19 @@ entries before checking and updating.`</span>
 Timed game
 
 Sounds
+
+
+
+
+
+## Applying colors to markdown text and bullets
+
+- ![#f03c15](https://placehold.it/15/f03c15/000000?text=+) `#f03c15`
+- ![#c5f015](https://placehold.it/15/c5f015/000000?text=+) `#c5f015`
+- ![#1589F0](https://placehold.it/15/1589F0/000000?text=+) `#1589F0`
+
+
+```diff
++ this will be highlighted in green
+- this will be highlighted in red
+```

@@ -132,6 +132,11 @@ header h2 {
     color: grey;
 }
 
+.btn-hide {
+    display: none;
+    background-color: blue;
+}
+
 .list_games {
     border: 2px solid black;
     border-radius: 10px;

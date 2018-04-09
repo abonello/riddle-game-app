@@ -344,29 +344,43 @@ def login():
 @app.route('/register', methods=['GET','POST'])
 def register():
     global app_info
+    app_info["register_active"] = "btn-deactivated btn-hide"
     if request.method == 'POST':
         app_info["username"] = request.form['username']
         app_info["allusers"] = read_from_file("users.txt")
         if 'check' in request.form:
-            if app_info["username"] in app_info["allusers"]:
+            # Check that username is not empty
+            if app_info["username"] == "":
                 app_info["register"] = ""
-                app_info["register_active"] = "btn-deactivated"
+                app_info["register_active"] = "btn-deactivated btn-hide"
+                app_info["check_active"] = ""
+                username_feedback = "Please type in a username."
+            elif app_info["username"] in app_info["allusers"]:
+                app_info["register"] = ""
+                app_info["register_active"] = "btn-deactivated btn-hide"
                 app_info["check_active"] = ""
                 username_feedback = "username already exist try another one"
             else:
                 app_info["register"] = "register"
                 app_info["register_active"] = ""
-                app_info["check_active"] = "btn-deactivated"
+                app_info["check_active"] = "btn-deactivated btn-hide"
                 username_feedback = "Username available. Please click the register button."
             return render_template("register.html",app_info=app_info, username_feedback=username_feedback)
             
         if 'register' in request.form:
-            with open("data/users.txt", "a") as addusernames:
-                addusernames.write(app_info["username"] + "\n")
-                app_info["allusers"] += (app_info["username"])
-                app_info["logged"] = True
-                session['logged_in'] = True
-            return redirect(url_for('user'))
+            if app_info["username"] == "":
+                app_info["register"] = ""
+                app_info["register_active"] = "btn-deactivated btn-hide"
+                app_info["check_active"] = ""
+                username_feedback = "Please type in a username and check its availability."
+                return render_template("register.html",app_info=app_info, username_feedback=username_feedback)
+            else:
+                with open("data/users.txt", "a") as addusernames:
+                    addusernames.write(app_info["username"] + "\n")
+                    app_info["allusers"] += (app_info["username"])
+                    app_info["logged"] = True
+                    session['logged_in'] = True
+                return redirect(url_for('user'))
 
     app_info["register"] = "register"
     app_info["allusers"]=""

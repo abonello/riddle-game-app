@@ -1228,6 +1228,16 @@ Code for all games to read and write json
 
 #### Cleaned run.py and rearranged order of functions.
 
+#### Fixed Register button which was registering empty users
+I also added a class to hide the register button when a user first reaches this 
+page. Thus the user has to press the "Check Username Available" button. If the 
+username is available, the "Check Username Available" button is hidden and the 
+"Register" button is displayed.  
+If for any reason the user deletes the username which will still be displayed 
+in the text field, then tries to register, the user will be redirected back 
+to the "Check username Available" button and the message "Please type in a 
+username and check its availability." will be displayed. 
+PART of DEFENSIVE CODING.
 
 * * *
 * * *

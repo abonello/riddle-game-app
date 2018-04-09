@@ -313,7 +313,7 @@ def index():
     return render_template("index.html", username=username)
 ~~~~
 
-index.html 
+index.html  
 POST method was added to the form and an action. names were added to each form 
 part.  
 ~~~~html
@@ -324,7 +324,7 @@ part.
         <button type="submit" class="btn btn-default form-align" name="register" type="submit" value="register">Register</button>
     </div>
 </form>
-~~~~html
+~~~~
 
 * * *
 Next I need to check if a username already exist when someone tries to register.  
@@ -1256,10 +1256,10 @@ only while a game is running. This should allow the user to navigate away from t
 game and return to the game by using this menu item.~~_
 
 _Clean the run.py - Refactor using functions and unit tests for the functions._  
-Some has been done. More to go
+Some has been done. More to go -- ONGOING
 
-_~~Store Points, **Games Played by User**~~_ and Hall of Fame in a permanent way.
-Text or JSON?
+_~~Store Points, **Games Played by User**and Hall of Fame in a permanent way.
+Text or JSON?~~_ 
 
 _~~Template Inheritance -- Clean the templates using base.html  
 This will extend the base code. EX:~~_
@@ -1275,34 +1275,37 @@ _~~Add code for today's date~~_
 _~~Build contact form~~_
 
 Better text for **About** including rules for game, input types expected. Case insensitive,
-No extra characters expected, numbers as text.
-Attempt 2 and 3 can accept the answer all typed in one of the text fields.
-(Just a visual clue)
+No extra characters expected, numbers as text.  
+
+_~~Attempt 2 and 3 can accept the answer all typed in one of the text fields.
+(Just a visual clue)~~_
 
 Put more images and increase the game to 10 riddles.
 
-How can I prevent certain routes from being accessed directly. I want them to 
-be accessible only through the menus AND when the user is logged in.
+<span style="color:red">`How can I prevent certain routes from being accessed directly. I want them to 
+be accessible only through the menus AND when the user is logged in.`</span>
 
-Check that the game can be accessed independently by more than one user at the 
-same time.  NOT WORKING
+<span style="color:red">`Check that the game can be accessed independently by more than one user at the 
+same time.  NOT WORKING`</span>
 
-At the end of each riddle I need some form of feedback about outcome and 
+<span style="color:red">`At the end of each riddle I need some form of feedback about outcome and 
 number of points gained. Similarly at end of game need to display the amount of 
-points earned for the whole game before moving on to the user page.   
+points earned for the whole game before moving on to the user page.  
+I was thinking some form of modal before progressing to the next riddle or the 
+user page if it is the end of the game.`</span>  
 ***Perhaps a breakdown of points and answers, but this can be placed in EXTRAS.***
 
-Register button is logging in a user with an empty name. Button should be
-inactive if no username is typed.
+_~~Register button is logging in a user with an empty name. Button should be
+inactive if no username is typed.~~_
 
 
 
 
 ## TO DO -- EXTRA
-If a user is added to the HOF all games, I need to check if he already is on the
+<span style="color:blue">`If a user is added to the HOF all games, I need to check if he already is on the
 list. If yes, his entry will be updated, ie older entry removed. Need to check 
 that this does not end with less than the current of entries. ie do not drop 
-entries before checking and updating.
+entries before checking and updating.`</span>
 
 Timed game
 

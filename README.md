@@ -1239,6 +1239,17 @@ to the "Check username Available" button and the message "Please type in a
 username and check its availability." will be displayed. 
 PART of DEFENSIVE CODING.
 
+
+#### Adding new images
+I experimented with jpg files vs png and found I can compress the jpgs to less 
+than 25% of the size of a png. For this reason I am changing all images to jpg.
+Updated and added data to the riddles.json
+
+I added another 10 images, now have a total of 20. Updated code in game function 
+to randomly select select 10 images. (It was 5 up to now.)
+
+
+
 * * *
 * * *
 ## TO DO -- ESSENTIAL

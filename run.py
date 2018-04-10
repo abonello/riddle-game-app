@@ -458,7 +458,7 @@ def game():
         app_info["game"] = True  # Game On
         all_riddles = json.loads(read_from_file("riddles.json"))
         
-        for x in range(0, 5):
+        for x in range(0, 10):  # Select 10 images at random
             repeat = True
             while repeat:
                 choose_game=random.choice(all_riddles)

@@ -1248,6 +1248,8 @@ Updated and added data to the riddles.json
 I added another 10 images, now have a total of 20. Updated code in game function 
 to randomly select select 10 images. (It was 5 up to now.)
 
+Added a further 10 images - total 30.
+
 
 
 * * *
